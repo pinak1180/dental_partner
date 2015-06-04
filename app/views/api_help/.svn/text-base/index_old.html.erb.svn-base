@@ -1,0 +1,1470 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <meta name="language" content="en">
+        <title>Chat Fire - API Help </title>
+ 
+       
+
+        <script type="text/javascript">
+            var currentTarget = "";
+            var currentRaw	  = "";
+            function example(name)
+            {
+                currentTarget = $("#output_" + name);
+                currentRaw = $("#raw_" + name);
+                currentTarget.html("..loading..");
+                var link = $("#example_" + name).val();
+                var method = $("#method_" + name).text();
+
+                // remove accessing api_raw url during POST method
+                if (method!="POST"){
+                    currentRaw.html("..loading..");
+                    $.ajax({
+                        type:       method,
+                        url:        "api_raw.php",
+                        data:       { raw : link + "&api_log=false" }
+                    }).done(function(output){
+                        currentRaw.html(output);
+                    });
+                }
+
+                // we dont want to destroy the existing program, that's why we copy the original and make one
+                if (method=="POST"){
+                    var link = $("#link_" + name).html();
+                    $.ajax({
+                        type:       method,
+                        url:        link,
+                        data:       $('.form_'+name).serialize(),
+                        processData: true,
+                        error: function(xhr, ajaxOptions, thrownError) {
+                            currentTarget.text("Error " + xhr.status + " " + xhr.responseText);
+                        }
+                    }).done(function(output){
+                        console.log("Output = ", output);
+                        if (typeof(output) == "object")
+                        {
+                            var txt = "Received JSON Object:\n<br/>";
+                            txt = prettyPrint( output );
+                            currentTarget.html(txt);
+                        } else {
+                            currentTarget.text("Raw output: " + output);
+                        }
+                    })
+
+                }else{
+                    $.ajax({
+                        type:   method,
+                        url:    link,
+                        processData: true,
+                        error: function(xhr, ajaxOptions, thrownError) {
+                            currentTarget.text("Error " + xhr.status + " " + xhr.responseText);
+                        }
+                    }).done(function(output){
+                        console.log("Output = ", output);
+                        if (typeof(output) == "object")
+                        {
+                            var txt = "Received JSON Object:\n<br/>";
+                            txt = prettyPrint( output );
+                            currentTarget.html(txt);
+                        } else {
+                            currentTarget.text("Raw output: " + output);
+                        }
+                    })
+                }
+            }
+
+            function exampleWithFile(name)
+            {
+                currentTarget = $("#output_" + name);
+                currentRaw = $("#raw_" + name);
+                currentRaw.html("..loading..");
+                currentTarget.html("..loading..");
+                var link = $("#example_" + name).val();
+                var method = $("#method_" + name).text();
+                $.ajax({
+                    type:       method,
+                    url:        "api_raw.php",
+                    data:		{ raw : link }
+                }).done(function(output){
+                    currentRaw.html(output);
+                });
+
+                $.ajax({
+                    type:   method,
+                    url:    link,
+                    processData: false
+                }).done(function(output){
+                    console.log("Output = ", output);
+                    if (typeof(output) == "object")
+                    {
+                        var txt = "Received JSON Object:\n<br/>";
+                        txt = prettyPrint( output );
+                        currentTarget.html(txt);
+                    } else {
+                        currentTarget.text("Raw output: " + output);
+                    }
+                }).fail(function(obj, output)
+                {
+                    currentTarget.text("FAILED: " + output);
+                })
+            }
+
+            function change(name)
+            {
+                console.log("CHANGE", name);
+            }
+        </script>
+
+    </head>
+<body>
+
+<a name="top">
+<table border="1" class="top tbltop">
+  <tbody><tr>
+    <td>Sr. #</td>
+    <td>API NAME</td>
+    <td>REQUEST TYPE</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td><a href="#signup">/api/uber/sign_up</a></td>
+    <td>POST</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td><a href="#login">/api/uber/login</a></td>
+    <td>POST</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td><a href="#list_cards"> /api/uber/list_cards</a></td>
+    <td>GET</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td><a href="#add_cards">/api/uber/add_card</a></td>
+    <td>POST</td>
+  </tr>
+   <tr>
+    <td>6</td>
+    <td><a href="#forgot_password">/api/uber/forgot_password</a></td>
+    <td>POST</td>
+  </tr>
+  <tr>
+    <td>7</td>
+    <td><a href="#device_info">/api/uber/my/device_info</a></td>
+    <td>POST</td>
+  </tr>
+  <tr>
+    <td>8</td>
+    <td><a href="#pickup_address">/api/uber/pickup_address</a></td>
+    <td>POST</td>
+  </tr>
+  <tr>
+    <td>9</td>
+    <td><a href="#fare_quote">api/uber/fare_quote</a></td>
+    <td>POST</td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td><a href="#edit_profile">/api/uber/my/edit_profile</a></td>
+    <td>POST</td>
+  </tr>
+  <tr>
+    <td>11</td>
+    <td><a href="#get_profile">/api/uber/my/get_profile</a></td>
+    <td>GET</td>
+  </tr>
+  <tr>
+    <td>12</td>
+    <td><a href="#change_password">/api/uber/change_password</a></td>
+    <td>POST</td>
+  </tr>
+  <tr>
+    <td>13</td>
+    <td><a href="#create_reservation">/api/uber/create_reservation</a></td>
+    <td>POST</td>
+  </tr>
+  <tr>
+    <td>14</td>
+    <td><a href="#card_active">/api/uber/card_active</a></td>
+    <td>POST</td>
+  </tr>
+  <tr>
+    <td>15</td>
+    <td><a href="#cars">/api/uber/cars</a></td>
+    <td>GET</td>
+  </tr>
+  <tr>
+    <td>16</td>
+    <td><a href="#country_list">/api/uber/country_list</a></td>
+    <td>GET</td>
+  </tr>
+   <tr>
+    <td>17</td>
+    <td><a href="#rate_driver">/api/uber/rate_driver</a></td>
+    <td>Post</td>
+  </tr>
+  <tr>
+    <td>18</td>
+    <td><a href="#rate_driver">/api/uber/delete_card</a></td>
+    <td>Post</td>
+  </tr>
+   <tr>
+    <td>19</td>
+    <td><a href="#begin_trip">/api/uber/begin_trip</a></td>
+    <td>Post</td>
+  </tr>
+  
+  
+  
+
+</tbody></table>
+
+</a><div style="margin: 10px;"><a name="top">
+
+    </a>
+
+    Example authentication_token: 21971964328c87e170de8a2e5a5c635ad1a6c7a9<br>
+    email: pinak@complitech.net<br>
+    password: 12345678<br>
+    for avatar upload if you are using base64 then use avatar1 else use avatar in signup,edit profile api.
+
+   
+    <br>
+   
+
+        <a name="signup">
+	</a><div class="box-element"><a name="mobileXapiXuserXusernameXvalidate1">	    
+    <div class="box-head-light">
+        <h3 style="cursor:pointer;"> Signup </h3></div>
+	    </a><div class="box-content"><a name="mobileXapiXuserXusernameXvalidate1">
+	    
+	    API URL: <br>
+    <span id="link_mobileXapiXuserXusernameXvalidate1"><%=  configatron.host %>/api/uber/sign_up?</span>
+
+    <br>
+    Method: <span id="method_mobileXapiXuserXusernameXvalidate1">POST</span>
+    <br>
+		<form class="form_mobileXapiXuserXusernameXvalidate1">
+	    <br>
+    Parameters:
+    <br>
+	    
+	    <table width="100%" cellpadding="4" cellspacing="0" border="1" bordercolor="#808080"> 	    
+	    <thead>
+        <tr bgcolor="#eeeeee"><td> Field name </td><td> Description </td><td>Example</td>
+            <td>Req</td></tr>
+        </thead>
+	    <tbody>	
+	    <tr>
+        <td width="140"> email</td>
+        <td> email of user </td>
+        <td width="210"> <input id="input_mobileXapiXuserXusernameXvalidate1_user" name="email" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+    <tr>
+        <td width="140"> password</td>
+        <td> password for user </td>
+        <td width="210"> <input id="input_mobileXapiXuserXusernameXvalidate1_password" name="password" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+    <tr>
+        <td width="140"> firstname</td>
+        <td> firstname </td>
+        <td width="210"> <input id="input_mobileXapiXuserXusernameXvalidate1_firstname" name="firstname" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+    <tr>
+        <td width="140"> lastname</td>
+        <td> lastname </td>
+        <td width="210"> <input id="input_mobileXapiXuserXusernameXvalidate1_lastname" name="lastname" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+    <tr>
+        <td width="140"> phone_number</td>
+        <td> phone_number </td>
+        <td width="210"> <input id="input_mobileXapiXuserXusernameXvalidate1_phone_number" name="phone_number" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+    <tr>
+        <td width="140"> card[card_number]</td>
+        <td> credit/debit card  number </td>
+        <td width="210"> <input id="input_mobileXapiXuserXusernameXvalidate1_card_number" name="card[card_number]" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+     <tr>
+        <td width="140"> card[exp_year]</td>
+        <td> credit/debit card  exp year </td>
+        <td width="210"> <input id="input_mobileXapiXuserXusernameXvalidate1_card_year" name="card[exp_year]" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+     <tr>
+        <td width="140"> card[exp_month]</td>
+        <td> credit/debit card  exp month </td>
+        <td width="210"> <input id="input_mobileXapiXuserXusernameXvalidate1_card_month" name="card[exp_month]" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+     <tr>
+        <td width="140"> card[cvc]</td>
+        <td> credit/debit card  number </td>
+        <td width="210"> <input id="input_mobileXapiXuserXusernameXvalidate1_card_number" name="card[cvc]" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+    
+                </tbody>
+        </table>
+        </form>
+    <br>
+        <br>
+    Example call <br>
+    <textarea id="example_mobileXapiXuserXusernameXvalidate1" style="font-family: Courier New" rows="4" cols="90"><%=  configatron.host %>/api/uber/sign_up?</textarea>
+    <br>
+    <input type="button" id="button_mobileXapiXuserXusernameXvalidate1" onclick="example(&quot;mobileXapiXuserXusernameXvalidate1&quot;);" value="Execute"> <br>
+    <br>
+    <div id="raw_mobileXapiXuserXusernameXvalidate1" style="font-family: courier new; font-size: 10pt;">
+    </div>
+    <br>
+    <div id="output_mobileXapiXuserXusernameXvalidate1" style="font-family: courier new; font-size: 10pt;">
+    </div>
+    <br>
+        </a><a href="#top">go to top</a>
+        </div>
+    </div>
+    <br>
+   
+
+        <a name="login">
+	</a><div class="box-element"><a name="mobileXapiXuserXlocation2">	    
+    <div class="box-head-light">
+        <h3 style="cursor:pointer;"> Login </h3></div>
+	    </a><div class="box-content"><a name="mobileXapiXuserXlocation2">
+	    
+	    API URL: <br>
+    <span id="link_mobileXapiXuserXlocation2"><%=  configatron.host %>/api/uber/login?</span>
+
+    <br>
+    Method: <span id="method_mobileXapiXuserXlocation2">POST</span>
+    <br>
+		<form class="form_mobileXapiXuserXlocation2">
+	    <br>
+    Parameters:
+    <br>
+	    
+	    <table width="100%" cellpadding="4" cellspacing="0" border="1" bordercolor="#808080"> 	    
+	    <thead>
+        <tr bgcolor="#eeeeee"><td> Field name </td><td> Description </td><td>Example</td>
+            <td>Req</td></tr>
+        </thead>
+	    <tbody>	
+	    <tr>
+        <td width="140"> email</td>
+        <td> email  of user </td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation2_token" name="email" class="input_mobileXapiXuserXlocation2" size="40" onkeyup="change_mobileXapiXuserXlocation2();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+        <tr>
+        <td width="140"> password</td>
+        <td> Password of user </td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation2_lat" name="password" class="input_mobileXapiXuserXlocation2" size="40" onkeyup="change_mobileXapiXuserXlocation2();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+        
+                </tbody>
+        </table>
+        </form>
+    <br>
+        <br>
+    Example call <br>
+    <textarea id="example_mobileXapiXuserXlocation2" style="font-family: Courier New" rows="4" cols="90"><%=  configatron.host %>/api/uber/login?</textarea>
+    <br>
+    <input type="button" id="button_mobileXapiXuserXlocation2" onclick="example(&quot;mobileXapiXuserXlocation2&quot;);" value="Execute"> <br>
+    <br>
+    <div id="raw_mobileXapiXuserXlocation2" style="font-family: courier new; font-size: 10pt;">
+    </div>
+    <br>
+    <div id="output_mobileXapiXuserXlocation2" style="font-family: courier new; font-size: 10pt;">
+    </div>
+    <br>
+       </a><a href="#top">go to top</a>
+        </div>
+    </div>
+    <br>
+    
+    
+    
+   
+  
+    
+    <div class="box-element"><a name="list_cards">	    
+    <div class="box-head-light">
+        <h3 style="cursor:pointer;"> List User cards</h3></div>
+	    </a><div class="box-content"><a name="list_cards">
+	    
+	    API URL: <br>
+    <span id="link_mobileXapiXuserXrestoreXpassword10"><%=  configatron.host %>/api/uber/list_cards?</span>
+
+    <br>
+    Method: <span id="method_mobileXapiXuserXrestoreXpassword10">GET</span>
+    <br>
+		<form class="form_mobileXapiXuserXrestoreXpassword10">
+	    <br>
+    Parameters:
+    <br>
+	    
+	    <table width="100%" cellpadding="4" cellspacing="0" border="1" bordercolor="#808080"> 	    
+	    <thead>
+        <tr bgcolor="#eeeeee"><td> Field name </td><td> Description </td><td>Example</td>
+            <td>Req</td></tr>
+        </thead>
+	    <tbody>	
+	    <tr>
+        <td width="140">authentication_token</td>
+        <td>that you  will get from login api</td>
+       
+    </tr>
+                </tbody>
+        </table>
+        </form>
+    <br>
+        <br>
+    Example call <br>
+    <textarea id="example_mobileXapiXuserXrestoreXpassword10" style="font-family: Courier New" rows="4" cols="90"><%=  configatron.host %>/api/uber/list_cards?authentication_token=&amp</textarea>
+    <br>
+    <input type="button" id="button_mobileXapiXuserXrestoreXpassword10" onclick="example(&quot;mobileXapiXuserXrestoreXpassword10&quot;);" value="Execute"> <br>
+    <br>
+    <div id="raw_mobileXapiXuserXrestoreXpassword10" style="font-family: courier new; font-size: 10pt;">
+    </div>
+    <br>
+    <div id="output_mobileXapiXuserXrestoreXpassword10" style="font-family: courier new; font-size: 10pt;">
+    </div>
+    <br>
+       </a><a href="#top">go to top</a>
+        </div>
+        
+    </div>
+  
+  
+  
+  
+  
+   <a name="add_cards">
+	</a><div class="box-element"><a name="mobileXapiXuserXlocation3">	    
+    <div class="box-head-light">
+        <h3 style="cursor:pointer;"> Add card </h3></div>
+	    </a><div class="box-content"><a name="mobileXapiXuserXlocation3">
+	    
+	    API URL: <br>
+    <span id="link_mobileXapiXuserXlocation3"><%=  configatron.host %>/api/uber/add_card?</span>
+
+    <br>
+    Method: <span id="method_mobileXapiXuserXlocation3">POST</span>
+    <br>
+		<form class="form_mobileXapiXuserXlocation3">
+	    <br>
+    Parameters:
+    <br>
+	    
+	    <table width="100%" cellpadding="4" cellspacing="0" border="1" bordercolor="#808080"> 	    
+	    <thead>
+        <tr bgcolor="#eeeeee"><td> Field name </td><td> Description </td><td>Example</td>
+            <td>Req</td></tr>
+        </thead>
+	    <tbody>	
+	    <tr>
+        <td width="140">authentication_token</td>
+        <td> that you will get from login api </td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation3_token" name="authentication_token" class="input_mobileXapiXuserXlocation2" size="40" onkeyup="change_mobileXapiXuserXlocation2();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+    <tr>
+        <td width="140"> card[card_number]</td>
+        <td> credit/debit card  number </td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation3_card_number" name="card[card_number]" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+     <tr>
+        <td width="140"> card[exp_year]</td>
+        <td> credit/debit card  exp year </td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation3_card_year" name="card[exp_year]" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+     <tr>
+        <td width="140"> card[exp_month]</td>
+        <td> credit/debit card  exp month </td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation3_card_month" name="card[exp_month]" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+     <tr>
+        <td width="140"> card[cvc]</td>
+        <td> credit/debit card  number </td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation3_card_number" name="card[cvc]" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+        
+        
+                </tbody>
+        </table>
+        </form>
+    <br>
+        <br>
+    Example call <br>
+    <textarea id="example_mobileXapiXuserXlocation3" style="font-family: Courier New" rows="4" cols="90"><%=  configatron.host %>/api/uber/add_card?</textarea>
+    <br>
+    <input type="button" id="button_mobileXapiXuserXlocation3" onclick="example(&quot;mobileXapiXuserXlocation3&quot;);" value="Execute"> <br>
+    <br>
+    <div id="raw_mobileXapiXuserXlocation3" style="font-family: courier new; font-size: 10pt;">
+    </div>
+    <br>
+    <div id="output_mobileXapiXuserXlocation3" style="font-family: courier new; font-size: 10pt;">
+    </div>
+    <br>
+       </a><a href="#top">go to top</a>
+        </div>
+    </div>
+
+
+
+
+
+
+ <a name="forgot_password">
+	</a><div class="box-element"><a name="mobileXapiXuserXlocation4">	    
+    <div class="box-head-light">
+        <h3 style="cursor:pointer;"> Forgot password </h3></div>
+	    </a><div class="box-content"><a name="mobileXapiXuserXlocation4">
+	    
+	    API URL: <br>
+    <span id="link_mobileXapiXuserXlocation4"><%=  configatron.host %>/api/uber/forgot_password?</span>
+
+    <br>
+    Method: <span id="method_mobileXapiXuserXlocation4">POST</span>
+    <br>
+		<form class="form_mobileXapiXuserXlocation4">
+	    <br>
+    Parameters:
+    <br>
+	    
+	    <table width="100%" cellpadding="4" cellspacing="0" border="1" bordercolor="#808080"> 	    
+	    <thead>
+        <tr bgcolor="#eeeeee"><td> Field name </td><td> Description </td><td>Example</td>
+            <td>Req</td></tr>
+        </thead>
+	    <tbody>	
+	    
+    <tr>
+        <td width="140"> email</td>
+        <td> email</td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation4_card_number" name="email" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+    
+        
+        
+                </tbody>
+        </table>
+        </form>
+    <br>
+        <br>
+    Example call <br>
+    <textarea id="example_mobileXapiXuserXlocation4" style="font-family: Courier New" rows="4" cols="90"><%=  configatron.host %>/api/uber/forgot_password?</textarea>
+    <br>
+    <input type="button" id="button_mobileXapiXuserXlocation4" onclick="example(&quot;mobileXapiXuserXlocation4&quot;);" value="Execute"> <br>
+    <br>
+    <div id="raw_mobileXapiXuserXlocation4" style="font-family: courier new; font-size: 10pt;">
+    </div>
+    <br>
+    <div id="output_mobileXapiXuserXlocation4" style="font-family: courier new; font-size: 10pt;">
+    </div>
+    <br>
+       </a><a href="#top">go to top</a>
+        </div>
+    </div>
+    <br>
+    
+
+
+
+<a name="device_info">
+	</a><div class="box-element"><a name="api5">	    
+    <div class="box-head-light">
+        <h3 style="cursor:pointer;"> Device info update api</h3></div>
+	    </a><div class="box-content"><a name="api5">
+	    
+	    API URL: <br>
+    <span id="link_api5"><%=  configatron.host %>/api/uber/my/device_info?</span>
+
+    <br>
+    Method: <span id="method_api5">POST</span>
+    <br>
+		<form class="form_api5">
+	    <br>
+    Parameters:
+    <br>
+	    
+	    <table width="100%" cellpadding="4" cellspacing="0" border="1" bordercolor="#808080"> 	    
+	    <thead>
+        <tr bgcolor="#eeeeee"><td> Field name </td><td> Description </td><td>Example</td>
+            <td>Req</td></tr>
+        </thead>
+	    <tbody>	
+	    
+    <tr>
+        <td width="140"> authentication_token</td>
+        <td> that you willget from login api</td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation4_card_number" name="authentication_token" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+     <tr>
+        <td width="140"> device_id</td>
+        <td> device id</td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation4_card_number" name="device_id" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+     <tr>
+        <td width="140"> device_type</td>
+        <td> device_type(android/iphone/blackberry)</td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation4_card_number" name="device_type" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+    
+        
+        
+                </tbody>
+        </table>
+        </form>
+    <br>
+        <br>
+    Example call <br>
+    <textarea id="example_api5" style="font-family: Courier New" rows="4" cols="90"><%=  configatron.host %>/api/uber/my/devise_info?</textarea>
+    <br>
+    <input type="button" id="button_api5" onclick="example(&quot;api5&quot;);" value="Execute"> <br>
+    <br>
+    <div id="raw_api5" style="font-family: courier new; font-size: 10pt;">
+    </div>
+    <br>
+    <div id="output_api5" style="font-family: courier new; font-size: 10pt;">
+    </div>
+    <br>
+       </a><a href="#top">go to top</a>
+        </div>
+    </div>
+    <br>
+    
+  <a name="pickup_address">
+	</a><div class="box-element"><a name="pickup_address">	    
+    <div class="box-head-light">
+        <h3 style="cursor:pointer;"> Pickup address api</h3></div>
+	    </a><div class="box-content"><a name="api5">
+	    
+	    API URL: <br>
+    <span id="link_pickup_address"><%=  configatron.host %>/api/uber/pickup_address?</span>
+
+    <br>
+    Method: <span id="method_pickup_address">POST</span>
+    <br>
+		<form class="form_pickup_address">
+	    <br>
+    Parameters:
+    <br>
+	    
+	    <table width="100%" cellpadding="4" cellspacing="0" border="1" bordercolor="#808080"> 	    
+	    <thead>
+        <tr bgcolor="#eeeeee"><td> Field name </td><td> Description </td><td>Example</td>
+            <td>Req</td></tr>
+        </thead>
+	    <tbody>	
+	    
+    <tr>
+        <td width="140"> authentication_token</td>
+        <td> that you willget from login api</td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation4_card_number" name="authentication_token" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+     <tr>
+        <td width="140"> latitude</td>
+        <td> latitude</td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation4_card_number" name="latitude" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+     <tr>
+        <td width="140">longitude</td>
+        <td>longitude</td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation4_card_number" name="longitude" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+    
+        
+        
+                </tbody>
+        </table>
+        </form>
+    <br>
+        <br>
+    Example call <br>
+    <textarea id="example_pickup_address" style="font-family: Courier New" rows="4" cols="90"><%=  configatron.host %>/api/uber/pickup_address?</textarea>
+    <br>
+    <input type="button" id="button_pickup_address" onclick="example(&quot;pickup_address&quot;);" value="Execute"> <br>
+    <br>
+    <div id="raw_pickup_address" style="font-family: courier new; font-size: 10pt;">
+    </div>
+    <br>
+    <div id="output_pickup_address" style="font-family: courier new; font-size: 10pt;">
+    </div>
+    <br>
+       </a><a href="#top">go to top</a>
+        </div>
+    </div>
+    <br>
+    
+    <a name="fare_quote">
+	</a><div class="box-element"><a name="fare_quote">	    
+    <div class="box-head-light">
+        <h3 style="cursor:pointer;"> fare_quote api</h3></div>
+	    </a><div class="box-content"><a name="api5">
+	    
+	    API URL: <br>
+    <span id="link_fare_quote"><%=  configatron.host %>/api/uber/fare_quote?</span>
+
+    <br>
+    Method: <span id="method_fare_quote">POST</span>
+    <br>
+		<form class="form_fare_quote">
+	    <br>
+    Parameters:
+    <br>
+	    
+	    <table width="100%" cellpadding="4" cellspacing="0" border="1" bordercolor="#808080"> 	    
+	    <thead>
+        <tr bgcolor="#eeeeee"><td> Field name </td><td> Description </td><td>Example</td>
+            <td>Req</td></tr>
+        </thead>
+	    <tbody>	
+	    
+    <tr>
+        <td width="140"> authentication_token</td>
+        <td> that you willget from login api</td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation4_card_number" name="authentication_token" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+     <tr>
+        <td width="140"> pickup latitude</td>
+        <td> latitude</td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation4_card_number" name="pic_latitude" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+     <tr>
+        <td width="140">pick up longitude</td>
+        <td>longitude</td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation4_card_number" name="pic_longitude" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+    <tr>
+        <td width="140">destination latitude</td>
+        <td> latitude</td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation4_card_number" name="dest_latitude" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+     <tr>
+        <td width="140">destination longitude</td>
+        <td>longitude</td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation4_card_number" name="dest_longitude" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+   
+    
+        
+        
+                </tbody>
+        </table>
+        </form>
+    <br>
+        <br>
+    Example call <br>
+    <textarea id="example_fare_quote" style="font-family: Courier New" rows="4" cols="90"><%=  configatron.host %>/api/uber/fare_quote?</textarea>
+    <br>
+    <input type="button" id="button_fare_quote" onclick="example(&quot;fare_quote&quot;);" value="Execute"> <br>
+    <br>
+    <div id="raw_fare_quote" style="font-family: courier new; font-size: 10pt;">
+    </div>
+    <br>
+    <div id="output_fare_quote" style="font-family: courier new; font-size: 10pt;">
+    </div>
+    <br>
+       </a><a href="#top">go to top</a>
+        </div>
+    </div>
+    <br>
+
+
+
+
+
+
+<a name="edit_profile">
+	</a><div class="box-element"><a name="edit_profile">	    
+    <div class="box-head-light">
+        <h3 style="cursor:pointer;"> edit profile api</h3></div>
+	    </a><div class="box-content"><a name="api5">
+	    
+	    API URL: <br>
+    <span id="link_edit_profile"><%=  configatron.host %>/api/uber/my/edit_profile?</span>
+
+    <br>
+    Method: <span id="method_edit_profile">POST</span>
+    <br>
+		<form class="form_edit_profile">
+	    <br>
+    Parameters:
+    <br>
+	    
+	    <table width="100%" cellpadding="4" cellspacing="0" border="1" bordercolor="#808080"> 	    
+	    <thead>
+        <tr bgcolor="#eeeeee"><td> Field name </td><td> Description </td><td>Example</td>
+            <td>Req</td></tr>
+        </thead>
+	    <tbody>	
+	    
+    <tr>
+        <td width="140"> authentication_token</td>
+        <td> that you willget from login api</td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation4_card_number" name="authentication_token" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+     <tr>
+        <td width="140"> user[firstname]</td>
+        <td> firstname</td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation4_card_number" name="user[firstname]" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+     <tr>
+        <td width="140">user[lastname]</td>
+        <td>lastname</td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation4_card_number" name="user[lastname]" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+    <tr>
+        <td width="140">user[mobile]</td>
+        <td> phone number</td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation4_card_number" name="user[mobile]" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+     <tr>
+        <td width="140">avatar</td>
+        <td>avatar</td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation4_card_number" name="dest_longitude" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+   
+    
+        
+        
+                </tbody>
+        </table>
+        </form>
+    <br>
+        <br>
+    Example call <br>
+    <textarea id="example_edit_profile" style="font-family: Courier New" rows="4" cols="90"><%=  configatron.host %>/api/uber/my/edit_profile?</textarea>
+    <br>
+    <input type="button" id="button_edit_profile" onclick="example(&quot;edit_profile&quot;);" value="Execute"> <br>
+    <br>
+    <div id="raw_edit_profile" style="font-family: courier new; font-size: 10pt;">
+    </div>
+    <br>
+    <div id="output_edit_profile" style="font-family: courier new; font-size: 10pt;">
+    </div>
+    <br>
+       </a><a href="#top">go to top</a>
+        </div>
+    </div>
+    <br>
+
+
+
+
+<div class="box-element"><a name="get_profile">	    
+    <div class="box-head-light">
+        <h3 style="cursor:pointer;"> get profile of user</h3></div>
+	    </a><div class="box-content"><a name="get_profile">
+	    
+	    API URL: <br>
+    <span id="link_get_profile"><%=  configatron.host %>/api/uber/my/get_profile?</span>
+
+    <br>
+    Method: <span id="method_get_profile">GET</span>
+    <br>
+		<form class="form_get_profile">
+	    <br>
+    Parameters:
+    <br>
+	    
+	    <table width="100%" cellpadding="4" cellspacing="0" border="1" bordercolor="#808080"> 	    
+	    <thead>
+        <tr bgcolor="#eeeeee"><td> Field name </td><td> Description </td><td>Example</td>
+            <td>Req</td></tr>
+        </thead>
+	    <tbody>	
+	    <tr>
+        <td width="140">authentication_token</td>
+        <td>that you  will get from login api</td>
+       
+    </tr>
+                </tbody>
+        </table>
+        </form>
+    <br>
+        <br>
+    Example call <br>
+    <textarea id="example_get_profile" style="font-family: Courier New" rows="4" cols="90"><%=  configatron.host %>/api/uber/my/get_profile?authentication_token=&amp</textarea>
+    <br>
+    <input type="button" id="button_get_profile" onclick="example(&quot;get_profile&quot;);" value="Execute"> <br>
+    <br>
+    <div id="raw_get_profile" style="font-family: courier new; font-size: 10pt;">
+    </div>
+    <br>
+    <div id="output_get_profile" style="font-family: courier new; font-size: 10pt;">
+    </div>
+    <br>
+       </a><a href="#top">go to top</a>
+        </div>
+        
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<a name="change_password">
+	</a><div class="box-element"><a name="change_password">	    
+    <div class="box-head-light">
+        <h3 style="cursor:pointer;"> change password for user</h3></div>
+	    </a><div class="box-content"><a name="change_password">
+	    
+	    API URL: <br>
+    <span id="link_change_password"><%=  configatron.host %>/api/uber/change_password?</span>
+
+    <br>
+    Method: <span id="method_change_password">POST</span>
+    <br>
+		<form class="form_change_password">
+	    <br>
+    Parameters:
+    <br>
+	    
+	    <table width="100%" cellpadding="4" cellspacing="0" border="1" bordercolor="#808080"> 	    
+	    <thead>
+        <tr bgcolor="#eeeeee"><td> Field name </td><td> Description </td><td>Example</td>
+            <td>Req</td></tr>
+        </thead>
+	    <tbody>	
+	    
+    <tr>
+        <td width="140"> authentication_token</td>
+        <td> that you willget from login api</td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation4_card_number" name="authentication_token" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+     <tr>
+        <td width="140"> user[current_password]</td>
+        <td> password</td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation4_card_number" name="user[current_password]" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+     <tr>
+        <td width="140">user[password]</td>
+        <td>new password </td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation4_card_number" name="user[password]" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+    <tr>
+        <td width="140">user[password_confirmation]</td>
+        <td> password_confirmation</td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation4_card_number" name="user[password_confirmation]" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+     
+   
+    
+        
+        
+                </tbody>
+        </table>
+        </form>
+    <br>
+        <br>
+    Example call <br>
+    <textarea id="example_change_password" style="font-family: Courier New" rows="4" cols="90"><%=  configatron.host %>/api/uber/change_password?</textarea>
+    <br>
+    <input type="button" id="button_change_password" onclick="example(&quot;change_password&quot;);" value="Execute"> <br>
+    <br>
+    <div id="raw_change_password" style="font-family: courier new; font-size: 10pt;">
+    </div>
+    <br>
+    <div id="output_change_password" style="font-family: courier new; font-size: 10pt;">
+    </div>
+    <br>
+       </a><a href="#top">go to top</a>
+        </div>
+    </div>
+    <br>
+
+  
+  </div>
+  
+
+
+
+
+
+
+
+
+<a name="create_reservation">
+	</a><div class="box-element"><a name="create_reservation">	    
+    <div class="box-head-light">
+        <h3 style="cursor:pointer;"> create reservation</h3></div>
+	    </a><div class="box-content"><a name="change_password">
+	    
+	    API URL: <br>
+    <span id="link_create_reservation"><%=  configatron.host %>/api/uber/create_reservation?</span>
+
+    <br>
+    Method: <span id="method_create_reservation">POST</span>
+    <br>
+		<form class="form_create_reservation">
+	    <br>
+    Parameters:
+    <br>
+	    
+	    <table width="100%" cellpadding="4" cellspacing="0" border="1" bordercolor="#808080"> 	    
+	    <thead>
+        <tr bgcolor="#eeeeee"><td> Field name </td><td> Description </td><td>Example</td>
+            <td>Req</td></tr>
+        </thead>
+	    <tbody>	
+	    
+    <tr>
+        <td width="140"> authentication_token</td>
+        <td> that you willget from login api</td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation4_card_number" name="authentication_token" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+     <tr>
+        <td width="140">reservation[pickup_address] </td>
+        <td> pickup  address</td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation4_card_number" name="reservation[pickup_address]" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+     <tr>
+        <td width="140">reservation[destination_address]</td>
+        <td>destination address </td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation4_card_number" name="reservation[destination_address]" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+    <tr>
+        <td width="140">reservation[car_id]</td>
+        <td> car id</td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation4_card_number" name="reservation[car_id]" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+    <tr>
+        <td width="140">driver_id</td>
+        <td> driver id</td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation4_card_number" name="driver_id" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+     
+   
+    
+        
+        
+                </tbody>
+        </table>
+        </form>
+    <br>
+        <br>
+    Example call <br>
+    <textarea id="example_create_reservation" style="font-family: Courier New" rows="4" cols="90"><%=  configatron.host %>/api/uber/create_reservation?</textarea>
+    <br>
+    <input type="button" id="button_create_reservation" onclick="example(&quot;create_reservation&quot;);" value="Execute"> <br>
+    <br>
+    <div id="raw_create_reservation" style="font-family: courier new; font-size: 10pt;">
+    </div>
+    <br>
+    <div id="output_create_reservation" style="font-family: courier new; font-size: 10pt;">
+    </div>
+    <br>
+       </a><a href="#top">go to top</a>
+        </div>
+    </div>
+    <br>
+
+
+
+
+
+
+
+
+
+<a name="card_active">
+	</a><div class="box-element"><a name="card_active">	    
+    <div class="box-head-light">
+        <h3 style="cursor:pointer;"> make card active for payment api</h3></div>
+	    </a><div class="box-content"><a name="api5">
+	    
+	    API URL: <br>
+    <span id="link_card_active"><%=  configatron.host %>/api/uber/card_active?</span>
+
+    <br>
+    Method: <span id="method_card_active">POST</span>
+    <br>
+		<form class="form_card_active">
+	    <br>
+    Parameters:
+    <br>
+	    
+	    <table width="100%" cellpadding="4" cellspacing="0" border="1" bordercolor="#808080"> 	    
+	    <thead>
+        <tr bgcolor="#eeeeee"><td> Field name </td><td> Description </td><td>Example</td>
+            <td>Req</td></tr>
+        </thead>
+	    <tbody>	
+	    
+    <tr>
+        <td width="140"> authentication_token</td>
+        <td> that you willget from login api</td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation4_card_number" name="authentication_token" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+     <tr>
+        <td width="140"> id</td>
+        <td> whichyou  will get in list card api</td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation4_card_number" name="id" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+    
+        
+        
+                </tbody>
+        </table>
+        </form>
+    <br>
+        <br>
+    Example call <br>
+    <textarea id="example_card_active" style="font-family: Courier New" rows="4" cols="90"><%=  configatron.host %>/api/uber/my/card_active?</textarea>
+    <br>
+    <input type="button" id="button_card_active" onclick="example(&quot;card_active&quot;);" value="Execute"> <br>
+    <br>
+    <div id="raw_card_active" style="font-family: courier new; font-size: 10pt;">
+    </div>
+    <br>
+    <div id="output_card_active" style="font-family: courier new; font-size: 10pt;">
+    </div>
+    <br>
+       </a><a href="#top">go to top</a>
+        </div>
+    </div>
+    <br>
+
+
+
+ 
+ <div class="box-element"><a name="cars">	    
+    <div class="box-head-light">
+        <h3 style="cursor:pointer;"> List cars</h3></div>
+	    </a><div class="box-content"><a name="list_cards">
+	    
+	    API URL: <br>
+    <span id="link_cars"><%=  configatron.host %>/api/uber/cars?</span>
+
+    <br>
+    Method: <span id="method_cars">GET</span>
+    <br>
+		<form class="form_cars">
+	    <br>
+    Parameters:
+    <br>
+	    
+	    <table width="100%" cellpadding="4" cellspacing="0" border="1" bordercolor="#808080"> 	    
+	    <thead>
+        <tr bgcolor="#eeeeee"><td> Field name </td><td> Description </td><td>Example</td>
+            <td>Req</td></tr>
+        </thead>
+	    <tbody>	
+	    <tr>
+        <td width="140">authentication_token</td>
+        <td>that you  will get from login api</td>
+       
+    </tr>
+                </tbody>
+        </table>
+        </form>
+    <br>
+        <br>
+    Example call <br>
+    <textarea id="example_cars" style="font-family: Courier New" rows="4" cols="90"><%=  configatron.host %>/api/uber/cars?authentication_token=&amp</textarea>
+    <br>
+    <input type="button" id="button_cars" onclick="example(&quot;cars&quot;);" value="Execute"> <br>
+    <br>
+    <div id="raw_cars" style="font-family: courier new; font-size: 10pt;">
+    </div>
+    <br>
+    <div id="output_cars" style="font-family: courier new; font-size: 10pt;">
+    </div>
+    <br>
+       </a><a href="#top">go to top</a>
+        </div>
+        
+    </div>
+  
+  
+  
+  
+  
+  <div class="box-element"><a name="country_list">	    
+    <div class="box-head-light">
+        <h3 style="cursor:pointer;"> country_list</h3></div>
+	    </a><div class="box-content"><a name="country_list">
+	    
+	    API URL: <br>
+    <span id="link_country_list"><%=  configatron.host %>/api/uber/country_list?</span>
+
+    <br>
+    Method: <span id="method_country_list">GET</span>
+    <br>
+		
+    <br>
+        <br>
+    Example call <br>
+    <textarea id="example_country_list" style="font-family: Courier New" rows="4" cols="90"><%=  configatron.host %>/api/uber/country_list</textarea>
+    <br>
+    <input type="button" id="button_cars" onclick="example(&quot;country_list&quot;);" value="Execute"> <br>
+    <br>
+    <div id="raw_country_list" style="font-family: courier new; font-size: 10pt;">
+    </div>
+    <br>
+    <div id="output_country_list" style="font-family: courier new; font-size: 10pt;">
+    </div>
+    <br>
+       </a><a href="#top">go to top</a>
+        </div>
+        
+    </div>
+    
+    
+    
+    
+    <a name="rate_driver">
+	</a><div class="box-element"><a name="rate_driver">	    
+    <div class="box-head-light">
+        <h3 style="cursor:pointer;">driver rating api</h3></div>
+	    </a><div class="box-content"><a name="rate_driver">
+	    
+	    API URL: <br>
+    <span id="link_rate_driver"><%=  configatron.host %>/api/uber/rate_driver?</span>
+
+    <br>
+    Method: <span id="method_rate_driver">POST</span>
+    <br>
+		<form class="form_rate_driver">
+	    <br>
+    Parameters:
+    <br>
+	    
+	    <table width="100%" cellpadding="4" cellspacing="0" border="1" bordercolor="#808080"> 	    
+	    <thead>
+        <tr bgcolor="#eeeeee"><td> Field name </td><td> Description </td><td>Example</td>
+            <td>Req</td></tr>
+        </thead>
+	    <tbody>	
+	    
+    <tr>
+        <td width="140"> authentication_token</td>
+        <td> that you willget from login api</td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation4_card_number" name="authentication_token" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+     <tr>
+        <td width="140"> driver_id</td>
+        <td>driver id to which reservation assigned</td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation4_card_number" name="driver_id" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+    <tr>
+        <td width="140">rating</td>
+        <td>1-5</td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation4_card_number" name="rating" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+    
+        
+        
+                </tbody>
+        </table>
+        </form>
+    <br>
+        <br>
+    Example call <br>
+    <textarea id="example_rate_driver" style="font-family: Courier New" rows="4" cols="90"><%=  configatron.host %>/api/uber/rate_driver?</textarea>
+    <br>
+    <input type="button" id="button_rate_driver" onclick="example(&quot;rate_driver&quot;);" value="Execute"> <br>
+    <br>
+    <div id="raw_rate_driver" style="font-family: courier new; font-size: 10pt;">
+    </div>
+    <br>
+    <div id="output_rate_driver" style="font-family: courier new; font-size: 10pt;">
+    </div>
+    <br>
+       </a><a href="#top">go to top</a>
+        </div>
+    </div>
+    <br>
+  
+
+
+
+
+
+ <a name="delete_card">
+ 
+	</a><b>note:You can delete cards of a user. If you delete a card that is currently a users's default, the most recently added card will be used as the new default. If you delete the users's last remaining card, the default_card attribute on the user will become null.</b>
+	<div class="box-element"><a name="delete_card">	    
+    <div class="box-head-light">
+        <h3 style="cursor:pointer;">Delete card</h3></div>
+	    </a><div class="box-content"><a name="delete_card">
+	    
+	    API URL: <br>
+    <span id="link_delete_card"><%=  configatron.host %>/api/uber/delete_card?</span>
+
+    <br>
+    Method: <span id="method_delete_card">POST</span>
+    <br>
+		<form class="form_delete_card">
+	    <br>
+    Parameters:
+    <br>
+	    
+	    <table width="100%" cellpadding="4" cellspacing="0" border="1" bordercolor="#808080"> 	    
+	    <thead>
+        <tr bgcolor="#eeeeee"><td> Field name </td><td> Description </td><td>Example</td>
+            <td>Req</td></tr>
+        </thead>
+	    <tbody>	
+	    
+    <tr>
+        <td width="140"> authentication_token</td>
+        <td> that you willget from login api</td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation4_card_number" name="authentication_token" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+     <tr>
+        <td width="140"> id</td>
+        <td> which you  will get in list card api</td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation4_card_number" name="id" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+    
+        
+        
+                </tbody>
+        </table>
+        </form>
+    <br>
+        <br>
+    Example call <br>
+    <textarea id="example_delete_card" style="font-family: Courier New" rows="4" cols="90"><%=  configatron.host %>/api/uber/delete_card?</textarea>
+    <br>
+    <input type="button" id="button_card_active" onclick="example(&quot;delete_card&quot;);" value="Execute"> <br>
+    <br>
+    <div id="raw_delete_card" style="font-family: courier new; font-size: 10pt;">
+    </div>
+    <br>
+    <div id="output_delete_card" style="font-family: courier new; font-size: 10pt;">
+    </div>
+    <br>
+       </a><a href="#top">go to top</a>
+        </div>
+    </div>
+    <br>
+
+
+
+
+
+
+
+<a name="begin_trip">
+ 
+	</a>
+	<div class="box-element"><a name="begin_trip">	    
+    <div class="box-head-light">
+        <h3 style="cursor:pointer;">Begin trip</h3></div>
+	    </a><div class="box-content"><a name="begin_trip">
+	    
+	    API URL: <br>
+    <span id="link_begin_trip"><%=  configatron.host %>/api/uber/begin_trip?</span>
+
+    <br>
+    Method: <span id="method_begin_trip">POST</span>
+    <br>
+		<form class="form_begin_trip">
+	    <br>
+    Parameters:
+    <br>
+	    
+	    <table width="100%" cellpadding="4" cellspacing="0" border="1" bordercolor="#808080"> 	    
+	    <thead>
+        <tr bgcolor="#eeeeee"><td> Field name </td><td> Description </td><td>Example</td>
+            <td>Req</td></tr>
+        </thead>
+	    <tbody>	
+	    
+    <tr>
+        <td width="140"> authentication_token</td>
+        <td> that you willget from login api</td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation4_card_number" name="authentication_token" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+     <tr>
+        <td width="140"> reservation_id</td>
+        <td> created reservation</td>
+        <td width="210"> <input id="input_mobileXapiXuserXlocation4_card_number" name="reservation_id" class="input_mobileXapiXuserXusernameXvalidate1" size="40" onkeyup="change_mobileXapiXuserXusernameXvalidate1();" value=""> </td>
+        <td width="30"> * </td>
+    </tr>
+    
+        
+        
+                </tbody>
+        </table>
+        </form>
+    <br>
+        <br>
+    Example call <br>
+    <textarea id="example_begin_trip" style="font-family: Courier New" rows="4" cols="90"><%=  configatron.host %>/api/uber/begin_trip?</textarea>
+    <br>
+    <input type="button" id="button_card_active" onclick="example(&quot;begin_trip&quot;);" value="Execute"> <br>
+    <br>
+    <div id="raw_begin_trip" style="font-family: courier new; font-size: 10pt;">
+    </div>
+    <br>
+    <div id="output_begin_trip" style="font-family: courier new; font-size: 10pt;">
+    </div>
+    <br>
+       </a><a href="#top">go to top</a>
+        </div>
+    </div>
+    <br>
+  
+  </div>
+</div>
+
+</body></html>
