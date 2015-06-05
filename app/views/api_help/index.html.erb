@@ -34,8 +34,10 @@
         original_link: api_dental_partner_change_password_path,
         parameters: [
           {name: 'authentication_token', description: 'You will get authentication token from signup/login api', required: 1 },
-          {name: 'password_reset[old_password]', description: 'Current Password', required: 1 },
-          {name: 'password_reset[password]', description: 'Current Password', required: 1 }
+          {name: 'user[current_password]', description: 'Current Password', required: 1 },
+          {name: 'user[password]', description: 'New Password', required: 1 },
+          {name: 'user[password_confirmation]', description: 'New Password', required: 1 }
+
 
         ],
         options: {}} %>

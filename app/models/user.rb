@@ -17,4 +17,9 @@ class User < ActiveRecord::Base
     u = User.find_by_email(email)
     (u.present? && u.valid_password?(password)) ? u : nil
   end
+
+  # #instance methods
+  def display_errors
+    errors.full_messages.join(',')
+  end
 end
