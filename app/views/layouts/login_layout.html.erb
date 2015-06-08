@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dental Partner</title>
+    <%= stylesheet_link_tag    "login_layout" %>
+    <link href="http://fonts.googleapis.com/css?family=Lato:100,300,400,700" media="all" rel="stylesheet" type="text/css" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <%#= csrf_meta_tags %>
+  </head>
+  <body class="login2">
+    <div class="login-wrapper">
+    <!-- START Template Canvas -->
+      <link rel="shortcut icon" href="/favicon.ico" />
+      <div class="login-container">
+        <%= link_to image_tag("logo_inner.png")%>
+          <%= render 'layouts/flash_partial' %>
+          <%= yield %>
+      </div>
+    </div>
+    <%= javascript_include_tag "login_layout"  %>
+  </body>
+</html>
