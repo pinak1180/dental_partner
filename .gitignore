@@ -13,5 +13,6 @@
 /tmp
 
 # Ignore application configuration
-/config/database.yml
-/config/secrets.yml
+config/database.yml
+config/secrets.yml
+vendor/ruby/
