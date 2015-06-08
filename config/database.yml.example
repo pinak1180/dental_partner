@@ -1,0 +1,25 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  host: localhost
+
+local: &local
+  username: <%= Rails.application.secrets.DP_LOCAL_USERNAME %>
+  password: <%= Rails.application.secrets.DP_LOCAL_PASSWORD %>
+
+development:
+  <<: *default
+  database: dental_partner_development
+  <<: *local
+
+test:
+  <<: *default
+  database: dental_partner_test
+  <<: *local
+
+production:
+  <<: *default
+  database: dental_partner_production
+  username: <%= Rails.application.secrets.DP_DB_USERNAME %>
+  password: <%= Rails.application.secrets.DP_DB_PASSWORD %>
