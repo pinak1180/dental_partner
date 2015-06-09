@@ -50,6 +50,7 @@ GEM
       tzinfo (~> 1.1)
     acts_as_commentable (4.0.2)
     acts_as_votable (0.10.0)
+    addressable (2.3.8)
     arel (6.0.0)
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
@@ -110,6 +111,10 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.8.3)
     kgio (2.9.3)
+    launchy (2.4.3)
+      addressable (~> 2.3)
+    letter_opener (1.4.1)
+      launchy (~> 2.2)
     loofah (2.0.2)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -225,6 +230,7 @@ DEPENDENCIES
   font-awesome-rails
   jbuilder (~> 2.0)
   jquery-rails
+  letter_opener
   pg
   postgres_ext
   rails (= 4.2.1)

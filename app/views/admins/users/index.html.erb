@@ -1,45 +1,45 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Admins Users</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>First name</th>
-      <th>Last name</th>
-      <th>Position ids</th>
-      <th>Phone</th>
-      <th>Email</th>
-      <th>Postal code</th>
-      <th>Access level ids</th>
-      <th>Department ids</th>
-      <th>Practise code ids</th>
-      <th>Direct report ids</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @admins_users.each do |admins_user| %>
+<% provide :title, "Listing Users" %>
+<section class="panel">
+  <header class="panel-heading">Listing Users</header>
+  <div class="panel-body">
+  <%= link_to 'New User', new_admins_user_path, class: "btn btn-default" %>
+  <table class="table table-stripped">
+    <thead>
       <tr>
-        <td><%= admins_user.first_name %></td>
-        <td><%= admins_user.last_name %></td>
-        <td><%= admins_user.position_ids %></td>
-        <td><%= admins_user.phone %></td>
-        <td><%= admins_user.email %></td>
-        <td><%= admins_user.postal_code %></td>
-        <td><%= admins_user.access_level_ids %></td>
-        <td><%= admins_user.department_ids %></td>
-        <td><%= admins_user.practise_code_ids %></td>
-        <td><%= admins_user.direct_report_ids %></td>
-        <td><%= link_to 'Show', admins_user %></td>
-        <td><%= link_to 'Edit', edit_admins_user_path(admins_user) %></td>
-        <td><%= link_to 'Destroy', admins_user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Positions</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Postal code</th>
+        <th>Access levels</th>
+        <th>Departments</th>
+        <th>Practise</th>
+        <th>Direct report</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
-
-<%= link_to 'New User', new_admins_user_path %>
+    <tbody>
+      <% @admins_users.each do |admins_user| %>
+        <tr>
+          <td><%= admins_user.first_name %></td>
+          <td><%= admins_user.last_name %></td>
+          <td><%= admins_user.positions %></td>
+          <td><%= admins_user.phone %></td>
+          <td><%= admins_user.email %></td>
+          <td><%= admins_user.postal_code %></td>
+          <td><%= admins_user.access_levels %></td>
+          <td><%= admins_user.departments %></td>
+          <td><%= admins_user.practise_codes %></td>
+          <td><%= admins_user.direct_report_ids %></td>
+          <td><%= link_to 'Show', admins_user_path(admins_user) %></td>
+          <td><%= link_to 'Edit', edit_admins_user_path(admins_user) %></td>
+          <td><%= link_to 'Destroy', admins_user_path(admins_user), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br>
+</div>
+</section>

@@ -96,11 +96,11 @@ ActiveRecord::Schema.define(version: 20150609180937) do
     t.string   "last_name"
     t.string   "phone"
     t.string   "postal_code"
-    t.integer  "access_level_ids",                                    array: true
-    t.integer  "position_ids",                                        array: true
-    t.integer  "department_ids",                                      array: true
-    t.integer  "practise_code_ids",                                   array: true
-    t.integer  "direct_report_ids",                                   array: true
+    t.integer  "access_level_ids",       default: [],                 array: true
+    t.integer  "position_ids",           default: [],                 array: true
+    t.integer  "department_ids",         default: [],                 array: true
+    t.integer  "practise_code_ids",      default: [],                 array: true
+    t.integer  "direct_report_ids",      default: [],                 array: true
   end
 
   add_index "users", ["access_level_ids"], name: "index_users_on_access_level_ids", using: :gin

@@ -19,6 +19,7 @@ gem 'unicorn'
 gem 'chosen-rails', git: 'git://github.com/qpowell/chosen-rails.git'
 gem 'acts_as_commentable'
 gem 'acts_as_votable', '~> 0.10.0'
+gem 'letter_opener', group: :development
 # gem 'therubyracer', platforms: :ruby
 
 group :development, :test do

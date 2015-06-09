@@ -1,8 +1,9 @@
 class Admins::UsersController < AdminBaseController
   before_action :set_admins_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_form_details, only: [ :new, :edit, :create, :update ]
 
   def index
-    @admins_users = User.all
+    @admins_users = User.non_admins
   end
 
   def show
@@ -19,7 +20,7 @@ class Admins::UsersController < AdminBaseController
     @admins_user = User.new(admins_user_params)
     respond_to do |format|
       if @admins_user.save
-        format.html { redirect_to @admins_user, notice: 'User was successfully created.' }
+        format.html { redirect_to admins_user_path(@admins_user), notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @admins_user }
       else
         format.html { render :new }
@@ -31,7 +32,7 @@ class Admins::UsersController < AdminBaseController
   def update
     respond_to do |format|
       if @admins_user.update(admins_user_params)
-        format.html { redirect_to @admins_user, notice: 'User was successfully updated.' }
+        format.html { redirect_to admins_user_path(@admins_user), notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @admins_user }
       else
         format.html { render :edit }
@@ -54,6 +55,14 @@ class Admins::UsersController < AdminBaseController
     end
 
     def admins_user_params
-      params.require(:admins_user).permit(:first_name, :last_name, :position_ids, :phone, :email, :postal_code, :access_level_ids, :department_ids, :practise_code_ids, :direct_report_ids, :postal_code)
+      params.require(:user).permit(:first_name, :last_name, :position_ids, :phone, :email, :postal_code, position_ids: [], access_level_ids: [], department_ids: [], practise_code_ids: [])
+    end
+
+    def set_form_details
+      @direct_reporters = User.non_admins.pluck(:email, :id)
+      @positions        = Position.pluck(:name, :id)
+      @access_levels    = AccessLevel.pluck(:level, :id)
+      @departments      = Department.pluck(:name, :id)
+      @practise_codes   = PractiseCode.pluck(:code, :id)
     end
 end

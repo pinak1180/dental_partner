@@ -1,54 +1,58 @@
-<p id="notice"><%= notice %></p>
+<% provide :title, "View User" %>
+<section class="panel">
+  <header class="panel-heading">View User</header>
+  <div class="panel-body">
+  <p>
+    <strong>First name:</strong>
+    <%= @admins_user.first_name %>
+  </p>
 
-<p>
-  <strong>First name:</strong>
-  <%= @admins_user.first_name %>
-</p>
+  <p>
+    <strong>Last name:</strong>
+    <%= @admins_user.last_name %>
+  </p>
 
-<p>
-  <strong>Last name:</strong>
-  <%= @admins_user.last_name %>
-</p>
+  <p>
+    <strong>Position ids:</strong>
+    <%= @admins_user.positions %>
+  </p>
 
-<p>
-  <strong>Position ids:</strong>
-  <%= @admins_user.position_ids %>
-</p>
+  <p>
+    <strong>Phone:</strong>
+    <%= @admins_user.phone %>
+  </p>
 
-<p>
-  <strong>Phone:</strong>
-  <%= @admins_user.phone %>
-</p>
+  <p>
+    <strong>Email:</strong>
+    <%= @admins_user.email %>
+  </p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @admins_user.email %>
-</p>
+  <p>
+    <strong>Postal code:</strong>
+    <%= @admins_user.postal_code %>
+  </p>
 
-<p>
-  <strong>Postal code:</strong>
-  <%= @admins_user.postal_code %>
-</p>
+  <p>
+    <strong>Access levels</strong>
+    <%= @admins_user.access_levels %>
+  </p>
 
-<p>
-  <strong>Access level ids:</strong>
-  <%= @admins_user.access_level_ids %>
-</p>
+  <p>
+    <strong>Departments:</strong>
+    <%= @admins_user.departments %>
+  </p>
 
-<p>
-  <strong>Department ids:</strong>
-  <%= @admins_user.department_ids %>
-</p>
+  <p>
+    <strong>Practise code</strong>
+    <%= @admins_user.practise_codes %>
+  </p>
 
-<p>
-  <strong>Practise code ids:</strong>
-  <%= @admins_user.practise_code_ids %>
-</p>
+  <p>
+    <strong>Direct reports</strong>
+    <%= @admins_user.direct_report_ids %>
+  </p>
 
-<p>
-  <strong>Direct report ids:</strong>
-  <%= @admins_user.direct_report_ids %>
-</p>
-
-<%= link_to 'Edit', edit_admins_user_path(@admins_user) %> |
-<%= link_to 'Back', admins_users_path %>
+  <%= link_to 'Edit', edit_admins_user_path(@admins_user) %> |
+  <%= link_to 'Back', admins_users_path %>
+<div>
+</section>

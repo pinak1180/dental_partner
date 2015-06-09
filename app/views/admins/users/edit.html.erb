@@ -1,6 +1,5 @@
-<h1>Editing Admins User</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @admins_user %> |
-<%= link_to 'Back', admins_users_path %>
+<% provide :title, "Edit User" %>
+<section class="panel">
+  <header class="panel-heading">Edit User</header>
+  <%= render 'form' %>
+</section>
