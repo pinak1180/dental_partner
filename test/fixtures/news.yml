@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  release_date: 2015-06-09
+  expiry_date: 2015-06-09
+  tags: 
+  content: MyText
+
+two:
+  release_date: 2015-06-09
+  expiry_date: 2015-06-09
+  tags: 
+  content: MyText
