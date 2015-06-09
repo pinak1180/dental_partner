@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
             :department_ids, :practise_code_ids, :position_ids, presence: true, unless: Proc.new { |user| user.admin }
 
   before_validation :set_password, if: Proc.new { |user| !user.admin && user.new_record? }
-  after_save        :send_welcome_mail, if: Proc.new { |user| !user.admin && user.new_record? }
+  after_create      :send_welcome_mail, if: Proc.new { |user| !user.admin }
 
   ## Scope ##
   scope :non_admins, -> { where(admin: false) }
