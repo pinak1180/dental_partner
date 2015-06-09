@@ -4,7 +4,7 @@ class CreateNews < ActiveRecord::Migration
       t.date :release_date
       t.date :expiry_date
       t.string :tags, array: true
-      t.text :content
+      t.string :content
 
       t.timestamps null: false
     end

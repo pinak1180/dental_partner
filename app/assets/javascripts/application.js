@@ -30,8 +30,8 @@
 //= require core/jquery.tagsinput
 //= require core/file_upload_changer
 //= require chosen-jquery
-//  require ckeditor/init
-//  require ckeditor/config
+//=  require ckeditor/init
+//=  require ckeditor/config
 //= require core/jquery.simple-dtpicker
 //= require_self
 
