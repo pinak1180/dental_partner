@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- meta -->
+    <meta charset="utf-8">
+    <meta name="description" content="Flat, Clean, Responsive, application admin template built with bootstrap 3">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+    <!-- /meta -->
+    <%= stylesheet_link_tag :login, media: "all" %>
+    <%= csrf_meta_tags %>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- load modernizer -->
+    <%= javascript_include_tag "modernizr.js" %>
+  </head>
+  <body>
+    <div class="cover" style='background-image: url(<%= asset_path("cover1.jpg") %>)'></div>
+    <div class="overlay"></div>
+    <div class="center-wrapper">
+      <div class="center-content">
+        <div class="row">
+          <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+            <section class="panel bg-white no-b">
+              <ul class="switcher-dash-action">
+                <li class="<%= check_active('admins/sessions', 'active') %>"><%= link_to "Sign in", new_session_path(resource_name) %></li>
+                <li class="<%= check_active('devise/passwords', 'active') %>"><%= link_to "Forgot password?", new_password_path(resource_name) %></li>
+              </ul>
+              <div class="p15 panel-body">
+                <%= render "layouts/flash_partial" %>
+                <%= yield %>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%= javascript_include_tag :login %>
+  </body>
+</html>

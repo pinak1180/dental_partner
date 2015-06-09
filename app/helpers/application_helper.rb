@@ -1,31 +1,29 @@
 module ApplicationHelper
-  def edit_link(link_href, _btnklass = 'table-actions')
-    link_to link_href  do
-      (content_tag :i, '', class: 'fa fa-pencil').html_safe
+  def flash_class(level)
+    case level
+      when "notice" then "alert alert-info"
+      when "success" then "alert alert-success"
+      when "error" then "alert alert-danger"
+      when "alert" then "alert alert-danger"
     end
   end
 
-  def view_link(link_href)
-    link_to link_href, class: 'table-actions' do
-      (content_tag :i, '', class: 'fa fa-eye').html_safe
-    end
+  def page_title(title)
+    title.present? ? "#{title} | Dental Partners" : "Dental Partners"
   end
 
-  def delete_link(link_href)
-    link_to link_href, method: :delete, data: { confirm: 'Are you sure?' }, class: 'table-actions' do
-      (content_tag :i, '', class: 'fa fa-trash-o').html_safe
-    end
+  def check_active(controller, value)
+    params[:controller].present? && params[:controller] == controller ? value : ""
   end
 
-  def add_link(name, link_href)
-    link_to link_href, class: 'btn' do
-      (content_tag :i, '', class: 'fa fa-plus') + "#{name} "
-    end
-  end
-
-  def edit_link1(link_href)
-    link_to link_href  do
-      (content_tag :i, '', class: 'fa fa-edit') + ('Edit').html_safe
-    end
+  def avatar_input_for(object, name, image)
+    html = "<p class='form-label'> #{object.class.to_s + ' Picture'}
+    <div class='settings_account_avatar'>
+      #{image_tag image, id: 'uploadPreview', size: '150x150'}
+      <div class='settings_account_avatar_button'><i class='fa fa-camera fa-5x'></i></div>
+      <input type='file' name='#{name}' id='uploadImage' title='Click to upload picture' alt='Click to upload picture' autocomplete='off' onchange='PreviewImage();' accept='#{UserDecorator.valid_avatar_file_formats}'>
+    </div>
+    </p>"
+    html.html_safe
   end
 end

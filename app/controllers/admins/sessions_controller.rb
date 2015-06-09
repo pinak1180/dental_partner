@@ -1,5 +1,5 @@
 class Admins::SessionsController < Devise::SessionsController
-  layout 'login_layout'
+  layout 'login'
   def new
     super
   end

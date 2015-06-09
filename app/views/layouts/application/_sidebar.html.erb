@@ -1,0 +1,40 @@
+<aside class="sidebar offscreen-left">
+  <!-- main navigation -->
+  <nav class="main-navigation" data-height="auto" data-size="6px" data-distance="0" data-rail-visible="true" data-wheel-step="10">
+    <p class="nav-title">MENU</p>
+    <ul class="nav">
+      <!-- dashboard -->
+      <li>
+        <%= link_to root_path do %>
+          <i class="ti-home"></i>
+          <span>Dashboard</span>
+        <% end %>
+      </li>
+      <!-- /create group -->
+      <li>
+        <%= link_to new_admins_user_path do %>
+          <i class="fa fa-user"></i>
+          <span>Users</span>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to new_admins_user_path do %>
+          <i class="fa fa-newspaper-o"></i>
+          <span>News</span>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to new_admins_user_path do %>
+          <i class="fa fa-question-circle"></i>
+          <span>Forums</span>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to new_admins_user_path do %>
+          <i class="fa fa-line-chart"></i>
+          <span>Surveys</span>
+        <% end %>
+      </li>
+    </ul>
+  </nav>
+</aside>

@@ -1,5 +1,4 @@
 /*
-*= require pages/fullcalendar.css
 *= require core/bootstrap.min
 *= require font-awesome
 *= require core/themify-icons.css
@@ -7,10 +6,14 @@
 *= require templates/palette.css
 *= require templates/font.css
 *= require templates/main.css
-*  require jquery.tagsinput
-*= require pages/file_uploader
-*= require chosen
-*= require core/jquery.simple-dtpicker
-* require custom
+*  require pwdcalc
 *= require_self
 */
+@charset "utf-8";
+
+.text-center{
+	display: block;
+	text-align: center;
+	padding: 12px;
+	font-style: oblique;
+}

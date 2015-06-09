@@ -1,0 +1,98 @@
+<header class="header header-fixed navbar">
+  <div class="brand">
+    <!-- toggle offscreen menu -->
+    <a href="javascript:;" class="ti-menu off-left visible-xs" data-toggle="offscreen" data-move="ltr"></a>
+    <!-- /toggle offscreen menu -->
+
+    <!-- logo -->
+    <%= link_to root_path, class: "navbar-brand" do %>
+      <%= image_tag "logo.png", alt: "Diaspora Bridge" %>
+      <span class="heading-font">Dental Partners</span>
+    <% end %>
+    <!-- /logo -->
+  </div>
+
+  <ul class="nav navbar-nav">
+    <li class="hidden-xs">
+      <!-- toggle small menu -->
+      <a href="javascript:;" class="toggle-sidebar">
+        <i class="ti-menu"></i>
+      </a>
+      <!-- /toggle small menu -->
+    </li>
+    <li class="header-search">
+      <!-- toggle search -->
+      <a href="javascript:;" class="toggle-search">
+        <i class="ti-search"></i>
+      </a>
+      <!-- /toggle search -->
+      <div class="search-container">
+        <form role="search">
+          <input type="text" class="form-control search" placeholder="type and press enter">
+        </form>
+      </div>
+    </li>
+  </ul>
+
+  <ul class="nav navbar-nav navbar-right">
+    <li class="dropdown hidden-xs">
+      <a href="javascript:;" data-toggle="dropdown">
+        <i class="ti-more-alt"></i>
+      </a>
+      <ul class="dropdown-menu animated zoomIn">
+        <li class="dropdown-header">Quick Links</li>
+        <li>
+          <a href="javascript:;">Start New Campaign</a>
+        </li>
+      </ul>
+    </li>
+
+    <li class="notifications dropdown">
+      <a href="javascript:;" data-toggle="dropdown">
+        <i class="ti-bell"></i>
+        <div class="badge badge-top bg-danger animated flash">
+          <span>1</span>
+        </div>
+      </a>
+      <div class="dropdown-menu animated fadeInLeft">
+        <div class="panel panel-default no-m">
+          <div class="panel-heading small"><b>Notifications</b>
+        </div>
+          <ul class="list-group">
+            <li class="list-group-item">
+              <%= link_to "#" do %>
+                <span class="pull-left mt5 mr15">
+                  <%#= image_tag request.sender.decorate.profile_avatar, class: "avatar avatar-sm img-circle", alt: "" %>
+                </span>
+                <div class="m-body">
+                  <div class="">
+                    <small><b>test</b></small>
+                    <span class="label label-danger pull-right">REQUEST TO JOIN</span>
+                  </div>
+                  <span> wants to join you</span>
+                  <span class="time small">3 mins ago.</span>
+                </div>
+              <% end %>
+            </li>
+          </ul>
+          <div class="panel-footer">
+            <a href="javascript:;">See all notifications</a>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="off-right">
+      <a href="javascript:;" data-toggle="dropdown">
+        <%= image_tag "faceless.jpg", class: "header-avatar img-circle", alt: "user", title: "user" %>
+        <span class="hidden-xs ml10">User John</span>
+        <i class="ti-angle-down ti-caret hidden-xs"></i>
+      </a>
+      <ul class="dropdown-menu animated fadeInRight">
+        <li><%= link_to "<i class='fa fa-cogs'></i> Settings".html_safe, "#" %></li>
+        <li><%= link_to "<i class='fa fa-user'></i> Profile".html_safe, "#" %></li>
+        <li><%= link_to "<i class='fa fa-sign-out'></i> Sign out".html_safe, destroy_user_session_path, method: "delete" %></li>
+      </ul>
+    </li>
+  </ul>
+</header>

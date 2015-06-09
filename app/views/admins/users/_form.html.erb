@@ -1,0 +1,23 @@
+<div class="panel-body">
+  <%= simple_form_for(@admins_user, url: @admins_user.new_record? ? admins_users_path : admins_user_path(@admins_user), html: {class: "col-md-6"}) do |f| %>
+    <%= f.input :first_name, input_html: {class: "form-control"} %>
+    <%= f.input :last_name, input_html: {class: "form-control"} %>
+    <%= f.input :email, input_html: {class: "form-control"} %>
+    <%= f.input :phone, input_html: {class: "form-control"} %>
+    <%= f.input :postal_code, input_html: {class: "form-control"} %>
+    <%= f.input :position_ids, label: "Select Positions" do %><br/>
+      <%= f.select :position_ids, Position.pluck(:name, :id), {include_blank: false}, {:class => "chosen-select", "data-placeholder": "Choose Positions", style: "width: 300px;"} %>
+    <% end %>
+    <%= f.input :access_level_ids, label: "Select Access Levels" do %><br/>
+      <%= f.select :access_level_ids, Position.pluck(:name, :id), {include_blank: false}, {:class => "chosen-select", "data-placeholder": "Choose Access Levels", style: "width: 300px;"} %>
+    <% end %>
+    <%= f.input :department_ids, label: "Select Departments" do %><br/>
+      <%= f.select :department_ids, Position.pluck(:name, :id), {include_blank: false}, {:class => "chosen-select", "data-placeholder": "Choose Departments", style: "width: 300px;"} %>
+    <% end %>
+    <%= f.input :practise_code_ids, label: "Select Practise Code" do %><br/>
+      <%= f.select :practise_code_ids, Position.pluck(:name, :id), {include_blank: false}, {:class => "chosen-select", "data-placeholder": "Choose Practise Codes", style: "width: 300px;"} %>
+    <% end %>
+    <%= f.input :direct_report_ids, input_html: {class: "form-control"} %>
+    <%= f.submit "Add User", class: "btn btn-primary" %>
+  <% end %>
+</div>

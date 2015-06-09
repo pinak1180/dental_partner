@@ -10,8 +10,8 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery-1.7.2
-//= require prettyprint
+//= require api_help/jquery-1.7.2
+//= require api_help/prettyprint
 //= require_self
 
 var currentTarget = "";
