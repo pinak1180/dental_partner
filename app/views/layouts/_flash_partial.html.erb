@@ -2,13 +2,13 @@
   <% flash.each do |name, msg| %>
     <% if msg.class == Array %>
       <% msg.each do |m| %>
-        <div class="alert alert-<%= name.to_s == 'notice' ? 'success' : 'danger' %>">
+        <div class="<%= flash_class(name) %> fadein mt15">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
              <%= m %> <br>
         </div>
       <% end %>
     <% else %>
-      <div class="alert alert-<%= name.to_s == 'notice' ? 'success' : 'danger' %>">
+      <div class="<%= flash_class(name) %> fadein mt15">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
           <%= msg %>
       </div>

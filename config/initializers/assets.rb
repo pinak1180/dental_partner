@@ -2,7 +2,7 @@
 
 # Version of your assets, change this if you want to expire all your assets.
 Rails.application.config.assets.version = '1.0'
-Rails.application.config.assets.precompile += %w( api_help.css login_layout.css api_help.js login_layout.js)
+Rails.application.config.assets.precompile += %w( api_help.css login.css api_help.js login.js modernizr.js)
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path
 

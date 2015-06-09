@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150607120624) do
+ActiveRecord::Schema.define(version: 20150609041308) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "access_levals", force: :cascade do |t|
-    t.integer  "leval"
+  create_table "access_levels", force: :cascade do |t|
+    t.integer  "level"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -65,9 +65,18 @@ ActiveRecord::Schema.define(version: 20150607120624) do
     t.string   "last_name"
     t.string   "phone"
     t.string   "postal_code"
+    t.integer  "access_level_ids",                                    array: true
+    t.integer  "position_ids",                                        array: true
+    t.integer  "department_ids",                                      array: true
+    t.integer  "practise_code_ids",                                   array: true
+    t.integer  "direct_report_ids",                                   array: true
   end
 
+  add_index "users", ["access_level_ids"], name: "index_users_on_access_level_ids", using: :gin
+  add_index "users", ["department_ids"], name: "index_users_on_department_ids", using: :gin
+  add_index "users", ["direct_report_ids"], name: "index_users_on_direct_report_ids", using: :gin
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["position_ids"], name: "index_users_on_position_ids", using: :gin
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
