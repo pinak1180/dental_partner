@@ -18,6 +18,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'unicorn'
 gem 'chosen-rails', git: 'git://github.com/qpowell/chosen-rails.git'
 gem 'acts_as_commentable'
+gem 'acts_as_votable', '~> 0.10.0'
 # gem 'therubyracer', platforms: :ruby
 
 group :development, :test do
