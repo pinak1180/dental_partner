@@ -1,8 +1,8 @@
 class CreateRecipients < ActiveRecord::Migration
   def change
     create_table :recipients do |t|
-      t.integer :recivable_ids, array: true
-      t.string :recivable_type
+      t.references :receivable, polymorphic: true, index: true
+      t.string :recipient_ids, array: true
       t.timestamps null: false
     end
   end

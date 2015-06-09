@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150609180937) do
+ActiveRecord::Schema.define(version: 20150610000436) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,22 @@ ActiveRecord::Schema.define(version: 20150609180937) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "ckeditor_assets", force: :cascade do |t|
+    t.string   "data_file_name",               null: false
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.integer  "assetable_id"
+    t.string   "assetable_type",    limit: 30
+    t.string   "type",              limit: 30
+    t.integer  "width"
+    t.integer  "height"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
+  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
 
   create_table "comments", force: :cascade do |t|
     t.string   "title",            limit: 50, default: ""
@@ -54,7 +70,7 @@ ActiveRecord::Schema.define(version: 20150609180937) do
     t.date     "release_date"
     t.date     "expiry_date"
     t.string   "tags",                      array: true
-    t.text     "content"
+    t.string   "content"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
@@ -72,11 +88,14 @@ ActiveRecord::Schema.define(version: 20150609180937) do
   end
 
   create_table "recipients", force: :cascade do |t|
-    t.integer  "recivable_ids",               array: true
-    t.string   "recivable_type"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.integer  "receivable_id"
+    t.string   "receivable_type"
+    t.string   "recipient_ids",                array: true
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
+
+  add_index "recipients", ["receivable_type", "receivable_id"], name: "index_recipients_on_receivable_type_and_receivable_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
@@ -96,11 +115,11 @@ ActiveRecord::Schema.define(version: 20150609180937) do
     t.string   "last_name"
     t.string   "phone"
     t.string   "postal_code"
-    t.integer  "access_level_ids",       default: [],                 array: true
-    t.integer  "position_ids",           default: [],                 array: true
-    t.integer  "department_ids",         default: [],                 array: true
-    t.integer  "practise_code_ids",      default: [],                 array: true
-    t.integer  "direct_report_ids",      default: [],                 array: true
+    t.integer  "access_level_ids",                                    array: true
+    t.integer  "position_ids",                                        array: true
+    t.integer  "department_ids",                                      array: true
+    t.integer  "practise_code_ids",                                   array: true
+    t.integer  "direct_report_ids",                                   array: true
   end
 
   add_index "users", ["access_level_ids"], name: "index_users_on_access_level_ids", using: :gin

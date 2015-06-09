@@ -116,8 +116,8 @@ CKEDITOR.editorConfig = function( config )
   //   { name: 'insert', items: [ 'Image', 'Table', 'HorizontalRule', 'SpecialChar' ] }
   // ];
 
-  config.toolbar_simple = [
-    ["Bold",  "Italic",  "Underline",  "Strike",  "-",  "Subscript",  "Superscript"],
-  ];
-  config.toolbar = "simple";  
+  //config.toolbar_simple = [
+    //["Bold",  "Italic",  "Underline",  "Strike",  "-",  "Subscript",  "Superscript"],
+  //];
+  config.toolbar = "simple";
 };

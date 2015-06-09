@@ -58,11 +58,4 @@ class Admins::UsersController < AdminBaseController
       params.require(:user).permit(:first_name, :last_name, :position_ids, :phone, :email, :postal_code, position_ids: [], access_level_ids: [], department_ids: [], practise_code_ids: [])
     end
 
-    def set_form_details
-      @direct_reporters = User.non_admins.pluck(:email, :id)
-      @positions        = Position.pluck(:name, :id)
-      @access_levels    = AccessLevel.pluck(:level, :id)
-      @departments      = Department.pluck(:name, :id)
-      @practise_codes   = PractiseCode.pluck(:code, :id)
-    end
 end

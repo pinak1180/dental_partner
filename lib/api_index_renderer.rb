@@ -13,6 +13,11 @@ class ApiIndexRenderer
       index_arr << ApiIndexRenderer.new('Login', 'login', 'POST')
       index_arr << ApiIndexRenderer.new('Forgot Password', 'forgot_password', 'POST')
       index_arr << ApiIndexRenderer.new('Change Password', 'change_password', 'POST')
+      index_arr << ApiIndexRenderer.new('Get All News', 'news_index', 'GET')
+      index_arr << ApiIndexRenderer.new('Get news by id', 'news_show', 'GET')
+      index_arr << ApiIndexRenderer.new('Create Comment', 'create_comment', 'POST')
+      index_arr << ApiIndexRenderer.new('Like article', 'like_article', 'POST')
+      index_arr << ApiIndexRenderer.new('Dislike article ', 'dislike_article', 'POST')
       index_arr << ApiIndexRenderer.new('Logout', 'logout', 'GET')
       index_arr
     end

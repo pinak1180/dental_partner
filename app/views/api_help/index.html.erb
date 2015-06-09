@@ -53,6 +53,45 @@
         ],
         options: {}} %>
 
+
+ <!-- News List Api -->
+  <%= render partial: 'api', locals: {
+        link_name: 'List News',
+        link_href: 'news_index',
+        link_method: 'Get',
+        original_link: api_dental_partner_news_index_path,
+        parameters: [
+          {name: 'authentication_token', description: 'You will get authentication token from signup/login api', required: 1 }
+               ],
+        options: {}} %>
+
+  <!-- Show news Api -->
+  <%= render partial: 'api', locals: {
+        link_name: 'Show News',
+        link_href: 'news_show',
+        link_method: 'Get',
+        original_link: api_dental_partner_news_path(1),
+        parameters: [
+          {name: 'authentication_token', description: 'You will get authentication token from signup/login api', required: 1 },
+          {name: 'id', description: 'News id', required: 1 }
+               ],
+          options: {}} %>
+
+  <!-- Create Comment Api -->
+   <%= render partial: 'api', locals: {
+         link_name: 'Create Comment',
+         link_href: 'create_comment',
+         link_method: 'Post',
+         original_link: api_dental_partner_news_comments_path,
+         parameters: [
+          {name: 'authentication_token', description: 'You will get authentication token from signup/login api', required: 1 },
+          {name: 'id', description: 'News id', required: 1 },
+          {name: 'comment[title]', description: 'Comment title', required: 1 },
+          {name: 'comment[comment]', description: 'Comment', required: 1 }
+
+                ],
+            options: {}} %>
+
 <!-- Logout -->
   <%= render partial: 'api', locals: {
         link_name: 'Logout',
