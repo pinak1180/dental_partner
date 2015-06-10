@@ -1,6 +1,6 @@
 class NewsSerializer < ActiveModel::Serializer
   attributes :id, :title, :content, :tags, :expiry_date, :comments,
-  :total_comments, :medium_poster, :thumb_poster
+  :total_comments, :medium_poster, :thumb_poster,:release_date
   has_many :comments
 
   def total_comments

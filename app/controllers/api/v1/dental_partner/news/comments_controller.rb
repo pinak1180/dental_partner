@@ -3,6 +3,7 @@ class Api::V1::DentalPartner::News::CommentsController < Api::V1::BaseController
 
   def create
     @comment = @news.comments.build(comment_params)
+    @comment.user_id = @current_user.id
     if @comment.save
       render_json({ result: { messages: 'ok', rstatus: 1, errorcode: '' }, data: { messages: 'Comments Sucessfully created' } }.to_json)
     else
@@ -13,7 +14,7 @@ class Api::V1::DentalPartner::News::CommentsController < Api::V1::BaseController
   private
 
   def comment_params
-    params.require(:comment).permit(:title, :comment)
+    params.require(:comment).permit(:comment,:title)
   end
 
   def set_news
