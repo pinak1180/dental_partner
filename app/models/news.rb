@@ -1,10 +1,13 @@
 class News < ActiveRecord::Base
+  include RecipientFilter
   acts_as_commentable
   # #Associations##
   has_one :recipient, as: :receivable
+  ##callbacks
+  after_create :create_recipient_filter
 
   ## Validations ##
-  validates :title, :release_date, :expiry_date, presence: true
+  validates :title, :content, presence: true
 
   ## Instance Methods ##
   def print_release_date
