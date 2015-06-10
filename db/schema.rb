@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150610101410) do
+ActiveRecord::Schema.define(version: 20150610190838) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,16 +69,20 @@ ActiveRecord::Schema.define(version: 20150610101410) do
   create_table "news", force: :cascade do |t|
     t.date     "release_date"
     t.date     "expiry_date"
-    t.string   "tags",                                        array: true
+    t.string   "tags",                                                 array: true
     t.string   "content"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.string   "title"
-    t.integer  "access_level_ids",  default: [],              array: true
-    t.integer  "position_ids",      default: [],              array: true
-    t.integer  "department_ids",    default: [],              array: true
-    t.integer  "practise_code_ids", default: [],              array: true
-    t.integer  "direct_report_ids", default: [],              array: true
+    t.integer  "access_level_ids",           default: [],              array: true
+    t.integer  "position_ids",               default: [],              array: true
+    t.integer  "department_ids",             default: [],              array: true
+    t.integer  "practise_code_ids",          default: [],              array: true
+    t.integer  "direct_report_ids",          default: [],              array: true
+    t.string   "poster_avatar_file_name"
+    t.string   "poster_avatar_content_type"
+    t.integer  "poster_avatar_file_size"
+    t.datetime "poster_avatar_updated_at"
   end
 
   add_index "news", ["access_level_ids"], name: "index_news_on_access_level_ids", using: :gin
@@ -131,6 +135,10 @@ ActiveRecord::Schema.define(version: 20150610101410) do
     t.integer  "department_ids",                                      array: true
     t.integer  "practise_code_ids",                                   array: true
     t.integer  "direct_report_ids",                                   array: true
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "users", ["access_level_ids"], name: "index_users_on_access_level_ids", using: :gin
