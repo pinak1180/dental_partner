@@ -7,7 +7,7 @@ class Api::V1::DentalPartner::NewsController < Api::V1::BaseController
   end
 
   def show
-    @news = ::News.valid_feeds.find(params[:id])
+    @news = ::News.valid_feeds(@current_user.id).find(params[:id])
     render json: @news
   end
 

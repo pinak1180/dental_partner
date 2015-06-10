@@ -145,7 +145,6 @@ ActiveRecord::Schema.define(version: 20150610190838) do
     t.string   "last_name"
     t.string   "phone"
     t.string   "postal_code"
-
     t.integer  "access_level_ids",       default: [],                 array: true
     t.integer  "position_ids",           default: [],                 array: true
     t.integer  "department_ids",         default: [],                 array: true
