@@ -7,8 +7,8 @@
 *= require templates/palette.css
 *= require templates/font.css
 *= require templates/main.css
-*  require jquery.tagsinput
-*= require pages/file_uploader
+*= require jquery.tagsinput
+*  require pages/file_uploader
 *= require chosen
 *= require core/jquery.simple-dtpicker
 * require custom

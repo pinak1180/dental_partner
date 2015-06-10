@@ -165,7 +165,7 @@
 	$.fn.tagExist = function(val) {
 		var id = $(this).attr('id');
 		var tagslist = $(this).val().split(delimiter[id]);
-		var check_valid = jQuery.inArray(val, tagslist) >= 0 || ((val.indexOf(',') != -1) ? false : !validateEmail(val))
+		var check_valid = jQuery.inArray(val, tagslist) >= 0 
 		return (check_valid); //true when tag exists, false when not
 	};
 
@@ -354,9 +354,3 @@
 	};
 
 })(jQuery);
-
-
-function validateEmail(email) {
-  var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-  return re.test(email);
-}

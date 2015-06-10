@@ -22,6 +22,7 @@ gem 'acts_as_votable', '~> 0.10.0'
 gem 'letter_opener', group: :development
 gem 'ckeditor'
 gem 'paperclip'
+gem 'tagsinput-rails'
 # gem 'therubyracer', platforms: :ruby
 
 group :development, :test do

@@ -1,5 +1,5 @@
-<h1>New Admins News</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Back', admins_news_index_path %>
+<% provide :title, "Add News" %>
+<section class="panel">
+  <header class="panel-heading">Add News</header>
+  <%= render 'form' %>
+</section>

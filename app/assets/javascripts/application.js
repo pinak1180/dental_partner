@@ -21,8 +21,8 @@
 //= require core/fastclick.js
 //= require pages/moment.js
 //= require pages/jquery-ui.custom.min.js
-//= require pages/fullcalendar.js
-//= require pages/calendar.js
+//  require pages/fullcalendar.js
+//  require pages/calendar.js
 //= require core/main.js
 //= require core/offscreen.js
 //= require core/formance.js
@@ -43,5 +43,19 @@ $(document).ready(function() {
     allow_single_deselect: true,
     no_results_text: 'No results matched',
     width: '522px'
+  });
+
+	// datetimepicker
+  $('.datepicker').appendDtpicker({
+    'dateFormat' : 'DD/MM/YYYY',
+		"dateOnly": true,
+    "autodateOnStart": false
+  });
+
+	// tags input
+	$('.thetags').tagsInput({
+    width: 'auto',
+		interactive: true,
+    defaultText: "Tags"
   });
 });
