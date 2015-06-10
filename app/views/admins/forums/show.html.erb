@@ -1,0 +1,53 @@
+<% provide :title, "Listing News" %>
+<section class="panel">
+  <header class="panel-heading">Listing News</header>
+  <div class="panel-body">
+    <p>
+      <strong>Title:</strong>
+      <%= @forum.title %>
+    </p>
+
+    <p>
+      <strong>Subject:</strong>
+      <%= @forum.subject.html_safe %>
+    </p>
+
+    <p>
+      <strong>Expiry date:</strong>
+      <%= @forum.expiry_date %>
+    </p>
+
+    <p>
+      <strong>Release date:</strong>
+      <%= @forum.release_date %>
+    </p>
+
+    <p>
+      <strong>Position ids:</strong>
+      <%= @forum.positions %>
+    </p>
+
+    <p>
+      <strong>Department ids:</strong>
+      <%= @forum.departments %>
+    </p>
+
+    <p>
+      <strong>Practise code ids:</strong>
+      <%= @forum.practise_codes %>
+    </p>
+
+    <p>
+      <strong>Direct report ids:</strong>
+      <%= @forum.direct_report_ids %>
+    </p>
+
+    <p>
+      <strong>Access level ids:</strong>
+      <%= @forum.access_levels %>
+    </p>
+
+    <%= link_to 'Edit', edit_admins_forum_path(@forum) %> |
+    <%= link_to 'Back', admins_forums_path %>
+  </div>
+</section>

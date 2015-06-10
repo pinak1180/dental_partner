@@ -1,4 +1,8 @@
-<p id="notice"><%= notice %></p>
-
-<%= link_to 'Edit', edit_admins_news_path(@admins_news) %> |
-<%= link_to 'Back', admins_news_index_path %>
+<% provide :title, "Listing News" %>
+<section class="panel">
+  <header class="panel-heading">Listing News</header>
+  <div class="panel-body">
+    <%= link_to 'Edit', edit_admins_news_path(@admins_news) %> |
+    <%= link_to 'Back', admins_news_index_path %>
+  </div>
+</section>

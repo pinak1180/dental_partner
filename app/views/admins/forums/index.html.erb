@@ -1,0 +1,39 @@
+<% provide :title, "Listing News" %>
+<section class="panel">
+  <header class="panel-heading">Listing News</header>
+  <div class="panel-body">
+    <%= link_to 'New News', new_admins_news_path, class: "btn btn-default" %>
+    <table class="table table-stripped">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Expiry date</th>
+          <th>Release date</th>
+          <th>Positions</th>
+          <th>Departments</th>
+          <th>Practise codes</th>
+          <th>Direct reports</th>
+          <th>Access levels</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @forums.each do |admins_forum| %>
+          <tr>
+            <td><%= admins_forum.title %></td>
+            <td><%= admins_forum.expiry_date %></td>
+            <td><%= admins_forum.release_date %></td>
+            <td><%= admins_forum.positions %></td>
+            <td><%= admins_forum.departments %></td>
+            <td><%= admins_forum.practise_codes %></td>
+            <td><%= admins_forum.direct_report_ids %></td>
+            <td><%= admins_forum.access_levels %></td>
+            <td><%= link_to 'Show', admins_forum_path(admins_forum) %></td>
+            <td><%= link_to 'Edit', edit_admins_forum_path(admins_forum) %></td>
+            <td><%= link_to 'Destroy', admins_forum_path(admins_forum), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>

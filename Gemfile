@@ -24,6 +24,7 @@ gem 'ckeditor'
 gem 'paperclip'
 gem 'tagsinput-rails'
 # gem 'therubyracer', platforms: :ruby
+gem 'sidekiq'
 
 group :development, :test do
   gem 'byebug'

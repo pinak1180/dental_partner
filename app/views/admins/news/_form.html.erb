@@ -3,25 +3,8 @@
   <%= simple_form_for(@admins_news, url: @admins_news.new_record? ? admins_news_index_path  : admins_news_path(@admins_news), html: {class: "col-md-12", multipart: true}) do |f| %>
     <%= f.input :title, as: :string, input_html: {class: "form-control", autofocus: true} %><br/>
     <%= f.input :content,as: :ckeditor, input_html: { ckeditor: {toolbar: 'Full'}, class: "form-control" } %><br/>
-    <%= f.input :tags, input_html: {class: "form-control thetags"} %><br/>
-    <%= f.input :release_date, as: :string, input_html: {class: "form-control datepicker"} %><br/>
-    <%= f.input :expiry_date, as: :string, input_html: {class: "form-control datepicker"} %><br/>
     <%= f.input :poster_avatar, as: :file %>
-    <%= f.input :position_ids, label: "Select Positions" do %><br/>
-      <%= f.select :position_ids, @positions, {include_blank: false,include_hidden: false}, {:class => "chosen-select", "data-placeholder": "Choose Positions", style: "width: 300px;", multiple: true} %>
-    <% end %><br/>
-    <%= f.input :access_level_ids, label: "Select Access Levels" do %><br/>
-      <%= f.select :access_level_ids, @access_levels, {include_blank: false,include_hidden: false}, {:class => "chosen-select", "data-placeholder": "Choose Access Levels", style: "width: 300px;", multiple: true} %>
-    <% end %><br/>
-    <%= f.input :department_ids, label: "Select Departments" do %><br/>
-      <%= f.select :department_ids, @departments, {include_blank: false,include_hidden: false}, {:class => "chosen-select", "data-placeholder": "Choose Departments", style: "width: 300px;", multiple: true} %>
-    <% end %><br/>
-    <%= f.input :practise_code_ids, label: "Select Practise Code" do %><br/>
-      <%= f.select :practise_code_ids, @practise_codes, {include_blank: false,include_hidden: false}, {:class => "chosen-select", "data-placeholder": "Choose Practise Codes", style: "width: 300px;", multiple: true} %>
-    <% end %><br/>
-    <%= f.input :direct_report_ids, label: "Select Direct Reporters" do %><br/>
-      <%= f.select :direct_report_ids, @direct_reporters, {include_blank: false,include_hidden: false}, {:class => "chosen-select", "data-placeholder": "Choose Direct Reporters", style: "width: 300px;", multiple: true} %>
-    <% end %><br/>
+    <%= render '/admins/shared/other_fields', f: f %>
     <div class="form-actions">
       <%= f.submit "Add News", class: "btn btn-primary mt15" %>
     </div>
