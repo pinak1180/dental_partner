@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  include RecipientFilter
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -31,22 +32,6 @@ class User < ActiveRecord::Base
   ## Instance methods ##
   def display_errors
     errors.full_messages.join(',')
-  end
-
-  def departments
-    Department.where(id: department_ids).uniq.pluck(:name).join(', ')
-  end
-
-  def access_levels
-    AccessLevel.where(id: access_level_ids).uniq.pluck(:level).join(', ')
-  end
-
-  def positions
-    Position.where(id: position_ids).uniq.pluck(:name).join(', ')
-  end
-
-  def practise_codes
-    PractiseCode.where(id: practise_code_ids).uniq.pluck(:code).join(', ')
   end
 
   private

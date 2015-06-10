@@ -1,9 +1,11 @@
 class News < ActiveRecord::Base
   include RecipientFilter
   acts_as_commentable
-  # #Associations##
+
+  ## Associations ##
   has_one :recipient, as: :receivable
-  # #callbacks
+
+  ## Callbacks ##
   after_create :create_recipient_filter
 
   ## Validations ##

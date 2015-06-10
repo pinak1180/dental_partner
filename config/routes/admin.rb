@@ -6,6 +6,6 @@ DentalPartner::Application.routes.draw do
     resources :dashboard
     resources :users
     resources :news
+    resources :forums
   end
-  
 end

@@ -66,6 +66,21 @@ ActiveRecord::Schema.define(version: 20150610190838) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "forums", force: :cascade do |t|
+    t.string   "title"
+    t.text     "subject"
+    t.date     "expiry_date"
+    t.date     "release_date"
+    t.string   "tags",                           array: true
+    t.integer  "position_ids",                   array: true
+    t.integer  "department_ids",                 array: true
+    t.integer  "practise_code_ids",              array: true
+    t.integer  "direct_report_ids",              array: true
+    t.integer  "access_level_ids",               array: true
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
   create_table "news", force: :cascade do |t|
     t.date     "release_date"
     t.date     "expiry_date"
@@ -130,11 +145,12 @@ ActiveRecord::Schema.define(version: 20150610190838) do
     t.string   "last_name"
     t.string   "phone"
     t.string   "postal_code"
-    t.integer  "access_level_ids",                                    array: true
-    t.integer  "position_ids",                                        array: true
-    t.integer  "department_ids",                                      array: true
-    t.integer  "practise_code_ids",                                   array: true
-    t.integer  "direct_report_ids",                                   array: true
+
+    t.integer  "access_level_ids",       default: [],                 array: true
+    t.integer  "position_ids",           default: [],                 array: true
+    t.integer  "department_ids",         default: [],                 array: true
+    t.integer  "practise_code_ids",      default: [],                 array: true
+    t.integer  "direct_report_ids",      default: [],                 array: true
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
