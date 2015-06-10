@@ -21,10 +21,10 @@ class News < ActiveRecord::Base
   end
 
   def medium_image
-    poster_avatar.url(:medium)
+    ENV['HOST'] + poster_avatar.url(:medium)
   end
 
   def thumb_image
-    poster_avatar.url(:thumb)
+    ENV['HOST'] + poster_avatar.url(:thumb)
   end
 end

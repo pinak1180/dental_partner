@@ -1,7 +1,12 @@
 module RecipientFilter
   def self.included(base)
-    # base.send(:extend, ClassMethods)
+    base.send(:extend, ClassMethods)
     base.send(:include, InstanceMethods)
+  end
+  module ClassMethods
+    def valid_feeds(user_id)
+      joins(:recipient).where("'#{user_id}' = ANY (recipients.recipient_ids)")
+    end
   end
   module InstanceMethods
     def create_recipient_filter
