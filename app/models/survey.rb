@@ -4,7 +4,7 @@ class Survey < ActiveRecord::Base
 
   ## Associations ##
   has_many :questions
-  has_one  :response, required: true
+  has_one  :response
 
   ## Validations ##
   validates :title, :description, :release_date, :expiry_date, presence: true
