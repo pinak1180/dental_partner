@@ -3,11 +3,12 @@ class Survey < ActiveRecord::Base
   acts_as_commentable
 
   ## Associations ##
-  has_many :questions
-  has_one  :response
+  has_many :questions, dependent: :destroy
+  has_many :response, dependent: :destroy
 
   ## Validations ##
-  validates :title, :description, :release_date, :expiry_date, presence: true
+  validates :title, :description, :release_date, :expiry_date, :questions, presence: true
+  validates :questions, :length => { :minimum => 1 }
   validate :atleast_single_reciptient, :correct_expiry_date
 
   ## Nested Attributes ##

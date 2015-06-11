@@ -2,10 +2,10 @@ class Question < ActiveRecord::Base
 
   ## Associations ##
   belongs_to :survey
-  has_many   :answers
+  has_many   :answers, dependent: :destroy
 
   ## Validations ##
-  validates :question, presence: true
+  validates :question, :answers, presence: true
   validates :question, uniqueness: { case_sensitive: false }
 
   ## Nested Attributes ##
