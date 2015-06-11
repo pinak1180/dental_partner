@@ -3,10 +3,6 @@ class Forum < ActiveRecord::Base
   acts_as_commentable
 
   ## Associations ##
-  has_one :recipient, as: :receivable
-
-  ## Callbacks ##
-  after_create :create_recipient_filter
 
   ## Validations ##
   validates :title, :subject, :release_date, :expiry_date, presence: true

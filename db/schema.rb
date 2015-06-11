@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150611184247) do
+ActiveRecord::Schema.define(version: 20150611211150) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -131,16 +131,6 @@ ActiveRecord::Schema.define(version: 20150611184247) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-  create_table "recipients", force: :cascade do |t|
-    t.integer  "receivable_id"
-    t.string   "receivable_type"
-    t.string   "recipient_ids",                array: true
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
-
-  add_index "recipients", ["receivable_type", "receivable_id"], name: "index_recipients_on_receivable_type_and_receivable_id", using: :btree
 
   create_table "response_details", force: :cascade do |t|
     t.integer  "question_id"

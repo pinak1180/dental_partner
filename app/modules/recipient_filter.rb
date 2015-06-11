@@ -4,22 +4,16 @@ module RecipientFilter
     base.send(:include, InstanceMethods)
   end
   module ClassMethods
-    def valid_feeds(user_id)
-      joins(:recipient).where("'#{user_id}' = ANY (recipients.recipient_ids)")
+    def valid_feeds(user)
+      arel = self.arel_table
+      where(arel[:direct_report_ids].overlap(user.direct_report_ids)
+        .or(arel[:department_ids].overlap(user.department_ids))
+        .or(arel[:practise_code_ids].overlap(user.practise_code_ids))
+        .or(arel[:access_level_ids].overlap(user.access_level_ids))
+        .or(arel[:position_ids].overlap(user.position_ids)))
     end
   end
   module InstanceMethods
-    def create_recipient_filter
-      user_arel = User.arel_table
-      user_ids = User.where(user_arel[:direct_report_ids].contains(direct_report_ids)
-        .or(user_arel[:department_ids].contains(department_ids))
-        .or(user_arel[:practise_code_ids].contains(practise_code_ids))
-        .or(user_arel[:department_ids].contains(department_ids))
-        .or(user_arel[:access_level_ids].contains(access_level_ids))
-        .or(user_arel[:position_ids].contains(position_ids))).ids
-      user_ids
-    end
-
     def print_release_date
       release_date.strftime("%d-%m-%Y")
     end
