@@ -1,0 +1,28 @@
+<% provide :title, "Listing Surveys" %>
+<section class="panel">
+  <header class="panel-heading">Listing Surveys</header>
+  <div class="panel-body">
+    <%= link_to 'New Survey', new_admins_survey_path, class: "btn btn-default" %>
+    <table class="table table-stripped">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Release date</th>
+          <th>Expiry date</th>
+          <th colspan="2"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @surveys.each do |survey| %>
+          <tr>
+            <td><%= link_to survey.title, admins_survey_path(survey) %></td>
+            <td><%= survey.print_release_date %></td>
+            <td><%= survey.print_expiry_date %></td>
+            <td><%= link_to 'Edit', edit_admins_survey_path(survey), class: "btn btn-xs btn-warning" %></td>
+            <td><%= link_to 'Destroy', admins_survey_path(survey), class: "btn btn-xs btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>

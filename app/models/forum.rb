@@ -10,10 +10,5 @@ class Forum < ActiveRecord::Base
 
   ## Validations ##
   validates :title, :subject, :release_date, :expiry_date, presence: true
-  validate :atleast_single_reciptient
-
-  private
-  def atleast_single_reciptient
-    errors.add(:position_ids, "must be present") unless (position_ids || department_ids || practise_code_ids || direct_report_ids).present?
-  end
+  validate :atleast_single_reciptient, :correct_expiry_date
 end

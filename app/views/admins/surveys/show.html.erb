@@ -1,0 +1,69 @@
+<% provide :title, "Survey" %>
+<section class="panel">
+  <header class="panel-heading"><%= @survey.title %></header>
+  <div class="panel-body">
+    <p>
+      <strong>Title:</strong><br/>
+      <%= @survey.title %>
+    </p>
+
+    <p>
+      <strong>Description:</strong><br/>
+      <%= @survey.description.html_safe %><br/>
+    </p>
+
+    <p class="col-md-6 pull-left">
+      <strong>Release date:</strong><br/>
+      <%= @survey.print_release_date %>
+    </p>
+
+    <p class="col-md-6 pull-right">
+      <strong>Expiry date:</strong><br/>
+      <%= @survey.print_expiry_date %>
+    </p
+    <div class="col-md-12">
+      <p class="col-md-2">
+        <strong>Positions</strong><br/>
+        <%= @survey.positions %>
+      </p>
+      <p class="col-md-2">
+        <strong>Access levels</strong><br/>
+        <%= @survey.access_levels %>
+      </p>
+
+      <p class="col-md-3">
+        <strong>Practise code</strong><br/>
+        <%= @survey.practise_codes %>
+      </p>
+
+      <p class="col-md-2">
+        <strong>Direct reports</strong><br/>
+        <%= @survey.direct_report_ids %>
+      </p>
+
+      <p class="col-md-3">
+        <strong>Departments:</strong><br/>
+        <%= @survey.departments %>
+      </p>
+    </div>
+
+    <div class="col-md-12 panel panel-info">
+      <p><strong>Question</strong></p>
+      <% @survey.questions.each do |question| %>
+        <ol>
+          <li><span><%= question.question %> <% if question.compulsory %><label class="label label-danger">compulsory</label><% end %></span></li>
+          <ul>
+            <% question.answers.each do |answer| %>
+              <li><%= answer.option %></li>
+            <% end %>
+          </ul>
+        </ol>
+      <% end %>
+    </div>
+
+    <p class="col-md-12">
+      <%= link_to 'Edit', edit_admins_survey_path(@survey), class: "btn btn-warning" %>
+      <%= link_to 'Back', admins_surveys_path, class: "btn btn-default" %>
+    </p>
+  </div>
+</section>

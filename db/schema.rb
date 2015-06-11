@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150610190838) do
+ActiveRecord::Schema.define(version: 20150611181231) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,13 @@ ActiveRecord::Schema.define(version: 20150610190838) do
     t.integer  "level"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "answers", force: :cascade do |t|
+    t.integer  "question_id"
+    t.string   "option"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "authentication_tokens", force: :cascade do |t|
@@ -117,6 +124,14 @@ ActiveRecord::Schema.define(version: 20150610190838) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "questions", force: :cascade do |t|
+    t.integer  "survey_id"
+    t.string   "question"
+    t.boolean  "compulsory"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "recipients", force: :cascade do |t|
     t.integer  "receivable_id"
     t.string   "receivable_type"
@@ -126,6 +141,35 @@ ActiveRecord::Schema.define(version: 20150610190838) do
   end
 
   add_index "recipients", ["receivable_type", "receivable_id"], name: "index_recipients_on_receivable_type_and_receivable_id", using: :btree
+
+  create_table "response_details", force: :cascade do |t|
+    t.integer  "question_id"
+    t.integer  "answer_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "responses", force: :cascade do |t|
+    t.integer  "survey_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "surveys", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.date     "release_date"
+    t.date     "expiry_date"
+    t.string   "tags",                                        array: true
+    t.integer  "position_ids",      default: [],              array: true
+    t.integer  "department_ids",    default: [],              array: true
+    t.integer  "practise_code_ids", default: [],              array: true
+    t.integer  "direct_report_ids", default: [],              array: true
+    t.integer  "access_level_ids",  default: [],              array: true
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false

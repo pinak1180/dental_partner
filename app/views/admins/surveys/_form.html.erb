@@ -1,0 +1,16 @@
+<div class="panel-body">
+  <%= simple_nested_form_for(@survey, url: @survey.new_record? ? admins_surveys_path : admins_survey_path(@survey), html: {class: 'col-md-12'}) do |f| %>
+    <%= f.input :title, input_html: { class: "form-control", autofocus: true } %><br/>
+    <%= f.input :description, as: :ckeditor, input_html: { ckeditor: {toolbar: 'Full'}, class: "form-control" } %><br/>
+    <%= render '/admins/shared/other_fields', f: f %>
+    <div class="col-md-10">
+      <p>Questions
+        <%= f.fields_for :questions %><br/>
+        <%= f.link_to_add "Add a Question", :questions, :class => "pull-right btn btn-xs btn-primary" %><br/><br/>
+      </p>
+    </div>
+    <div class="form-actions col-md-12">
+      <%= f.button :submit, "Add Survey", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

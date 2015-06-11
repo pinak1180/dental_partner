@@ -17,7 +17,7 @@ module RecipientFilter
         .or(user_arel[:department_ids].contains(department_ids))
         .or(user_arel[:access_level_ids].contains(access_level_ids))
         .or(user_arel[:position_ids].contains(position_ids))).ids
-      create_recipient(recipient_ids: user_ids)
+      user_ids
     end
 
     def print_release_date
@@ -42,6 +42,15 @@ module RecipientFilter
 
     def practise_codes
       PractiseCode.where(id: practise_code_ids).uniq.pluck(:code).join(', ')
-    end    
+    end
+
+    private
+    def atleast_single_reciptient
+      errors.add(:position_ids, "atleast single criteria must be selected") unless (position_ids || department_ids || practise_code_ids || direct_report_ids).present?
+    end
+
+    def correct_expiry_date
+      errors.add(:expiry_date, "must be greater than Release Date") unless release_date.present? && release_date <= expiry_date
+    end
   end
 end

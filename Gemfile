@@ -23,6 +23,7 @@ gem 'letter_opener', group: :development
 gem 'ckeditor'
 gem 'paperclip'
 gem 'tagsinput-rails'
+gem "nested_form"
 # gem 'therubyracer', platforms: :ruby
 gem 'sidekiq'
 

@@ -7,5 +7,6 @@ DentalPartner::Application.routes.draw do
     resources :users
     resources :news
     resources :forums
+    resources :surveys
   end
 end

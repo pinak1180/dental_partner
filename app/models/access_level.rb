@@ -1,4 +1,4 @@
 class AccessLevel < ActiveRecord::Base
   ## Validations ##
-  validates :level, presence: true, uniqueness: true
+  validates :level, presence: true, uniqueness: { case_sensitive: false }
 end

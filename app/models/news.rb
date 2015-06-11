@@ -9,7 +9,8 @@ class News < ActiveRecord::Base
   after_create :create_recipient_filter
 
   ## Validations ##
-  validates :title, :content, :poster_avatar, presence: true
+  validates :title, :content, :poster_avatar, :release_date, :expiry_date, presence: true
+  validate :atleast_single_reciptient, :correct_expiry_date
   has_attached_file :poster_avatar, styles: { medium: '300x300>', thumb: '100x100>' }, default_url: '/images/:style/missing.png'
   validates_attachment_content_type :poster_avatar, content_type: /\Aimage\/.*\Z/
 
