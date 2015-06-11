@@ -16,6 +16,9 @@ DentalPartner::Application.routes.draw do
           resources :comments, only: [:create]
           resources :likes, only: [:create,:destroy]
         end
+        resources :surveys, only: [:index,:show] do
+          resources :response, only: [:create, :show]
+        end
       end
     end
   end

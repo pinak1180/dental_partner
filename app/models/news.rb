@@ -15,14 +15,6 @@ class News < ActiveRecord::Base
   validates_attachment_content_type :poster_avatar, content_type: /\Aimage\/.*\Z/
 
   ## Instance Methods ##
-  def print_release_date
-    release_date.strftime('%d-%m-%Y')
-  end
-
-  def print_expiry_date
-    expiry_date.strftime('%d-%m-%Y')
-  end
-
   def medium_image
     ENV['HOST'] + poster_avatar.url(:medium)
   end
