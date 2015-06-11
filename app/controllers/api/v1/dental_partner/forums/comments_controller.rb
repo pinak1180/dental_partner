@@ -1,8 +1,8 @@
 class Api::V1::DentalPartner::Forums::CommentsController < Api::V1::BaseController
-  before_filter :authentication_user_with_authentication_token, :forum
+  before_filter :authentication_user_with_authentication_token, :set_forum
 
   def create
-    @comment = @fourm.comments.build(comment_params)
+    @comment = @forum.comments.build(comment_params)
     @comment.user_id = @current_user.id
     if @comment.save
       render_json({ result: { messages: 'ok', rstatus: 1, errorcode: '' }, data: { messages: 'Comments Sucessfully created' } }.to_json)

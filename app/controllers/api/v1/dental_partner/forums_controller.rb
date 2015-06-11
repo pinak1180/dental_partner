@@ -10,5 +10,4 @@ class Api::V1::DentalPartner::ForumsController < Api::V1::BaseController
     @forum = ::Forum.valid_feeds(@current_user.id).find(params[:id])
     render json: @forum
   end
-
 end
