@@ -10,4 +10,7 @@ class Question < ActiveRecord::Base
 
   ## Nested Attributes ##
   accepts_nested_attributes_for :answers, allow_destroy: true
+
+  ## Scopes ##
+  scope :compulsory_questions, -> { where( compulsory: true ) }
 end

@@ -1,0 +1,39 @@
+<!-- Forum List Api -->
+<%= render partial: 'api', locals: {
+       link_name: 'List Forum',
+       link_href: 'forums_index',
+       link_method: 'Get',
+       original_link: api_dental_partner_forums_path,
+       parameters: [
+         {name: 'authentication_token', description: 'You will get authentication token from signup/login api', required: 1 },
+         {name: 'page', description: 'Page no (optional default : 1)', required: 1 },
+         {name: 'limit', description: 'per page limit (optional default : 10 per page)', required: 1 }
+              ],
+       options: {}} %>
+
+<!-- Show Forum Api -->
+<%= render partial: 'api', locals: {
+       link_name: 'Show Forum',
+       link_href: 'forums_show',
+       link_method: 'Get',
+       original_link: "/api/dental_partner/forums/",
+       parameters: [
+         {name: 'authentication_token', description: 'You will get authentication token from signup/login api', required: 1 },
+         {name: 'id', description: 'Forum id', required: 1 }
+              ],
+         options: {}} %>
+
+<!-- Create Comment Api -->
+<%= render partial: 'api', locals: {
+      link_name: 'Create Comment for forum',
+      link_href: 'create_comment_forum',
+      link_method: 'Post',
+      original_link: api_dental_partner_forums_comments_path,
+      parameters: [
+       {name: 'authentication_token', description: 'You will get authentication token from signup/login api', required: 1 },
+       {name: 'id', description: 'Forum id', required: 1 },
+       {name: 'comment[title]', description: 'Comment title', required: 1 },
+       {name: 'comment[comment]', description: 'Comment', required: 1 }
+
+             ],
+         options: {}} %>
