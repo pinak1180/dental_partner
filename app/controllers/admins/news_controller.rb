@@ -3,7 +3,7 @@ class Admins::NewsController < AdminBaseController
   before_action :set_form_details, only: [ :new, :edit, :create, :update ]
 
   def index
-    @admins_news = News.all
+    @admins_news = News.all.page params[:page]
   end
 
   def show

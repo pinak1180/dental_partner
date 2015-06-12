@@ -3,7 +3,7 @@ class Admins::ForumsController < AdminBaseController
   before_action :set_form_details, only: [ :new, :edit, :create, :update ]
 
   def index
-    @forums = Forum.all
+    @forums = Forum.all.page params[:page]
   end
 
   def show

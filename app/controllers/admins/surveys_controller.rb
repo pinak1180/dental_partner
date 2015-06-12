@@ -3,7 +3,7 @@ class Admins::SurveysController < AdminBaseController
   before_action :set_form_details, only: [ :new, :edit, :create, :update ]
 
   def index
-    @surveys = Survey.all
+    @surveys = Survey.all.page params[:page]
   end
 
   def show

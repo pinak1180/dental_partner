@@ -3,7 +3,7 @@ class Admins::UsersController < AdminBaseController
   before_action :set_form_details, only: [ :new, :edit, :create, :update ]
 
   def index
-    @admins_users = User.non_admins
+    @admins_users = User.non_admins.page params[:page]
   end
 
   def show
@@ -18,35 +18,24 @@ class Admins::UsersController < AdminBaseController
 
   def create
     @admins_user = User.new(admins_user_params)
-    respond_to do |format|
-      if @admins_user.save
-        format.html { redirect_to admins_user_path(@admins_user), notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @admins_user }
-      else
-        format.html { render :new }
-        format.json { render json: @admins_user.errors, status: :unprocessable_entity }
-      end
+    if @admins_user.save
+      redirect_to admins_user_path(@admins_user), notice: 'User was successfully created.'
+    else
+      render :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @admins_user.update(admins_user_params)
-        format.html { redirect_to admins_user_path(@admins_user), notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @admins_user }
-      else
-        format.html { render :edit }
-        format.json { render json: @admins_user.errors, status: :unprocessable_entity }
-      end
+    if @admins_user.update(admins_user_params)
+      redirect_to admins_user_path(@admins_user), notice: 'User was successfully updated.'
+    else
+      render :edit
     end
   end
 
   def destroy
     @admins_user.destroy
-    respond_to do |format|
-      format.html { redirect_to admins_users_url, notice: 'User was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to admins_users_url, notice: 'User was successfully destroyed.'
   end
 
   private
@@ -57,5 +46,4 @@ class Admins::UsersController < AdminBaseController
     def admins_user_params
       params.require(:user).permit(:first_name, :last_name, :position_ids, :phone, :email, :postal_code, position_ids: [], access_level_ids: [], department_ids: [], practise_code_ids: [], direct_report_ids: [])
     end
-
 end

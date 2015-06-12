@@ -56,4 +56,7 @@ $(document).ready(function() {
 		interactive: true,
     defaultText: "Tags"
   });
+
+	// phone number
+	$('#user_phone').formance('format_phone_number');
 });

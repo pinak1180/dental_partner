@@ -24,7 +24,7 @@ gem 'ckeditor'
 gem 'paperclip'
 gem 'tagsinput-rails'
 gem "nested_form"
-# gem 'therubyracer', platforms: :ruby
+gem 'kaminari'
 gem 'sidekiq'
 
 group :development, :test do

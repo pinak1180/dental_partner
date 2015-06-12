@@ -2,6 +2,7 @@ class Api::V1::BaseController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound, :with => :bad_record
   skip_before_filter :verify_authenticity_token, if: proc { |c| c.request.format == 'application/json' }
   after_filter :set_access_control_headers
+  before_filter :set_pagination_limit, only: [ :index ]
 
   protected
 
@@ -22,6 +23,11 @@ class Api::V1::BaseController < ActionController::Base
       end
     end
     render(content_type: :js, text: response)
+  end
+
+  def set_pagination_limit
+    @limit = params[:limit] || 10
+    @page  = params[:page] || 1
   end
 
   def bad_record

@@ -61,7 +61,9 @@
         link_method: 'Get',
         original_link: api_dental_partner_news_index_path,
         parameters: [
-          {name: 'authentication_token', description: 'You will get authentication token from signup/login api', required: 1 }
+          {name: 'authentication_token', description: 'You will get authentication token from signup/login api', required: 1 },
+          {name: 'page', description: 'Page no (optional default : 1)', required: 1 },
+          {name: 'limit', description: 'per page limit (optional default : 10 per page)', required: 1 }
                ],
         options: {}} %>
 
@@ -104,18 +106,20 @@
         ],
         options: {}} %>
 
-  <!-- News List Api -->
+  <!-- Forum List Api -->
   <%= render partial: 'api', locals: {
          link_name: 'List Forum',
          link_href: 'forums_index',
          link_method: 'Get',
          original_link: api_dental_partner_forums_path,
          parameters: [
-           {name: 'authentication_token', description: 'You will get authentication token from signup/login api', required: 1 }
+           {name: 'authentication_token', description: 'You will get authentication token from signup/login api', required: 1 },
+           {name: 'page', description: 'Page no (optional default : 1)', required: 1 },
+           {name: 'limit', description: 'per page limit (optional default : 10 per page)', required: 1 }
                 ],
          options: {}} %>
 
-  <!-- Show news Api -->
+  <!-- Show Forum Api -->
   <%= render partial: 'api', locals: {
          link_name: 'Show Forum',
          link_href: 'forums_show',
@@ -141,4 +145,15 @@
 
                ],
            options: {}} %>
+
+ <%= render partial: 'api', locals: {
+        link_name: 'Show Survey',
+        link_href: 'surveys_show',
+        link_method: 'Get',
+        original_link: "/api/dental_partner/surveys/",
+        parameters: [
+          {name: 'authentication_token', description: 'You will get authentication token from signup/login api', required: 1 },
+          {name: 'id', description: 'Survey id', required: 1 }
+               ],
+          options: {}} %>
 </span>

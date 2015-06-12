@@ -21,6 +21,7 @@ class ApiIndexRenderer
       index_arr << ApiIndexRenderer.new('Create Comment for Forum', 'create_comment_forum', 'POST')
       index_arr << ApiIndexRenderer.new('Like article', 'like_article', 'POST')
       index_arr << ApiIndexRenderer.new('Dislike article ', 'dislike_article', 'POST')
+      index_arr << ApiIndexRenderer.new('Get Survey by id', 'surveys_show', 'GET')
       index_arr << ApiIndexRenderer.new('Logout', 'logout', 'GET')
       index_arr
     end
