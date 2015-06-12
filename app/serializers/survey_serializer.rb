@@ -8,7 +8,7 @@ class SurveySerializer < ActiveModel::Serializer
 
   ## Instance Methods ##
   def attributes
-    super.only(:id, :title, :description, :release_date, :exppiry_date, :is_completed_by_user) if serialization_options[:show_details]
+    super.except(:questions) if serialization_options[:show_details]
   end
 
   def is_completed_by_user
