@@ -156,4 +156,17 @@
           {name: 'id', description: 'Survey id', required: 1 }
                ],
           options: {}} %>
+
+  <!-- Survey List Api -->
+  <%= render partial: 'api', locals: {
+         link_name: 'List Survey',
+         link_href: 'surveys_index',
+         link_method: 'Get',
+         original_link: api_dental_partner_surveys_path,
+         parameters: [
+           {name: 'authentication_token', description: 'You will get authentication token from signup/login api', required: 1 },
+           {name: 'page', description: 'Page no (optional default : 1)', required: 1 },
+           {name: 'limit', description: 'per page limit (optional default : 10 per page)', required: 1 }
+                ],
+         options: {}} %>
 </span>
