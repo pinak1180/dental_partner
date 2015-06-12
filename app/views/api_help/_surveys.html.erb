@@ -31,12 +31,6 @@
         parameters: [
           {name: 'authentication_token', description: 'You will get authentication token from signup/login api', required: 1 },
           {name: 'survey_id', description: 'The survey ID', required: 1 },
-          {name: 'response', description: 'response: {
-            response_details_attributes: [
-              { question_id: 1, answer_id: 1 },
-              { question_id: 2, answer_id: 1 },
-              { question_id: 3, answer_id: 1 }
-            ]
-          }', required: 1 }
+          {name: 'response', description: "{\"response_details_attributes\":[{\"question_id\":1,\"answer_id\":1},{\"question_id\":2,\"answer_id\":1}]}", required: 1 }
         ],
         options: {}} %>
