@@ -43,6 +43,10 @@ class User < ActiveRecord::Base
     ENV['HOST'] + avatar.url(:thumb)
   end
 
+  def full_name
+    format('%s %s', first_name, last_name)
+  end
+
   private
   def set_password
     self.password = Devise.friendly_token
