@@ -23,6 +23,7 @@ class ApiIndexRenderer
       index_arr << ApiIndexRenderer.new('Dislike article ', 'dislike_article', 'POST')
       index_arr << ApiIndexRenderer.new('Get Survey by id', 'surveys_show', 'GET')
       index_arr << ApiIndexRenderer.new('Get All Surveys', 'surveys_index', 'GET')
+      index_arr << ApiIndexRenderer.new('Get All Contacts', 'contacts', 'GET')
       index_arr << ApiIndexRenderer.new('Logout', 'logout', 'GET')
       index_arr
     end

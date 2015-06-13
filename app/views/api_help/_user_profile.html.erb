@@ -51,3 +51,15 @@
 
         ],
         options: {}} %>
+
+<!-- Logout -->
+  <%= render partial: 'api', locals: {
+        link_name: 'Contacts',
+        link_href: 'contacts',
+        link_method: 'GET',
+        original_link: api_dental_partner_users_path,
+        parameters: [
+          {name: 'authentication_token', description: 'You will get authentication token from signup/login api', required: 1 }
+
+        ],
+        options: {}} %>

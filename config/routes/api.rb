@@ -7,6 +7,7 @@ DentalPartner::Application.routes.draw do
         post 'forgot_password' => 'passwords#create', as: :forgot_password
         post 'change_password' => 'passwords#change_password', as: :change_password
         resources :news, only: [:index,:show]
+        resources :users, only: [ :index ]
         namespace :news do
           resources :comments, only: [:create]
           resources :likes, only: [:create,:destroy]

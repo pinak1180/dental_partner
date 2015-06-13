@@ -4,7 +4,7 @@ class Api::V1::DentalPartner::SessionsController < Api::V1::BaseController
   def create
     @user = User.authenticate_user_with_auth(params[:email], params[:password])
     if @user.present?
-      render json: @user
+      render json: @user, token: true
     else
       render_json({ result: { messages: User.invalid_credentials, rstatus: 0, errorcode: 404 } }.to_json)
     end
