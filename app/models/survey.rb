@@ -4,7 +4,7 @@ class Survey < ActiveRecord::Base
 
   ## Associations ##
   has_many :questions, dependent: :destroy
-  has_many :responses, dependent: :destroy
+  has_many :responses, dependent: :destroy, inverse_of: :survey
 
   ## Validations ##
   validates :title, :description, :release_date, :expiry_date, :questions, presence: true

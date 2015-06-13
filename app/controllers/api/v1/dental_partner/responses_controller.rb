@@ -5,6 +5,7 @@ class Api::V1::DentalPartner::ResponsesController < Api::V1::BaseController
     return param_missing if !params[:response].present?
     @response = @survey.responses.build(response_params)
     @response.user_id = @current_user.id
+    puts @response.response_details.inspect
     if @response.save
       render_json({ result: { messages: 'ok', rstatus: 1, errorcode: '' }, data: { messages: 'Your response created successfully' } }.to_json)
     else
