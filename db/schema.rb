@@ -180,11 +180,11 @@ ActiveRecord::Schema.define(version: 20150611211150) do
     t.string   "last_name"
     t.string   "phone"
     t.string   "postal_code"
-    t.integer  "access_level_ids",       default: [],                 array: true
-    t.integer  "position_ids",           default: [],                 array: true
-    t.integer  "department_ids",         default: [],                 array: true
-    t.integer  "practise_code_ids",      default: [],                 array: true
-    t.integer  "direct_report_ids",      default: [],                 array: true
+    t.integer  "access_level_ids",                                    array: true
+    t.integer  "position_ids",                                        array: true
+    t.integer  "department_ids",                                      array: true
+    t.integer  "practise_code_ids",                                   array: true
+    t.integer  "direct_report_ids",                                   array: true
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
