@@ -11,4 +11,6 @@ class ForumSerializer < ActiveModel::Serializer
   def total_comments
     object.comments.size
   end
+
+  
 end
