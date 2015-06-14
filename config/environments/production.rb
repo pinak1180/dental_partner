@@ -22,7 +22,7 @@ Rails.application.configure do
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
-  config.serve_static_files = true #ENV['RAILS_SERVE_STATIC_FILES'].present?
+  config.serve_static_files = true # ENV['RAILS_SERVE_STATIC_FILES'].present?
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
@@ -68,8 +68,7 @@ Rails.application.configure do
   # the I18n.default_locale when a translation cannot be found).
   config.i18n.fallbacks = true
   config.action_mailer.delivery_method = :smtp
-  #config.action_mailer.smtp_settings = SMTP_SETTINGS
-
+  # config.action_mailer.smtp_settings = SMTP_SETTINGS
 
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
@@ -79,13 +78,12 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-  config.action_mailer.default_url_options = { host: ENV.fetch("HOST") }
+  config.action_mailer.default_url_options = { host: ENV.fetch('HOST') }
   ActionMailer::Base.smtp_settings = {
-    :address => "smtp.gmail.com",
-    :port => 587,
-    :domain => "gmail.com",
-    :authentication => :plain,
-    :user_name => "jettison.inventory@gmail.com",
-    :password => "cspl@123"
+    address: 'smtp.mandrillapp.com',
+    port: 587,
+    authentication: :plain,
+    user_name: 'cspltesting@gmail.com',
+    password: '_hQ3Jm0-hBqKE2sFWCmsLA'
   }
 end

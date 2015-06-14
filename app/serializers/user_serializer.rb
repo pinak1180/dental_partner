@@ -1,14 +1,14 @@
 class UserSerializer < ActiveModel::Serializer
-
   ## Attributes ##
-  attributes :id, :first_name, :last_name, :phone, :email, :authentication_token
-
+  attributes :id, :first_name, :last_name, :phone, :email, :authentication_token,:address,:fax_no
   ## Instance Methods ##
   def attributes
-    puts "-----------#{serialization_options[:token]}"
-    if (serialization_options[:token])
+    puts serialization_options[:token] == true
+    unless serialization_options[:token]
       super.except(:authentication_token)
-    end
+    else
+      super
+  end
   end
 
   def authentication_token
