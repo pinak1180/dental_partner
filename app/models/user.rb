@@ -16,7 +16,10 @@ class User < ActiveRecord::Base
 
   before_validation :set_password, if: Proc.new { |user| !user.admin && user.new_record? }
   after_create      :send_welcome_mail, if: Proc.new { |user| !user.admin }
-  has_attached_file :avatar, styles: { medium: '300x300>', thumb: '100x100>' }, default_url: '/images/:style/missing.png'
+  has_attached_file :avatar,
+                    default_url: "faceless.jpg",
+                    styles: { medium: '300x300>', thumb: '100x100>' }
+
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
   ## Scope ##
