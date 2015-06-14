@@ -15,7 +15,6 @@ DentalPartner::Application.routes.draw do
         resources :forums, only: [:index,:show]
         namespace :forums do
           resources :comments, only: [:create]
-          resources :likes, only: [:create,:destroy]
         end
         resources :surveys, only: [:index,:show] do
           resources :responses, only: [:create]

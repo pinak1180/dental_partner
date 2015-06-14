@@ -1,6 +1,7 @@
 class News < ActiveRecord::Base
   include RecipientFilter
   acts_as_commentable
+  acts_as_votable
 
   ## Associations ##
 

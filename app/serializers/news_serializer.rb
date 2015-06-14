@@ -19,4 +19,7 @@ class NewsSerializer < ActiveModel::Serializer
   def thumb_poster
     object.thumb_image
   end
+
+  def liked_by_user
+  end
 end
