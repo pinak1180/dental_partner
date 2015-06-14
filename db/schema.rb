@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150611211150) do
+ActiveRecord::Schema.define(version: 20150614075433) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,6 +86,22 @@ ActiveRecord::Schema.define(version: 20150611211150) do
     t.integer  "access_level_ids",               array: true
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text     "message_body"
+    t.integer  "sender_id"
+    t.integer  "receiver_id"
+    t.boolean  "is_deleted",        default: false
+    t.boolean  "is_read",           default: false
+    t.integer  "parent_id"
+    t.integer  "position_ids",      default: [],                 array: true
+    t.integer  "department_ids",    default: [],                 array: true
+    t.integer  "practise_code_ids", default: [],                 array: true
+    t.integer  "direct_report_ids", default: [],                 array: true
+    t.integer  "access_level_ids",  default: [],                 array: true
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
   end
 
   create_table "news", force: :cascade do |t|
@@ -180,11 +196,11 @@ ActiveRecord::Schema.define(version: 20150611211150) do
     t.string   "last_name"
     t.string   "phone"
     t.string   "postal_code"
-    t.integer  "access_level_ids",                                    array: true
-    t.integer  "position_ids",                                        array: true
-    t.integer  "department_ids",                                      array: true
-    t.integer  "practise_code_ids",                                   array: true
-    t.integer  "direct_report_ids",                                   array: true
+    t.integer  "access_level_ids",       default: [],                 array: true
+    t.integer  "position_ids",           default: [],                 array: true
+    t.integer  "department_ids",         default: [],                 array: true
+    t.integer  "practise_code_ids",      default: [],                 array: true
+    t.integer  "direct_report_ids",      default: [],                 array: true
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
