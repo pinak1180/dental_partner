@@ -26,6 +26,7 @@ gem 'tagsinput-rails'
 gem "nested_form"
 gem 'kaminari'
 gem 'sidekiq'
+gem 'searchkick'
 
 group :development, :test do
   gem 'byebug'

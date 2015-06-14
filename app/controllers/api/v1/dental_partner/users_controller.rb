@@ -3,6 +3,6 @@ class Api::V1::DentalPartner::UsersController < Api::V1::BaseController
 
   def index
     @user = User.non_admins.page(@page).per(@limit)
-    render json: @user, each_serializer: UserSerializer
+    render json: @user, each_serializer: UserSerializer, token: false
   end
 end
