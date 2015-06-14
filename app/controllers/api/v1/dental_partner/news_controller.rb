@@ -3,7 +3,7 @@ class Api::V1::DentalPartner::NewsController < Api::V1::BaseController
 
   def index
     @news  = ::News.valid_feeds(@current_user).page(@page).per(@limit)
-    render json: @news, each_serializer: NewsSerializer
+    render json: @news, each_serializer: NewsSerializer, user: @current_user
   end
 
   def show
