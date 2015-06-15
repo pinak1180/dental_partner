@@ -15,7 +15,7 @@ class Api::V1::DentalPartner::PasswordsController < Api::V1::BaseController
   end
 
   def change_password
-    if params[:user][:current_password].present? && params[:user][:password].present?
+    if [:current_password].present? && [:password].present?
       @user = @current_user.update_with_password(change_password_params)
       if @user
         render_json({ result: { messages: 'ok', rstatus: 1, errorcode: '' }, data: { messages: 'Your Password has been reset' } }.to_json)
@@ -30,6 +30,6 @@ class Api::V1::DentalPartner::PasswordsController < Api::V1::BaseController
   private
 
   def change_password_params
-    params.require(:user).permit(:current_password, :password, :password_confirmation)
+    params.permit(:current_password, :password, :password_confirmation)
  end
 end
