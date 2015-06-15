@@ -34,34 +34,33 @@
          {name: 'id', description: 'News id', required: 1 },
          {name: 'title', description: 'Comment title', required: 1 },
          {name: 'comment', description: 'Comment', required: 1 }
-
                ],
            options: {}} %>
 
-           <!-- Create like Api -->
-            <%= render partial: 'api', locals: {
-                  link_name: 'Create like',
-                  link_href: 'like_article',
-                  link_method: 'Post',
-                  original_link: api_dental_partner_news_likes_path,
-                  parameters: [
-                   {name: 'authentication_token', description: 'You will get authentication token from signup/login api', required: 1 },
-                   {name: 'id', description: 'News id', required: 1 }
+<!-- Create like Api -->
+<%= render partial: 'api', locals: {
+      link_name: 'Create like',
+      link_href: 'like_article',
+      link_method: 'Post',
+      original_link: api_dental_partner_news_likes_path,
+      parameters: [
+       {name: 'authentication_token', description: 'You will get authentication token from signup/login api', required: 1 },
+       {name: 'id', description: 'News id', required: 1 }
 
 
-                         ],
-                     options: {}} %>
+             ],
+         options: {}} %>
 
-                     <!-- Create dislike Api -->
-                      <%= render partial: 'api', locals: {
-                            link_name: 'Dislike article',
-                            link_href: 'dislike_article',
-                            link_method: 'DELETE',
-                            original_link: api_dental_partner_news_like_path(32),
-                            parameters: [
-                             {name: 'authentication_token', description: 'You will get authentication token from signup/login api', required: 1 },
-                             {name: 'id', description: 'News id', required: 1 }
+<!-- Create dislike Api -->
+<%= render partial: 'api', locals: {
+      link_name: 'Dislike article',
+      link_href: 'dislike_article',
+      link_method: 'DELETE',
+      original_link: api_dental_partner_news_like_path(32),
+      parameters: [
+       {name: 'authentication_token', description: 'You will get authentication token from signup/login api', required: 1 },
+       {name: 'id', description: 'News id', required: 1 }
 
 
-                                   ],
-                               options: {}} %>
+             ],
+         options: {}} %>

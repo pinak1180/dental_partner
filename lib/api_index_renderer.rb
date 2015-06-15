@@ -24,6 +24,11 @@ class ApiIndexRenderer
       index_arr << ApiIndexRenderer.new('Get Survey by id', 'surveys_show', 'GET')
       index_arr << ApiIndexRenderer.new('Get All Surveys', 'surveys_index', 'GET')
       index_arr << ApiIndexRenderer.new('Get All Contacts', 'contacts', 'GET')
+      index_arr << ApiIndexRenderer.new('List Messages', 'message_index', 'GET')
+      index_arr << ApiIndexRenderer.new('Get Message Detail', 'message_show', 'GET')
+      index_arr << ApiIndexRenderer.new('Reply/Send Message', 'message_create', 'POST')
+      index_arr << ApiIndexRenderer.new('Mark as Deleted Message', 'message_delete', 'DELETE')
+      index_arr << ApiIndexRenderer.new('Mark as Read Message', 'message_read', 'POST')
       index_arr << ApiIndexRenderer.new('Logout', 'logout', 'GET')
       index_arr
     end

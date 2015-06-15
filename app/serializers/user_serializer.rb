@@ -1,10 +1,10 @@
 class UserSerializer < ActiveModel::Serializer
   ## Attributes ##
-  attributes :id, :first_name, :last_name, :phone, :email, :authentication_token,:address,:fax_no, :avatar_image
+  attributes :id, :first_name, :last_name, :phone, :email, :authentication_token,
+             :address,:fax_no, :avatar_image, :designation
 
   ## Instance Methods ##
   def attributes
-    puts serialization_options[:token] == true
     unless serialization_options[:token]
       super.except(:authentication_token)
     else
@@ -13,7 +13,11 @@ class UserSerializer < ActiveModel::Serializer
   end
 
   def avatar_image
-    "#{ENV["HOST"]}/#{object.avatar.url}"
+    "#{ENV["HOST"]}#{object.avatar.url}"
+  end
+
+  def designation
+    object.positions.first
   end
 
   def authentication_token
