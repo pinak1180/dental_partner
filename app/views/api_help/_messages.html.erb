@@ -30,9 +30,9 @@
       original_link: api_dental_partner_messages_path,
       parameters: [
        {name: 'authentication_token', description: 'You will get authentication token from signup/login api', required: 1 },
-       {name: 'message[parent_id]', description: 'parent_id', required: 1 },
-       {name: 'message[message_body]', description: 'Message Text', required: 1 },
-       {name: 'message[receiver_id]', description: 'Receiver id', required: 1 }
+       {name: 'parent_id', description: 'parent_id', required: 1 },
+       {name: 'message_body', description: 'Message Text', required: 1 },
+       {name: 'receiver_id', description: 'Receiver id', required: 1 }
              ],
          options: {}} %>
 
@@ -41,7 +41,7 @@
      link_name: 'Mark Delete Message',
      link_href: 'message_delete',
      link_method: 'Delete',
-     original_link: "/api/dental_partner/messages/2",
+     original_link: "/api/dental_partner/messages/<message_id>",
      parameters: [
        {name: 'authentication_token', description: 'You will get authentication token from signup/login api', required: 1 },
        {name: 'id', description: 'Message id', required: 1 }

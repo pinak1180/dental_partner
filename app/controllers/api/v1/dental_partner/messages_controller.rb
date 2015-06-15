@@ -12,7 +12,7 @@ class Api::V1::DentalPartner::MessagesController < Api::V1::BaseController
   end
 
   def create
-    @message = @current_user.sent_messages.build(message_params)
+    @message = @current_user.sent_messages.build(message_body: params[:message_body], receiver_id: params[:receiver_id], parent_id: params[:parent_id])
     if @message.save
       render_json({ result: { messages: 'ok', rstatus: 1, errorcode: '' }, data: { messages: 'Message Sent Successfully' } }.to_json)
     else
@@ -36,10 +36,5 @@ class Api::V1::DentalPartner::MessagesController < Api::V1::BaseController
 
   def missing_param
     render_json({ errors: "Param Message_ids missing" }.to_json)
-  end
-
-  private
-  def message_params
-    params.require(:message).permit(:message_body, :receiver_id, :parent_id)
   end
 end

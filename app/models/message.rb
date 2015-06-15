@@ -2,7 +2,7 @@ class Message < ActiveRecord::Base
   include RecipientFilter
 
   ## Validations ##
-  validates :message_body, presence: true
+  validates :message_body, :receiver_id, presence: true
 
   ## Associations ##
   belongs_to :sender, class: User, foreign_key: 'sender_id'
