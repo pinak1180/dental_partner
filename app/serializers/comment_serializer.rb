@@ -4,11 +4,11 @@ class CommentSerializer < ActiveModel::Serializer
   attributes :id,:comment,:created_at,:user_avatar_medium,:user_avatar_thumb,:full_name
 
   def user_avatar_medium
-    object.user.medium_image
+    #object.try(:user).medium_image
   end
 
   def user_avatar_thumb
-    object.user.thumb_image
+    #object.user.thumb_image
   end
 
   def full_name
