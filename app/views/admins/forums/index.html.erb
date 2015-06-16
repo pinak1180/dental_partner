@@ -20,7 +20,7 @@
       <tbody>
         <% @forums.each do |admins_forum| %>
           <tr>
-            <td><%= admins_forum.title %></td>
+            <td><%= link_to admins_forum.title, admins_forum_path(admins_forum) %></td>
             <td><%= admins_forum.expiry_date %></td>
             <td><%= admins_forum.release_date %></td>
             <td><%= admins_forum.positions %></td>
@@ -28,9 +28,8 @@
             <td><%= admins_forum.practise_codes %></td>
             <td><%= admins_forum.direct_report_ids %></td>
             <td><%= admins_forum.access_levels %></td>
-            <td><%= link_to 'Show', admins_forum_path(admins_forum) %></td>
-            <td><%= link_to 'Edit', edit_admins_forum_path(admins_forum) %></td>
-            <td><%= link_to 'Destroy', admins_forum_path(admins_forum), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= link_to 'Edit', edit_admins_forum_path(admins_forum), class: "btn btn-xs btn-warning" %></td>
+            <td><%= link_to 'Delete', admins_forum_path(admins_forum), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %></td>
           </tr>
         <% end %>
       </tbody>

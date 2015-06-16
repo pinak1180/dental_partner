@@ -4,7 +4,7 @@
     <%= f.input :last_name, input_html: {class: "form-control"} %><br/>
     <%= f.input :email, input_html: {class: "form-control"} %><br/>
     <%= f.input :phone, input_html: {class: "form-control"} %><br/>
-    <%= f.input :postal_code, input_html: {class: "form-control"} %><br/>
+    <%= f.input :postal_code, label: "Postalcode", input_html: {class: "form-control"} %><br/>
     <%= f.input :position_ids, label: "Select Positions" do %><br/>
       <%= f.select :position_ids, @positions, {include_blank: false}, {:class => "chosen-select", "data-placeholder": "Choose Positions", style: "width: 300px;", multiple: true} %>
     <% end %><br/>

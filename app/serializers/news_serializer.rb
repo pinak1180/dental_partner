@@ -2,7 +2,8 @@ class NewsSerializer < ActiveModel::Serializer
 
   ## Attributes ##
   attributes :id, :title, :content, :tags, :expiry_date, :comments,
-             :total_comments, :medium_poster, :thumb_poster,:release_date,:liked_by_user
+             :total_comments, :medium_poster, :thumb_poster, :release_date,
+             :liked_by_user, :author_name, :department
 
   ## Association ##
   has_many :comments
@@ -30,5 +31,9 @@ class NewsSerializer < ActiveModel::Serializer
 
   def liked_by_user
     ActsAsVotable::Vote.where(voter_id:serialization_options[:user].id,votable_id: object.id,  vote_flag: true).present?
+  end
+
+  def department
+    object.departments
   end
 end

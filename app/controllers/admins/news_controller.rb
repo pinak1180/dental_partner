@@ -55,6 +55,6 @@ class Admins::NewsController < AdminBaseController
     end
 
     def admins_news_params
-      params.require(:news).permit(:content, :tags,:poster_avatar, :expiry_date, :release_date, :title, position_ids: [], access_level_ids: [], department_ids: [], practise_code_ids: [], direct_report_ids: [])
+      params.require(:news).permit(:content, :tags,:poster_avatar, :expiry_date, :release_date, :title, :author_name, position_ids: [], access_level_ids: [], department_ids: [], practise_code_ids: [], direct_report_ids: [])
     end
 end

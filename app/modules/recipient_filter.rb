@@ -38,6 +38,10 @@ module RecipientFilter
       PractiseCode.where(id: practise_code_ids).uniq.pluck(:code).join(', ')
     end
 
+    def direct_report_users
+      User.where(id: direct_report_ids).uniq.pluck(:email).join(',')
+    end
+
     private
     def atleast_single_reciptient
       errors.add(:position_ids, "atleast single criteria must be selected") unless (position_ids || department_ids || practise_code_ids || direct_report_ids).present?

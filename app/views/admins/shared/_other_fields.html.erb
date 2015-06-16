@@ -16,7 +16,7 @@
     <%= f.input :practise_code_ids, label: "Select Practice Code" do %><br/>
       <%= f.select :practise_code_ids, @practise_codes, {include_blank: false,include_hidden: false}, {:class => "chosen-select", "data-placeholder": "Choose Practise Codes", style: "width: 300px;", multiple: true} %>
     <% end %><br/>
-    <%= f.input :direct_report_ids, label: "Select Direct Reporters" do %><br/>
+    <%= f.input :direct_report_ids, label: "Select Direct Report" do %><br/>
       <%= f.select :direct_report_ids, @direct_reporters, {include_blank: false,include_hidden: false}, {:class => "chosen-select", "data-placeholder": "Choose Direct Reporters", style: "width: 300px;", multiple: true} %>
     <% end %><br/>
   </div>
