@@ -1,0 +1,62 @@
+<%= render partial: 'api', locals: {
+      link_name: 'List Messages',
+      link_href: 'message_index',
+      link_method: 'Get',
+      original_link: api_dental_partner_messages_path,
+      parameters: [
+        {name: 'authentication_token', description: 'You will get authentication token from signup/login api', required: 1 },
+        {name: 'page', description: 'Page no (optional default : 1)', required: 1 },
+        {name: 'limit', description: 'per page limit (optional default : 10 per page)', required: 1 }
+             ],
+      options: {}} %>
+
+<!-- Show news Api -->
+<%= render partial: 'api', locals: {
+      link_name: 'Show Message',
+      link_href: 'message_show',
+      link_method: 'Get',
+      original_link: "/api/dental_partner/messages/<message_id>",
+      parameters: [
+        {name: 'authentication_token', description: 'You will get authentication token from signup/login api', required: 1 },
+        {name: 'id', description: 'Message id', required: 1 }
+      ],
+        options: {}} %>
+
+<!-- Create Message -->
+<%= render partial: 'api', locals: {
+      link_name: 'Reply/Send Message',
+      link_href: 'message_create',
+      link_method: 'Post',
+      original_link: api_dental_partner_messages_path,
+      parameters: [
+       {name: 'authentication_token', description: 'You will get authentication token from signup/login api', required: 1 },
+       {name: 'parent_id', description: 'parent_id', required: 1 },
+       {name: 'message_body', description: 'Message Text', required: 1 },
+       {name: 'receiver_id', description: 'Receiver id', required: 1 }
+             ],
+         options: {}} %>
+
+<!-- Marke Delete Message Api -->
+<%= render partial: 'api', locals: {
+     link_name: 'Mark Delete Message',
+     link_href: 'message_delete',
+     link_method: 'Delete',
+     original_link: "/api/dental_partner/messages/<message_id>",
+     parameters: [
+       {name: 'authentication_token', description: 'You will get authentication token from signup/login api', required: 1 },
+       {name: 'id', description: 'Message id', required: 1 }
+     ],
+       options: {}} %>
+
+<!-- Marke as Read/Unread Message Api -->
+<%= render partial: 'api', locals: {
+    link_name: 'Mark Read/Unread Message',
+    link_href: 'message_read',
+    link_method: 'Post',
+    original_link: api_dental_partner_mark_read_path,
+    parameters: [
+      {name: 'authentication_token', description: 'You will get authentication token from signup/login api', required: 1 },
+      {name: 'message_ids', description: 'Message ids eg. 1,2,3', required: 1 },
+      {name: 'read_flag', description: 'read_flag true/false, (default - true)', required: 1 }
+    ],
+      options: {}} %>

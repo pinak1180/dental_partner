@@ -52,6 +52,10 @@ class User < ActiveRecord::Base
     format('%s %s', first_name, last_name)
   end
 
+  def messages
+    Message.where("sender_id = ? OR receiver_id = ?", id, id)
+  end
+
   private
   def set_password
     self.password = Devise.friendly_token
