@@ -26,4 +26,11 @@ class ForumSerializer < ActiveModel::Serializer
   def thumb_poster
     object.thumb_image
   end
+  def release_date
+    object.print_release_date
+  end
+
+  def expiry_date
+    object.print_expiry_date
+  end
 end

@@ -18,4 +18,11 @@ class SurveySerializer < ActiveModel::Serializer
   def is_completed_by_user
     object.responses.find_by(user_id: serialization_options[:user_id]).present?
   end
+  def release_date
+    object.print_release_date
+  end
+
+  def expiry_date
+    object.print_expiry_date
+  end
 end
