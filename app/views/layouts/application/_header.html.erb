@@ -84,13 +84,12 @@
 
     <li class="off-right">
       <a href="javascript:;" data-toggle="dropdown">
-        <%= image_tag "faceless.jpg", class: "header-avatar img-circle", alt: "user", title: "user" %>
-        <span class="hidden-xs ml10">User John</span>
+        <%= image_tag current_user.avatar.url, class: "header-avatar img-circle", alt: "user", title: "user", style: "float: none; height: 35px; width: 35px;" %>
+        <span class="hidden-xs ml10">Hi, <%= current_user.full_name || "Alana" %></span>
         <i class="ti-angle-down ti-caret hidden-xs"></i>
       </a>
       <ul class="dropdown-menu animated fadeInRight">
-        <li><%= link_to "<i class='fa fa-cogs'></i> Settings".html_safe, "#" %></li>
-        <li><%= link_to "<i class='fa fa-user'></i> Profile".html_safe, "#" %></li>
+        <li><%= link_to "<i class='fa fa-cogs'></i> Settings".html_safe, edit_user_registration_path %></li>
         <li><%= link_to "<i class='fa fa-sign-out'></i> Sign out".html_safe, destroy_user_session_path, method: "delete" %></li>
       </ul>
     </li>

@@ -2,5 +2,52 @@
 <section class="panel">
   <header class="panel-heading">Dashboard</header>
   <div class="panel-body">
+    <p class="col-md-12">
+      <div class="col-md-2">
+        <%= link_to new_admins_forum_path, class: "col-sm-12 btn btn btn-primary text-center" do %>
+          <i class="fa fa-question fa-5x"></i>
+        <% end %>
+      </div>
+      <div class="col-md-10">
+        <p><strong>Forums</strong></p>
+        <p>Start a discussion by adding a new forum for your users </p>
+      </div>
+    </p>
+
+    <p class="col-md-12">
+      <div class="col-md-2">
+        <%= link_to new_admins_news_path, class: "col-sm-12 btn btn btn-success text-center" do %>
+          <i class="fa fa-newspaper-o fa-5x"></i>
+        <% end %>
+      </div>
+      <div class="col-md-10">
+        <p><strong>News Articles</strong></p>
+        <p>Post a News/Article for your users </p>
+      </div>
+    </p>
+
+    <p class="col-md-12">
+      <div class="col-md-2">
+        <%= link_to new_admins_user_path, class: "col-sm-12 btn btn btn-color text-center" do %>
+          <i class="fa fa-user fa-5x"></i>
+        <% end %>
+      </div>
+      <div class="col-md-10">
+        <p><strong>User</strong></p>
+        <p>Add a new Member </p>
+      </div>
+    </p>
+
+    <p class="col-md-12">
+      <div class="col-md-2">
+        <%= link_to new_admins_survey_path, class: "col-sm-12 btn btn btn-warning text-center" do %>
+          <i class="fa fa-line-chart fa-5x"></i>
+        <% end %>
+      </div>
+      <div class="col-md-10">
+        <p><strong>Surveys</strong></p>
+        <p>Add a Survey for your users </p>
+      </div>
+    </p>
   </div>
 </section>
