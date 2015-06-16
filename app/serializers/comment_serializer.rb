@@ -14,4 +14,8 @@ class CommentSerializer < ActiveModel::Serializer
   def full_name
     object.user.full_name if object.user.present?
   end
+
+  def created_at
+    created_at.strftime("%d-%m-%Y")
+  end
 end
