@@ -2,6 +2,16 @@
 <section class="panel">
   <header class="panel-heading">Listing News</header>
   <div class="panel-body">
+    <p>
+      <strong>Title:</strong><br/>
+      <%= @admins_news.title %>
+    </p>
+
+    <p>
+      <strong>Description:</strong><br/>
+      <%= @admins_news.content %>
+    </p>
+
     <%= link_to 'Edit', edit_admins_news_path(@admins_news) %> |
     <%= link_to 'Back', admins_news_index_path %>
   </div>

@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :authentication_tokens, dependent: :destroy, inverse_of: :user
   has_many :sent_messages, dependent: :destroy, class: Message, foreign_key: :sender_id
   has_many :received_messages, dependent: :destroy, class: Message, foreign_key: :receiver_id
+  has_many :comments, dependent: :destroy
 
   ## Validations ##
   validates :first_name, :last_name, :phone, :access_level_ids,

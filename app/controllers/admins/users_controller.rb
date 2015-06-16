@@ -38,6 +38,18 @@ class Admins::UsersController < AdminBaseController
     redirect_to admins_users_url, notice: 'User was successfully destroyed.'
   end
 
+  def update_password
+    @user = current_user
+    if @user.update_with_password(user_password_params)
+      flash[:notice] = "Password Changed Successfully ."
+      sign_in @user, :bypass => true
+      redirect_to root_path
+    else
+      flash[:error] = "Incorrect Password Provided."
+      redirect_to edit_user_registration_path
+    end
+  end
+
   private
     def set_admins_user
       @admins_user = User.find(params[:id])
@@ -46,4 +58,8 @@ class Admins::UsersController < AdminBaseController
     def admins_user_params
       params.require(:user).permit(:first_name, :last_name, :position_ids, :phone, :email, :postal_code, position_ids: [], access_level_ids: [], department_ids: [], practise_code_ids: [], direct_report_ids: [])
     end
+
+    def user_password_params
+    	params.require(:user).permit(:current_password, :password, :password_confirmation)
+    end    
 end
