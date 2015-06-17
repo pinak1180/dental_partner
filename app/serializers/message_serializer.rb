@@ -27,6 +27,6 @@ class MessageSerializer < ActiveModel::Serializer
   end
 
   def sent_date
-    object.created_at
+    object.created_at.strftime("%d-%m-%Y")
   end
 end

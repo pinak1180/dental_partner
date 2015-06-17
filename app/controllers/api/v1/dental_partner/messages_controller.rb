@@ -21,8 +21,8 @@ class Api::V1::DentalPartner::MessagesController < Api::V1::BaseController
   end
 
   def destroy
-    @message = @current_user.messages.find(params[:id])
-    @message.update_attributes(is_deleted: true)
+    @message = @current_user.messages.where(id: params[:id].split(','))
+    @message.update_all(is_deleted: true)
     render_json({ result: { messages: 'ok', rstatus: 1, errorcode: '' }, data: { messages: 'Message Deleted Successfully' } }.to_json)
   end
 
