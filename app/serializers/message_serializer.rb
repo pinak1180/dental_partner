@@ -8,7 +8,7 @@ class MessageSerializer < ActiveModel::Serializer
   def attributes
     puts serialization_options[:token] == true
     unless serialization_options[:token]
-      super.except(:message_body)
+      super#.except(:message_body)
     else
       super
     end
