@@ -5,14 +5,7 @@ class MessageSerializer < ActiveModel::Serializer
              :message_body, :parent_id
 
   ## Instance Methods ##
-  def attributes
-    puts serialization_options[:token] == true
-    unless serialization_options[:token]
-      super#.except(:message_body)
-    else
-      super
-    end
-  end
+  
 
   def sender_dp
     ENV['HOST'] + object.sender.avatar.url
