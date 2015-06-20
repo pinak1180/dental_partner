@@ -13,7 +13,7 @@ class Message < ActiveRecord::Base
   ## Scope ##
   scope :parent_messages, -> { where( parent_id: nil ) }
   scope :trash_messages, -> { where( is_deleted: true ) }
-
+  scope :untrashed, -> { where( is_deleted: false ) }
   ## Instance Methods ##
   def display_errors
     errors.full_messages.join(',')
@@ -32,7 +32,7 @@ class Message < ActiveRecord::Base
   end
 
   def sent_at
-    created_at.strftime("%H:%M %P")
+    created_at.strftime("%d %b %Y, %l:%M %P")
   end
 
   def atleast_one_reciptient?

@@ -6,8 +6,9 @@ class Admins::MessagesController < AdminBaseController
   end
 
   def index
-    @messages = current_user.messages.send(params[:q]).parent_messages rescue current_user.messages.parent_messages
-    @messages = @messages.page(params[:page]).per(9)
+    @messages = current_user.messages.send(params[:q]) rescue current_user.messages.untrashed
+    @messages = @messages.parent_messages.includes(:receiver, :sender)
+                .order("created_at DESC").page(params[:page]).per(9)
   end
 
   def create
@@ -22,6 +23,7 @@ class Admins::MessagesController < AdminBaseController
 
   def show
     @message = current_user.messages.find(params[:id])
+    @thread = @message.child_messages.includes(:receiver, :sender)
     @reply = current_user.sent_messages.build
   end
 
@@ -33,6 +35,13 @@ class Admins::MessagesController < AdminBaseController
       @message = @reply.parent
       render :show
     end
+  end
+
+  def destroy
+    @message = current_user.messages.find(params[:id])
+    @message.update(is_deleted: true)
+    @message.child_messages.update_all(is_deleted: true)
+    redirect_to admins_messages_path, notice: "Message Deleted"
   end
 
   private

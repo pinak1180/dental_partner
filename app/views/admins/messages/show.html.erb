@@ -8,16 +8,25 @@
           <li class="dd-item">
             <ol class="dd-list">
               <li class="dd-item">
-                <div class="dd-handle"><%= @message.message_body %></div>
+                <div class="dd-handle">
+                  <%= @message.message_body %>
+                  <label class="pull-right"><%= @message.sent_at %></label>
+                </div>
               </li>
             </ol>
             <% @message.child_messages.each do |message| %>
               <% if current_user.id != message.sender_id %>
-                <div class="dd-handle"><%= message.message_body %></div>
+                <div class="dd-handle">
+                  <%= message.message_body %>
+                  <label class="pull-right"><%= message.sent_at %></label>
+                </div>
               <% else %>
                 <ol class="dd-list">
                   <li class="dd-item">
-                    <div class="dd-handle"><%= message.message_body %></div>
+                    <div class="dd-handle">
+                      <%= message.message_body %>
+                      <label class="pull-right"><%= @message.sent_at %></label>
+                    </div>
                   </li>
                 </ol>
               <% end %>
@@ -26,14 +35,17 @@
         </ol>
       </div>
     </div>
-    <%= simple_form_for(@reply, url: reply_admins_messages_path, html: {class: "col-md-12", multipart: true}) do |f| %>
-      <%= f.input :message_body, as: :text, label: false, input_html: { class: "form-control mt15", rows: 5, cols: 2, placeholder: "Message Text" } %><br/>
-      <%= f.input :sender_id, as: :hidden, input_html: {class: "form-control", value: current_user.id} %>
-      <%= f.input :receiver_id, as: :hidden, input_html: {class: "form-control", value: @message.receiver_id} %>
-      <%= f.input :parent_id, as: :hidden, input_html: {class: "form-control", value: @message.id} %>
-      <div class="form-actions">
-        <%= f.submit "Reply Message", class: "btn btn-primary" %>
-      </div>
+    <% unless @message.is_deleted  %>
+      <%= simple_form_for(@reply, url: reply_admins_messages_path, html: {class: "col-md-12", multipart: true}) do |f| %>
+        <%= f.input :message_body, as: :text, label: false, input_html: { class: "form-control mt15", rows: 5, cols: 2, placeholder: "Message Text" } %><br/>
+        <%= f.input :sender_id, as: :hidden, input_html: {class: "form-control", value: current_user.id} %>
+        <%= f.input :receiver_id, as: :hidden, input_html: {class: "form-control", value: @message.receiver_id} %>
+        <%= f.input :parent_id, as: :hidden, input_html: {class: "form-control", value: @message.id} %>
+        <div class="form-actions">
+          <%= f.submit "Reply Message", class: "btn btn-primary" %>
+          <%= link_to "Delete Conversation", admins_message_path(@message.id), method: :delete, class: "btn btn-danger" %>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </section>
