@@ -1,5 +1,6 @@
 class Message < ActiveRecord::Base
   include RecipientFilter
+  include PublicActivity::Common
 
   ## Validations ##
   validates :message_body, :receiver_id, presence: true
@@ -9,6 +10,7 @@ class Message < ActiveRecord::Base
   belongs_to :receiver, class: User, foreign_key: 'receiver_id'
   belongs_to :parent, class: Message, foreign_key: 'parent_id'
   has_many   :child_messages, class: Message, foreign_key: 'parent_id'
+  has_many   :notifications, -> { where(trackable_type: "Message") }, class: PublicActivity::Activity, foreign_key: :trackable_id
 
   ## Scope ##
   scope :parent_messages, -> { where( parent_id: nil ) }

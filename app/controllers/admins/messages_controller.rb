@@ -23,6 +23,7 @@ class Admins::MessagesController < AdminBaseController
 
   def show
     @message = current_user.messages.find(params[:id])
+    set_message_read
     @thread = @message.child_messages.includes(:receiver, :sender)
     @reply = current_user.sent_messages.build
   end
@@ -42,6 +43,12 @@ class Admins::MessagesController < AdminBaseController
     @message.update(is_deleted: true)
     @message.child_messages.update_all(is_deleted: true)
     redirect_to admins_messages_path, notice: "Message Deleted"
+  end
+
+  def set_message_read
+    ids = [@message.id].push(@message.child_messages.ids)
+    notifications = PublicActivity::Activity.where(trackable_type: "Message", trackable_id: ids)
+    notifications.update_all(read: true) if notifications.present?
   end
 
   private

@@ -27,6 +27,7 @@ gem "nested_form"
 gem 'kaminari'
 gem 'sidekiq'
 gem 'searchkick'
+gem 'public_activity'
 
 group :development, :test do
   gem 'byebug'

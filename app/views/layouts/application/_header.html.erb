@@ -47,40 +47,7 @@
       </ul>
     </li>
 
-    <li class="notifications dropdown">
-      <a href="javascript:;" data-toggle="dropdown">
-        <i class="ti-bell"></i>
-        <div class="badge badge-top bg-danger animated flash">
-          <span>1</span>
-        </div>
-      </a>
-      <div class="dropdown-menu animated fadeInLeft">
-        <div class="panel panel-default no-m">
-          <div class="panel-heading small"><b>Notifications</b>
-        </div>
-          <ul class="list-group">
-            <li class="list-group-item">
-              <%= link_to "#" do %>
-                <span class="pull-left mt5 mr15">
-                  <%#= image_tag request.sender.decorate.profile_avatar, class: "avatar avatar-sm img-circle", alt: "" %>
-                </span>
-                <div class="m-body">
-                  <div class="">
-                    <small><b>test</b></small>
-                    <span class="label label-danger pull-right">REQUEST TO JOIN</span>
-                  </div>
-                  <span> wants to join you</span>
-                  <span class="time small">3 mins ago.</span>
-                </div>
-              <% end %>
-            </li>
-          </ul>
-          <div class="panel-footer">
-            <a href="javascript:;">See all notifications</a>
-          </div>
-        </div>
-      </div>
-    </li>
+    <%= render "layouts/application/notifications" %>
 
     <li class="off-right">
       <a href="javascript:;" data-toggle="dropdown">

@@ -1,8 +1,10 @@
 class Forum < ActiveRecord::Base
   include RecipientFilter
+  include PublicActivity::Common
   acts_as_commentable
 
   ## Associations ##
+  has_many :notifications, -> { where(trackable_type: "Forum") }, class: PublicActivity::Activity, foreign_key: :trackable_id
 
   ## Validations ##
   validates :title, :subject, presence: true

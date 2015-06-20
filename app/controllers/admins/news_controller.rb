@@ -7,6 +7,7 @@ class Admins::NewsController < AdminBaseController
   end
 
   def show
+    @admins_news.notifications.update_all(read: true)
   end
 
   def new

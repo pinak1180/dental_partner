@@ -1,9 +1,11 @@
 class News < ActiveRecord::Base
   include RecipientFilter
+  include PublicActivity::Common
   acts_as_commentable
   acts_as_votable
 
   ## Associations ##
+  has_many :notifications, -> { where(trackable_type: "News") }, class: PublicActivity::Activity, foreign_key: :trackable_id
 
   ## Validations ##
   validates :title, :content, :poster_avatar, presence: true

@@ -1,6 +1,5 @@
 class Survey < ActiveRecord::Base
-  include RecipientFilter
-  acts_as_commentable
+  include RecipientFilter  
 
   ## Associations ##
   has_many :questions, dependent: :destroy

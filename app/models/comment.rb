@@ -15,8 +15,15 @@ class Comment < ActiveRecord::Base
   # NOTE: Comments belong to a user
   belongs_to :user
 
+  ## Callbacks ##
+  after_create :generate_notification
+
   ## Instance methods
   def display_errors
     errors.full_messages.join(',')
+  end
+
+  def generate_notification
+    self.commentable.create_activity(key: 'commented', owner: user, recipient: User.admin)
   end
 end

@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :sent_messages, dependent: :destroy, class: Message, foreign_key: :sender_id
   has_many :received_messages, dependent: :destroy, class: Message, foreign_key: :receiver_id
   has_many :comments, dependent: :destroy
+  has_many :notifications, class: PublicActivity::Activity, foreign_key: :recipient_id
 
   ## Validations ##
   validates :first_name, :last_name, :phone, :access_level_ids,
@@ -25,6 +26,7 @@ class User < ActiveRecord::Base
 
   ## Scope ##
   scope :non_admins, -> { where(admin: false) }
+  scope :admin, -> { find_by(admin: true) }
 
   ## Custom Attributes ##
   attr_accessor :avatar1

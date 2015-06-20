@@ -7,6 +7,7 @@ class Admins::ForumsController < AdminBaseController
   end
 
   def show
+    @forum.notifications.update_all(read: true)
   end
 
   def new
