@@ -2,15 +2,29 @@
 <section class="panel">
   <div class="panel-heading"><header><%= @message.receiver.full_name %></header></div>
   <div class="panel-body">
-    <div class="col-md-12">
-      <p class="<%= current_user.id == @message.sender_id ? 'pull-right' : 'pull-left' %> col-md-12">
-        <%= @message.message_body %>
-      </p>
-      <% @message.child_messages.each do |message| %>
-        <p class="<%= current_user.id == message.sender_id ? 'pull-right' : 'pull-left' %> col-md-12">
-          <%= message.message_body %>
-        </p>
-      <% end %>
+    <div class="cf nestable-lists">
+      <div class="dd" id="nestable">
+        <ol class="dd-list">
+          <li class="dd-item">
+            <ol class="dd-list">
+              <li class="dd-item">
+                <div class="dd-handle"><%= @message.message_body %></div>
+              </li>
+            </ol>
+            <% @message.child_messages.each do |message| %>
+              <% if current_user.id != message.sender_id %>
+                <div class="dd-handle"><%= message.message_body %></div>
+              <% else %>
+                <ol class="dd-list">
+                  <li class="dd-item">
+                    <div class="dd-handle"><%= message.message_body %></div>
+                  </li>
+                </ol>
+              <% end %>
+            <% end %>
+          </li>
+        </ol>
+      </div>
     </div>
     <%= simple_form_for(@reply, url: reply_admins_messages_path, html: {class: "col-md-12", multipart: true}) do |f| %>
       <%= f.input :message_body, as: :text, label: false, input_html: { class: "form-control mt15", rows: 5, cols: 2, placeholder: "Message Text" } %><br/>
