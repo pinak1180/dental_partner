@@ -17,6 +17,10 @@ class Api::V1::DentalPartner::PasswordsController < Api::V1::BaseController
   def change_password
     if [:current_password].present? && [:password].present?
       @user = @current_user.update_with_password(current_password: params[:current_password], password: params[:password], password_confirmation: params[:password_confirmation])
+      if params[:avatar].present?
+       @current_user.avatar1 = @current_user.decode_profile_picture_to_image_data(params[:avatar])
+       @current_user.save
+      end
       if @user
         render_json({ result: { messages: 'ok', rstatus: 1, errorcode: '' }, data: { messages: 'Your Password has been reset' } }.to_json)
       else
