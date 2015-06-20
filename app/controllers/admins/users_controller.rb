@@ -1,6 +1,7 @@
 class Admins::UsersController < AdminBaseController
   before_action :set_admins_user, only: [:show, :edit, :update, :destroy]
   before_action :set_form_details, only: [ :new, :edit, :create, :update ]
+  add_breadcrumb "Users", :admins_users_path
 
   def index
     @admins_users = User.non_admins.page params[:page]
@@ -11,6 +12,7 @@ class Admins::UsersController < AdminBaseController
 
   def new
     @admins_user = User.new
+    add_breadcrumb "New User", new_admins_user_path
   end
 
   def edit
@@ -61,5 +63,5 @@ class Admins::UsersController < AdminBaseController
 
     def user_password_params
     	params.require(:user).permit(:current_password, :password, :password_confirmation)
-    end    
+    end
 end

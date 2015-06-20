@@ -35,6 +35,11 @@
               <div class="row">
                 <%= render "layouts/flash_partial" %>
                 <div class="col-lg-12">
+                  <div class="mb5">
+                    <ol class="breadcrumb">
+                      <%= render_breadcrumbs :tag => :li, :separator => "" %>
+                    </ol>
+                  </div>
                   <%= yield %>
                 </div>
               </div>

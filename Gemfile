@@ -28,6 +28,7 @@ gem 'kaminari'
 gem 'sidekiq'
 gem 'searchkick'
 gem 'public_activity'
+gem 'breadcrumbs_on_rails'
 
 group :development, :test do
   gem 'byebug'

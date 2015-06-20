@@ -1,6 +1,7 @@
 class Admins::ForumsController < AdminBaseController
   before_action :set_forum, only: [:show, :edit, :update, :destroy]
   before_action :set_form_details, only: [:new, :edit, :create, :update]
+  add_breadcrumb "Forums", :admins_forums_path
 
   def index
     @forums = Forum.all.page params[:page]
@@ -12,6 +13,7 @@ class Admins::ForumsController < AdminBaseController
 
   def new
     @forum = Forum.new
+    add_breadcrumb "New Forum", new_admins_forum_path
   end
 
   def edit

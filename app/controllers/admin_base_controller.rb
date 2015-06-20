@@ -1,5 +1,6 @@
 class AdminBaseController < ApplicationController
   before_action :authenticate_admin, :set_notification
+  add_breadcrumb "Dashboard", :root_path, :options => { :title => "Dashboard" }
 
   private
   def authenticate_admin
@@ -11,10 +12,10 @@ class AdminBaseController < ApplicationController
   end
 
   def set_form_details
-    @direct_reporters = User.non_admins.pluck(:email, :id)
-    @positions        = Position.pluck(:name, :id)
-    @access_levels    = AccessLevel.pluck(:level, :id)
-    @departments      = Department.pluck(:name, :id)
-    @practise_codes   = PractiseCode.pluck(:code, :id)
+    @direct_reporters = User.non_admins.order(:email).pluck(:email, :id)
+    @positions        = Position.order(:name).pluck(:name, :id)
+    @access_levels    = AccessLevel.order(:level).pluck(:level, :id)
+    @departments      = Department.order(:name).pluck(:name, :id)
+    @practise_codes   = PractiseCode.order(:code).pluck(:code, :id)
   end
 end

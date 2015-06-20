@@ -1,6 +1,7 @@
 class Admins::NewsController < AdminBaseController
   before_action :set_admins_news, only: [:show, :edit, :update, :destroy]
   before_action :set_form_details, only: [ :new, :edit, :create, :update ]
+  add_breadcrumb "News", :admins_news_index_path, :title => "News"
 
   def index
     @admins_news = News.all.page params[:page]
@@ -12,6 +13,7 @@ class Admins::NewsController < AdminBaseController
 
   def new
     @admins_news = News.new
+    add_breadcrumb "New Article", new_admins_news_path, :title => "News"
   end
 
   def edit

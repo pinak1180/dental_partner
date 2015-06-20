@@ -1,8 +1,10 @@
 class Admins::MessagesController < AdminBaseController
   before_action :set_form_details, only: [:new, :edit, :create, :update]
+  add_breadcrumb "Messages", :admins_messages_path
 
   def new
     @message = current_user.sent_messages.build
+    add_breadcrumb "New Message", new_admins_message_path
   end
 
   def index
