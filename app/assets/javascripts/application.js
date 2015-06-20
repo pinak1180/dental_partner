@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require core/jquery-1.11.1.min
+//= require dataTables/jquery.dataTables
 //= require core/bootstrap
 //= require core/jquery.slimscroll.min
 //= require core/jquery.easing.min
@@ -23,12 +24,12 @@
 //= require pages/jquery-ui.custom.min.js
 //= require core/main.js
 //= require core/offscreen.js
-//= require core/formance.js
+//  require core/formance.js
 //= require core/jquery.tagsinput
 //= require core/file_upload_changer
 //= require chosen-jquery
-//= require ckeditor/init
-//= require ckeditor/config
+//  require ckeditor/init
+//  require ckeditor/config
 //= require core/jquery.simple-dtpicker
 //= require jquery_nested_form
 //= require_self
@@ -59,5 +60,15 @@ $(document).ready(function() {
   });
 
 	// phone number
-	$('#user_phone').formance('format_phone_number');
+	//$('#user_phone').formance('format_phone_number');
+
+	$('#user-table').dataTable({
+    "processing": true,
+    "serverSide": true,
+    "ajax": $('#user-table').data('source'),
+    "pagingType": "full_numbers",
+    // optional, if you want full pagination controls.
+    // Check dataTables documentation to learn more about
+    // available options.
+  });
 });

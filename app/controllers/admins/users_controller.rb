@@ -5,6 +5,10 @@ class Admins::UsersController < AdminBaseController
 
   def index
     @admins_users = User.non_admins.page params[:page]
+    respond_to do |format|
+      format.html
+      format.json { render json: UserDatatable.new(@admins_users) }
+    end
   end
 
   def show
