@@ -5,7 +5,7 @@ class Forum < ActiveRecord::Base
   ## Associations ##
 
   ## Validations ##
-  validates :title, :subject, :release_date, :expiry_date, :poster_avatar, presence: true
+  validates :title, :subject, presence: true
   validate :atleast_single_reciptient, :correct_expiry_date
   has_attached_file :poster_avatar, styles: { medium: '300x300>', thumb: '100x100>' }, default_url: '/images/:style/missing.png'
   validates_attachment_content_type :poster_avatar, content_type: /\Aimage\/.*\Z/

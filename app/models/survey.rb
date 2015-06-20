@@ -7,7 +7,7 @@ class Survey < ActiveRecord::Base
   has_many :responses, dependent: :destroy, inverse_of: :survey
 
   ## Validations ##
-  validates :title, :description, :release_date, :expiry_date, :questions, presence: true
+  validates :title, :description, :questions, presence: true
   validates :questions, :length => { :minimum => 1 }
   validate :atleast_single_reciptient, :correct_expiry_date
 

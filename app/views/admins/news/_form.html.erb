@@ -4,10 +4,10 @@
     <%= f.input :title, as: :string, input_html: {class: "form-control", autofocus: true} %><br/>
     <%= f.input :content, as: :text, input_html: { class: "form-control", rows: 10, cols: 5 } %><br/>
     <%= f.input :author_name, as: :string, input_html: {class: "form-control"} %><br/>
-    <%= f.input :poster_avatar, as: :file %>
+    <%= f.input :poster_avatar, as: :file, label: "Primary Image" %>
     <%= render '/admins/shared/other_fields', f: f %>
     <div class="form-actions">
-      <%= f.submit "Add News", class: "btn btn-primary mt15" %>
+      <%= f.submit "Publish", class: "btn btn-primary mt15" %>
     </div>
   <% end %>
 </div>

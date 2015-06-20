@@ -47,6 +47,7 @@ $(document).ready(function() {
   $('.datepicker').appendDtpicker({
     'dateFormat' : 'DD/MM/YYYY',
 		"dateOnly": true,
+		"closeOnSelected": true,
     "autodateOnStart": false
   });
 
