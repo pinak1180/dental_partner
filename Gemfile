@@ -29,6 +29,7 @@ gem 'sidekiq'
 gem 'searchkick'
 gem 'public_activity'
 gem 'breadcrumbs_on_rails'
+gem 'pushmeup'
 
 group :development, :test do
   gem 'byebug'

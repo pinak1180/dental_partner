@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150615111436) do
+ActiveRecord::Schema.define(version: 20150620101355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -125,6 +125,7 @@ ActiveRecord::Schema.define(version: 20150615111436) do
     t.string   "poster_avatar_content_type"
     t.integer  "poster_avatar_file_size"
     t.datetime "poster_avatar_updated_at"
+    t.string   "author_name"
   end
 
   add_index "news", ["access_level_ids"], name: "index_news_on_access_level_ids", using: :gin
@@ -200,17 +201,19 @@ ActiveRecord::Schema.define(version: 20150615111436) do
     t.string   "last_name"
     t.string   "phone"
     t.string   "postal_code"
-    t.integer  "access_level_ids",       default: [],                 array: true
-    t.integer  "position_ids",           default: [],                 array: true
-    t.integer  "department_ids",         default: [],                 array: true
-    t.integer  "practise_code_ids",      default: [],                 array: true
-    t.integer  "direct_report_ids",      default: [],                 array: true
+    t.integer  "access_level_ids",                                    array: true
+    t.integer  "position_ids",                                        array: true
+    t.integer  "department_ids",                                      array: true
+    t.integer  "practise_code_ids",                                   array: true
+    t.integer  "direct_report_ids",                                   array: true
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.string   "address"
     t.string   "fax_no"
+    t.string   "device_id"
+    t.string   "device_type"
   end
 
   add_index "users", ["access_level_ids"], name: "index_users_on_access_level_ids", using: :gin
