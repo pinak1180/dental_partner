@@ -1,0 +1,18 @@
+<% provide :title, "Messages" %>
+<section class="panel">
+  <div class="">
+    <ul class="list-group mail-list">
+      <% @messages.each do |message| %>
+        <li class="list-group-item">
+          <%= link_to admins_message_path(message.id) do %>
+            <span class="show">
+              <small class="pull-right"><%= message.sent_at %></small>
+              <strong class="text-uppercase"><%= message.receiver.full_name %></strong>
+            </span>
+            <p><%= message.short_message %></p>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</section>

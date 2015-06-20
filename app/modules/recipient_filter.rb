@@ -14,6 +14,15 @@ module RecipientFilter
     end
   end
   module InstanceMethods
+    def receivers
+      arel = User.arel_table
+      User.where(arel[:direct_report_ids].overlap(direct_report_ids)
+        .or(arel[:department_ids].overlap(department_ids))
+        .or(arel[:practise_code_ids].overlap(practise_code_ids))
+        .or(arel[:access_level_ids].overlap(access_level_ids))
+        .or(arel[:position_ids].overlap(position_ids)))
+    end
+
     def print_release_date
       release_date.strftime("%d-%m-%Y")
     end

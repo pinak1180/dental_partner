@@ -1,0 +1,52 @@
+<aside class="sidebar-250 canvas-right bg-default ">
+  <header class="header navbar clearfix bb bg-default pl0 pr0">
+    <p class="navbar-text">Inbox</p>
+    <div class="btn-group pull-right mr10">
+      <button type="button" class="btn btn-sm btn-primary navbar-btn">
+        <i class="ti-comment-alt"></i>
+      </button>
+      <button type="button" class="btn btn-sm btn-primary navbar-btn">
+        <i class="ti-help-alt"></i>
+      </button>
+    </div>
+  </header>
+
+  <div class="content-wrap no-p">
+    <div class="wrapper">
+      <div class="m15">
+        <%= link_to "SEND NEW MESSAGE", new_admins_message_path, class: "btn btn-primary btn-block" %>
+      </div>
+      <nav role="navigation">
+        <div class="no-padding">
+          <ul class="nav nav-stacked">
+            <li class="disabled text-uppercase">
+              <a href="javascript:;">
+                  <b>folders</b>
+              </a>
+            </li>
+            <li>
+              <a href="<%= admins_messages_path %>">
+                <span class="badge pull-right bg-success">0</span>
+                <i class="ti-import mr5"></i>
+                Conversations
+              </a>
+            </li>
+            <li>
+              <a href="<%= admins_messages_path(q: 'sent_messages') %>">
+                <i class="ti-share mr5"></i>
+                Sent Messages
+              </a>
+            </li>
+            <li>
+              <a href="<%= admins_messages_path(q: 'trash_messages') %>">
+                <span class="badge pull-right bg-danger">0</span>
+                <i class="ti-trash mr5"></i>
+                Trash
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+</aside>

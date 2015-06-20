@@ -25,6 +25,7 @@
       <section class="layout">
         <!-- sidebar menu -->
         <%= render "layouts/application/sidebar" %>
+        <%= render "layouts/application/messages_sidebar" if params[:controller].eql?("admins/messages") %>
         <!-- /sidebar menu -->
         <!-- main content -->
         <section class="main-content">

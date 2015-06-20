@@ -16,5 +16,10 @@ DentalPartner::Application.routes.draw do
     resources :news
     resources :forums
     resources :surveys
+    resources :messages do
+      collection do
+        post :reply
+      end
+    end
   end
 end
