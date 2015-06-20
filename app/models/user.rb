@@ -27,6 +27,8 @@ class User < ActiveRecord::Base
   ## Scope ##
   scope :non_admins, -> { where(admin: false) }
   scope :admin, -> { find_by(admin: true) }
+  scope :device_ids_not_null, -> { where("device_id <> ''") }
+  scope :push_eligible_user, ->(type) { where(device_type: type).pluck(:device_id)}
 
   ## Custom Attributes ##
   attr_accessor :avatar1

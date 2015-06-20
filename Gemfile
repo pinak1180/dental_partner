@@ -29,6 +29,7 @@ gem 'sidekiq'
 gem 'searchkick'
 gem 'public_activity'
 gem 'breadcrumbs_on_rails'
+gem 'pushmeup'
 gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
 gem 'ajax-datatables-rails'
 
