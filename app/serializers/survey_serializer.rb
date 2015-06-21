@@ -8,7 +8,7 @@ class SurveySerializer < ActiveModel::Serializer
 
   ## Instance Methods ##
   def total_comments
-    object.comments.size
+    #object.comments.size
   end
 
   def attributes

@@ -64,7 +64,7 @@ $(document).ready(function() {
 
 	$('#user-table').dataTable({
     "processing": true,
-    "serverSide": true,
+    "serverSide": false,
     "ajax": $('#user-table').data('source'),
     "pagingType": "full_numbers",
     // optional, if you want full pagination controls.

@@ -3,6 +3,7 @@
   <header class="panel-heading">Listing Users</header>
   <div class="panel-body">
   <%= link_to 'New User', new_admins_user_path, class: "btn btn-default" %>
+  <%= file_field_tag :file, :accept => "text/csv"%>
   <table class="table table-stripped" id="user-table" data-scoure="<%= admins_users_path(format: :json) %>">
     <thead>
       <tr>
@@ -13,7 +14,8 @@
         <th>Email</th>
         <th>Access levels</th>
         <th>Departments</th>
-        <th colspan="2"></th>
+        <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
