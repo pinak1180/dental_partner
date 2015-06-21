@@ -14,7 +14,7 @@ class Admins::UsersController < AdminBaseController
   def show
   end
 
-  def news
+  def new
     @admins_user = User.new
     add_breadcrumb "New User", new_admins_user_path
   end
