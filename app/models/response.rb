@@ -9,7 +9,7 @@ class Response < ActiveRecord::Base
   validates :user_id, :survey_id, presence: true
   validates :survey_id, uniqueness: { scope: [:user_id], message: "can be responded only once" }
   #validates_presence_of :response_details
-  validate  :correct_response
+  #validate  :correct_response
 
   ## Nested Attributes ##
   accepts_nested_attributes_for :response_details,:allow_destroy => :true
