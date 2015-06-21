@@ -13,8 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require core/jquery-1.11.1.min
-//= require dataTables/jquery.dataTables
 //= require core/bootstrap
+//= require dataTables/jquery.dataTables
+//= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require core/jquery.slimscroll.min
 //= require core/jquery.easing.min
 //= require core/jquery.appear
@@ -62,7 +63,7 @@ $(document).ready(function() {
 	// phone number
 	//$('#user_phone').formance('format_phone_number');
 
-	$('#user-table').dataTable({
+	$('#datatable-table').dataTable({
     "processing": true,
     "serverSide": false,
     "ajax": $('#user-table').data('source'),

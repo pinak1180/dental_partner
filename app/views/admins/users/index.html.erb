@@ -2,9 +2,8 @@
 <section class="panel">
   <header class="panel-heading">Listing Users</header>
   <div class="panel-body">
-  <%= link_to 'Create New User', new_admins_user_path, class: "btn btn-default" %>
-  <%= file_field_tag :file, :accept => "text/csv"%>
-  <table class="table table-stripped" id="user-table" data-scoure="<%= admins_users_path(format: :json) %>">
+  <%= link_to 'Create New User', new_admins_user_path, class: "btn btn-default mb15" %>
+  <table class="table table-stripped" id="datatable-table">
     <thead>
       <tr>
         <th>First name</th>

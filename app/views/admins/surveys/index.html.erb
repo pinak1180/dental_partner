@@ -2,8 +2,8 @@
 <section class="panel">
   <header class="panel-heading">Listing Surveys</header>
   <div class="panel-body">
-    <%= link_to 'Add New Survey', new_admins_survey_path, class: "btn btn-default" %>
-    <table class="table table-stripped">
+    <%= link_to 'Add New Survey', new_admins_survey_path, class: "btn btn-default mb15" %>
+    <table class="table table-stripped" id="datatable-table">
       <thead>
         <tr>
           <th>Title</th>
@@ -11,8 +11,8 @@
           <th>Expiry date</th>
           <th>Participated %</th>
           <th>Participated #</th>
-
-          <th colspan="2"></th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -29,6 +29,6 @@
         <% end %>
       </tbody>
     </table>
-    <%= paginate @surveys, :window => 2 %>
+    <%#= paginate @surveys, :window => 2 %>
   </div>
 </section>

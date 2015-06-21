@@ -4,11 +4,7 @@ class Admins::UsersController < AdminBaseController
   add_breadcrumb "Users", :admins_users_path
 
   def index
-    @admins_users = User.non_admins.page params[:page]
-    respond_to do |format|
-      format.html
-      format.json { render json: UserDatatable.new(@admins_users) }
-    end
+    @admins_users = User.non_admins
   end
 
   def show

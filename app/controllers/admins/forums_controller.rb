@@ -4,7 +4,7 @@ class Admins::ForumsController < AdminBaseController
   add_breadcrumb 'Forums', :admins_forums_path
 
   def index
-    @forums = Forum.all.page params[:page]
+    @forums = Forum.all
   end
 
   def show

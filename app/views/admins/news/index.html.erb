@@ -3,7 +3,7 @@
   <header class="panel-heading">Listing News</header>
   <div class="panel-body">
     <%= link_to 'Add New Article', new_admins_news_path, class: "btn btn-default" %>
-    <table class="table table-stripped" id="user-table">
+    <table class="table table-stripped" id="datatable-table">
       <thead>
         <tr>
           <th>Title</th>
@@ -32,7 +32,7 @@
         <% end %>
       </tbody>
     </table>
-    <%= paginate @admins_news, :window => 2 %>
+    <%#= paginate @admins_news, :window => 2 %>
     <br/>
   </div>
 </section>

@@ -4,7 +4,7 @@ class Admins::NewsController < AdminBaseController
   add_breadcrumb 'News', :admins_news_index_path, title: 'News'
 
   def index
-    @admins_news = News.all.page params[:page]
+    @admins_news = News.all
   end
 
   def show

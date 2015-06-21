@@ -4,7 +4,7 @@ class Admins::SurveysController < AdminBaseController
   add_breadcrumb 'Surveys', :admins_surveys_path
 
   def index
-    @surveys = Survey.all.page params[:page]
+    @surveys = Survey.all
   end
 
   def show
