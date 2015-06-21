@@ -79,7 +79,6 @@ class User < ActiveRecord::Base
   end
 
   private
-
   def set_password
     self.password = Devise.friendly_token
   end

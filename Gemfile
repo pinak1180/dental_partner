@@ -32,6 +32,7 @@ gem 'breadcrumbs_on_rails'
 gem 'pushmeup'
 gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
 gem 'ajax-datatables-rails'
+gem 'smarter_csv'
 
 group :development, :test do
   gem 'byebug'
