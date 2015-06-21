@@ -33,6 +33,7 @@ gem 'pushmeup'
 gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
 gem 'ajax-datatables-rails'
 gem 'smarter_csv'
+gem 'mina-sidekiq'
 
 group :development, :test do
   gem 'byebug'
