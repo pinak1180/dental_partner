@@ -1,0 +1,8 @@
+---
+:verbose: true
+:concurrency:  25
+:queues:
+  - [mailer, 5]
+  - [default, 5]
+  - [mailjob, 5]
+  - [importjob, 3]

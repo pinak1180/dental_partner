@@ -78,6 +78,10 @@ class User < ActiveRecord::Base
     Message.where('sender_id = ? OR receiver_id = ?', id, id)
   end
 
+  def import_users(filepath)
+    importer = ImporterJob.perform_later("import_user", filepath)
+  end
+
   private
   def set_password
     self.password = Devise.friendly_token

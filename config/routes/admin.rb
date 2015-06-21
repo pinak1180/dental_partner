@@ -11,6 +11,7 @@ DentalPartner::Application.routes.draw do
     resources :users do
       collection do
         post :update_password
+        post :import
       end
     end
     resources :news

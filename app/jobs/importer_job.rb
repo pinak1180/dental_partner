@@ -3,6 +3,6 @@ class ImporterJob < ActiveJob::Base
 
   def perform(import_type,filepath)
   	importer = Importer.new(import_type,filepath)
-    importer.import
+    @valid_records, @invalid_records = importer.import
   end
 end

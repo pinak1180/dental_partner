@@ -52,6 +52,15 @@ class Admins::UsersController < AdminBaseController
     end
   end
 
+  def import
+    if params[:csv_file].present?
+      current_user.import_users(params[:csv_file].path)
+      redirect_to admins_users_path, notice: "Users are being Imported, you will receive status soon by email"
+    else
+      redirect_to admins_users_url, alert: "CSV missing"
+    end
+  end
+
   private
     def set_admins_user
       @admins_user = User.find(params[:id])
