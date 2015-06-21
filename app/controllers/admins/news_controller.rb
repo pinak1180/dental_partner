@@ -1,7 +1,7 @@
 class Admins::NewsController < AdminBaseController
   before_action :set_admins_news, only: [:show, :edit, :update, :destroy]
-  before_action :set_form_details, only: [ :new, :edit, :create, :update ]
-  add_breadcrumb "News", :admins_news_index_path, :title => "News"
+  before_action :set_form_details, only: [:new, :edit, :create, :update]
+  add_breadcrumb 'News', :admins_news_index_path, title: 'News'
 
   def index
     @admins_news = News.all.page params[:page]
@@ -13,7 +13,7 @@ class Admins::NewsController < AdminBaseController
 
   def new
     @admins_news = News.new
-    add_breadcrumb "New Article", new_admins_news_path, :title => "News"
+    add_breadcrumb 'New Article', new_admins_news_path, title: 'News'
   end
 
   def edit
@@ -53,11 +53,12 @@ class Admins::NewsController < AdminBaseController
   end
 
   private
-    def set_admins_news
-      @admins_news = News.find(params[:id])
-    end
 
-    def admins_news_params
-      params.require(:news).permit(:content, :tags,:poster_avatar, :expiry_date, :release_date, :title, :author_name, position_ids: [], access_level_ids: [], department_ids: [], practise_code_ids: [], direct_report_ids: [])
-    end
+  def set_admins_news
+    @admins_news = News.find(params[:id])
+  end
+
+  def admins_news_params
+    params.require(:news).permit(:content, :tags, :send_push, :poster_avatar, :expiry_date, :release_date, :title, :author_name, position_ids: [], access_level_ids: [], department_ids: [], practise_code_ids: [], direct_report_ids: [])
+  end
 end
