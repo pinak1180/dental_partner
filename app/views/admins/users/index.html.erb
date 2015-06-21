@@ -3,6 +3,16 @@
   <header class="panel-heading">Listing Users</header>
   <div class="panel-body">
   <%= link_to 'Create New User', new_admins_user_path, class: "btn btn-default mb15" %>
+  <div class="panel-body">
+    <%= form_tag "#", method: :post,  multipart: true do %>
+      <%= label_tag "Upload Users from a CSV File", nil, class: "form-label mr5" %>
+      <div class="alert alert-info">
+        Click here to see the CSV Format <%= link_to "Download CSV", "/user_import.csv", class: "btn btn-success btn-xs" %>
+      </div>
+      <%= file_field_tag "csv_emails", { accept: %w(.csv).join(',') } %><br/>
+      <%= submit_tag "Invite!", class: "btn mr5" %>
+    <% end %>
+	</div>
   <table class="table table-stripped" id="datatable-table">
     <thead>
       <tr>
