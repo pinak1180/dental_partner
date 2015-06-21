@@ -2,8 +2,8 @@
 <section class="panel">
   <header class="panel-heading">Listing News</header>
   <div class="panel-body">
-    <%= link_to 'Add New Forum', new_admins_forum_path, class: "btn btn-default" %>
-    <table class="table table-stripped">
+    <%= link_to 'Add New Forum', new_admins_forum_path,  class: "btn btn-default" %>
+    <table class="table table-stripped" id="user-table" >
       <thead>
         <tr>
           <th>Title</th>
@@ -11,10 +11,13 @@
           <th>Release date</th>
           <th>Positions</th>
           <th>Departments</th>
-          <th>Practise codes</th>
+          <th>Practice codes</th>
           <th>Direct reports</th>
           <th>Access levels</th>
-          <th colspan="3"></th>
+          <th>Views </th>
+          <th>Comments </th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -28,6 +31,8 @@
             <td><%= admins_forum.practise_codes %></td>
             <td><%= admins_forum.direct_report_ids %></td>
             <td><%= admins_forum.access_levels %></td>
+            <td><%= "3" %></td>
+            <td><%= admins_forum.comments.size %></td>
             <td><%= link_to 'Edit', edit_admins_forum_path(admins_forum), class: "btn btn-xs btn-warning" %></td>
             <td><%= link_to 'Delete', admins_forum_path(admins_forum), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %></td>
           </tr>
