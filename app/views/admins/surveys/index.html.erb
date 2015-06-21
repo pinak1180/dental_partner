@@ -9,6 +9,9 @@
           <th>Title</th>
           <th>Release date</th>
           <th>Expiry date</th>
+          <th>Participated %</th>
+          <th>Participated #</th>
+
           <th colspan="2"></th>
         </tr>
       </thead>
@@ -18,6 +21,8 @@
             <td><%= link_to survey.title, admins_survey_path(survey) %></td>
             <td><%= survey.print_release_date %></td>
             <td><%= survey.print_expiry_date %></td>
+            <td><%= survey.recipient_percent %></td>
+            <td><%= survey.recipient_number %></td>
             <td><%= link_to 'Edit', edit_admins_survey_path(survey), class: "btn btn-xs btn-warning" %></td>
             <td><%= link_to 'Delete', admins_survey_path(survey), class: "btn btn-xs btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
