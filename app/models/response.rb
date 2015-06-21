@@ -29,7 +29,8 @@ class Response < ActiveRecord::Base
       answered_questions = response_details.map(&:question_id)
       puts answered_questions.inspect
       puts "====#{answered_questions}======#{compulsory_questions}"
-      unless compulsory_questions.include? answered_questions
+      puts compulsory_questions == answered_questions
+      unless compulsory_questions == answered_questions
         errors.add(:base, "All compulsory questions need to be answered")
       end
     end
