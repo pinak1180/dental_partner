@@ -1,7 +1,7 @@
 class Admins::ForumsController < AdminBaseController
   before_action :set_forum, only: [:show, :edit, :update, :destroy]
   before_action :set_form_details, only: [:new, :edit, :create, :update]
-  add_breadcrumb "Forums", :admins_forums_path
+  add_breadcrumb 'Forums', :admins_forums_path
 
   def index
     @forums = Forum.all.page params[:page]
@@ -13,7 +13,7 @@ class Admins::ForumsController < AdminBaseController
 
   def new
     @forum = Forum.new
-    add_breadcrumb "New Forum", new_admins_forum_path
+    add_breadcrumb 'New Forum', new_admins_forum_path
   end
 
   def edit
@@ -48,6 +48,6 @@ class Admins::ForumsController < AdminBaseController
   end
 
   def forum_params
-    params.require(:forum).permit(:title, :subject, :expiry_date, :release_date, :tags, :poster_avatar, position_ids: [], department_ids: [], practise_code_ids: [], direct_report_ids: [], access_level_ids: [])
+    params.require(:forum).permit(:title, :send_push, :subject, :expiry_date, :release_date, :tags, :poster_avatar, position_ids: [], department_ids: [], practise_code_ids: [], direct_report_ids: [], access_level_ids: [])
   end
 end

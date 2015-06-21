@@ -1,7 +1,7 @@
 class Admins::SurveysController < AdminBaseController
   before_action :set_survey, only: [:show, :edit, :update, :destroy]
-  before_action :set_form_details, only: [ :new, :edit, :create, :update ]
-  add_breadcrumb "Surveys", :admins_surveys_path
+  before_action :set_form_details, only: [:new, :edit, :create, :update]
+  add_breadcrumb 'Surveys', :admins_surveys_path
 
   def index
     @surveys = Survey.all.page params[:page]
@@ -13,7 +13,7 @@ class Admins::SurveysController < AdminBaseController
   def new
     @survey = Survey.new
     @survey.questions.build
-    add_breadcrumb "New Survey", new_admins_survey_path
+    add_breadcrumb 'New Survey', new_admins_survey_path
   end
 
   def edit
@@ -42,11 +42,12 @@ class Admins::SurveysController < AdminBaseController
   end
 
   private
-    def set_survey
-      @survey = Survey.find(params[:id])
-    end
 
-    def survey_params
-      params.require(:survey).permit(:title, :description, :release_date, :expiry_date, :tags, position_ids: [], department_ids: [], practise_code_ids: [], direct_report_ids: [], access_level_ids: [], questions_attributes: [:survey_id, :id, :question, :compulsory, :_destroy, answers_attributes: [:id, :option, :_destroy]])
-    end
+  def set_survey
+    @survey = Survey.find(params[:id])
+  end
+
+  def survey_params
+    params.require(:survey).permit(:title, :description, :send_push, :release_date, :expiry_date, :tags, position_ids: [], department_ids: [], practise_code_ids: [], direct_report_ids: [], access_level_ids: [], questions_attributes: [:survey_id, :id, :question, :compulsory, :_destroy, answers_attributes: [:id, :option, :_destroy]])
+  end
 end
