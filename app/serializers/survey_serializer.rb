@@ -1,15 +1,13 @@
 class SurveySerializer < ActiveModel::Serializer
   ## Attributes ##
   attributes  :id, :title, :description, :release_date, :expiry_date,
-              :is_completed_by_user, :questions, :comments, :total_comments
+              :is_completed_by_user, :questions
 
   ## Associations ##
   has_many :questions
 
   ## Instance Methods ##
-  def total_comments
-    #object.comments.size
-  end
+
 
   def attributes
     super.except(:questions) if serialization_options[:show_details]
