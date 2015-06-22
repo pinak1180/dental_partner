@@ -11,7 +11,7 @@
         <%= ff.hidden_field :fileable_id, :value => @admins_news.id %>
         <%= ff.hidden_field :fileable_type, :value => @admins_news.class %>
         <%= image_tag ff.object.file.url(:thumb) if ff.object.file.present? %>
-        <%= ff.input :file, input_html: { :class => "form-control mb5", :placeholder => "News Image" } unless ff.object.file.present? %><br/><br/>
+        <%= ff.input :file, label: "Secondary Image", input_html: { :class => "form-control mb5", :placeholder => "News Image" } unless ff.object.file.present? %><br/><br/>
         <%= ff.link_to_remove "Remove Image", class: "pull-left btn btn-xs btn-danger" %><br/><br/>
       <% end %>
       <%= f.link_to_add "Add an Image", :media_files, :class => "pull-right btn btn-xs btn-primary" %><br/><br/>

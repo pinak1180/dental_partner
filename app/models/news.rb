@@ -12,10 +12,10 @@ class News < ActiveRecord::Base
   ## Validations ##
   validates :title, :content, :poster_avatar, presence: true
   validate :atleast_single_reciptient, :correct_expiry_date
-  validates_attachment_content_type :poster_avatar, content_type: /\Aimage\/.*\Z/
   has_attached_file :poster_avatar,
                     styles: { medium: '300x300>', thumb: '100x100>', header: '1100x300#' },
                     default_url: '/images/:style/missing.png'
+  validates_attachment_content_type :poster_avatar, content_type: /\Aimage\/.*\Z/
 
   ## Nested Attributes ##
   accepts_nested_attributes_for :media_files, allow_destroy: true
