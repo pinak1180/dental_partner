@@ -6,6 +6,12 @@
       <%= image_tag @admins_news.poster_avatar.url(:header) %>
     </p>
     <hr/>
+    <% @admins_news.media_files.each do |file| %>
+    <p>
+      <%= image_tag file.file.url(:header) %>
+    </p>
+    <hr/>
+    <% end %>
     <p>
       <strong>Title:</strong><br/>
       <%= @admins_news.title %>

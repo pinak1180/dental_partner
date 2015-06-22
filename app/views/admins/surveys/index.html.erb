@@ -13,6 +13,7 @@
           <th>Participated #</th>
           <th></th>
           <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -23,6 +24,7 @@
             <td><%= survey.print_expiry_date %></td>
             <td><%= survey.recipient_percent %></td>
             <td><%= survey.recipient_number %></td>
+            <td><%= link_to 'View', admins_survey_path(survey), class: "btn btn-xs btn-primary" %></td>
             <td><%= link_to 'Edit', edit_admins_survey_path(survey), class: "btn btn-xs btn-warning" %></td>
             <td><%= link_to 'Delete', admins_survey_path(survey), class: "btn btn-xs btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>

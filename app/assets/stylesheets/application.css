@@ -20,3 +20,11 @@
 font-weight: bold;
 color: red;
 }
+
+.modal-backdrop{ z-index: 10; }
+.datepicker > .datepicker_header > .icon-close {
+	padding: 0px;
+}
+.datepicker > .datepicker_header > .icon-home {
+	padding: 0px;
+}

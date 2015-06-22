@@ -1,10 +1,21 @@
 
 <div class="panel-body">
-  <%= simple_form_for(@admins_news, url: @admins_news.new_record? ? admins_news_index_path  : admins_news_path(@admins_news), html: {class: "col-md-12", multipart: true}) do |f| %>
+  <%= simple_nested_form_for(@admins_news, url: @admins_news.new_record? ? admins_news_index_path  : admins_news_path(@admins_news), html: {class: "col-md-12", multipart: true}) do |f| %>
     <%= f.input :title, as: :string, input_html: {class: "form-control", autofocus: true} %><br/>
     <%= f.input :content, as: :text, input_html: { class: "form-control", rows: 10, cols: 5 } %><br/>
     <%= f.input :author_name, as: :string, input_html: {class: "form-control"} %><br/>
     <%= f.input :poster_avatar, as: :file, label: "Primary Image" %>
+    <p>News Images
+      <%= f.fields_for :media_files do |ff| %><br/>
+        <%= ff.hidden_field :id %>
+        <%= ff.hidden_field :fileable_id, :value => @admins_news.id %>
+        <%= ff.hidden_field :fileable_type, :value => @admins_news.class %>
+        <%= image_tag ff.object.file.url(:thumb) if ff.object.file.present? %>
+        <%= ff.input :file, input_html: { :class => "form-control mb5", :placeholder => "News Image" } unless ff.object.file.present? %><br/><br/>
+        <%= ff.link_to_remove "Remove Image", class: "pull-left btn btn-xs btn-danger" %><br/><br/>
+      <% end %>
+      <%= f.link_to_add "Add an Image", :media_files, :class => "pull-right btn btn-xs btn-primary" %><br/><br/>
+    </p>
     <%= render '/admins/shared/other_fields', f: f %>
     <div class="form-actions">
       <%= f.submit "Publish", class: "btn btn-primary mt15" %>

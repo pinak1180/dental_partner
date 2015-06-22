@@ -15,10 +15,12 @@ class Admins::NewsController < AdminBaseController
 
   def new
     @admins_news = News.new
+    @admins_news.media_files.build
     add_breadcrumb 'New Article', new_admins_news_path, title: 'News'
   end
 
   def edit
+    @admins_news.media_files.build unless @admins_news.media_files.present?
   end
 
   def create
@@ -28,6 +30,7 @@ class Admins::NewsController < AdminBaseController
         format.html { redirect_to admins_news_path(@admins_news), notice: 'News was successfully created.' }
         format.json { render :show, status: :created, location: @admins_news }
       else
+        logger.warn("========#{@admins_news.errors.full_messages}")
         format.html { render :new }
         format.json { render json: @admins_news.errors, status: :unprocessable_entity }
       end
@@ -61,6 +64,6 @@ class Admins::NewsController < AdminBaseController
   end
 
   def admins_news_params
-    params.require(:news).permit(:content, :tags, :send_push, :poster_avatar, :expiry_date, :release_date, :title, :author_name, position_ids: [], access_level_ids: [], department_ids: [], practise_code_ids: [], direct_report_ids: [])
+    params.require(:news).permit(:content, :tags, :send_push, :poster_avatar, :expiry_date, :release_date, :title, :author_name, position_ids: [], access_level_ids: [], department_ids: [], practise_code_ids: [], direct_report_ids: [], media_files_attributes: [ :id, :fileable_id, :fileable_type, :file, :_destroy ])
   end
 end
