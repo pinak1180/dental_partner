@@ -4,7 +4,7 @@ class Forum < ActiveRecord::Base
   acts_as_commentable
 
   ## Associations ##
-  has_many :notifications, -> { where(trackable_type: "Forum") }, class: PublicActivity::Activity, foreign_key: :trackable_id
+  has_many :notifications, -> { where(trackable_type: "Forum") }, class: PublicActivity::Activity, foreign_key: :trackable_id, dependent: :destroy
 
   ## Validations ##
   validates :title, :subject, presence: true

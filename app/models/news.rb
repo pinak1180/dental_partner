@@ -6,7 +6,7 @@ class News < ActiveRecord::Base
   acts_as_votable
 
   ## Associations ##
-  has_many :notifications, -> { where(trackable_type: "News") }, class: PublicActivity::Activity, foreign_key: :trackable_id
+  has_many :notifications, -> { where(trackable_type: "News") }, class: PublicActivity::Activity, foreign_key: :trackable_id, dependent: :destroy
 
   ## Validations ##
   validates :title, :content, :poster_avatar, presence: true

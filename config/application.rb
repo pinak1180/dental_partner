@@ -20,6 +20,7 @@ module DentalPartner
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     config.action_controller.action_on_unpermitted_parameters = :raise
+    config.active_job.queue_adapter = :sidekiq
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.autoload_paths << Rails.root.join('lib')
     %w(modules).each do |dir|
