@@ -1,6 +1,6 @@
-<% provide :title, "Listing News" %>
+<% provide :title, "Forum" %>
 <section class="panel">
-  <header class="panel-heading">Listing News</header>
+  <header class="panel-heading"><%= @forum.title.titlecase %></header>
   <div class="panel-body">
     <p>
       <%= image_tag @forum.poster_avatar.url, style: "height: 300px; width: 100%;" %>

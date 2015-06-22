@@ -10,7 +10,7 @@ class Admins::ForumsController < AdminBaseController
   def show
     @forum.notifications.update_all(read: true)
     @forum_comments = @forum.comments.includes(:user).page(params[:page]).per(5)
-    add_breadcrumb @forum.title, admins_forum_path(@forum)
+    add_breadcrumb @forum.title.titlecase, admins_forum_path(@forum)
   end
 
   def new
