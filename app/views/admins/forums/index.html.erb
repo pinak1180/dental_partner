@@ -9,11 +9,6 @@
           <th>Title</th>
           <th>Expiry date</th>
           <th>Release date</th>
-          <th>Positions</th>
-          <th>Departments</th>
-          <th>Practice codes</th>
-          <th>Direct reports</th>
-          <th>Access levels</th>
           <th>Views </th>
           <th>Comments </th>
           <th>View</th>
@@ -27,11 +22,6 @@
             <td><%= admins_forum.title %></td>
             <td><%= admins_forum.expiry_date %></td>
             <td><%= admins_forum.release_date %></td>
-            <td><%= admins_forum.positions %></td>
-            <td><%= admins_forum.departments %></td>
-            <td><%= admins_forum.practise_codes %></td>
-            <td><%= admins_forum.direct_report_ids %></td>
-            <td><%= admins_forum.access_levels %></td>
             <td><%= "3" %></td>
             <td><%= admins_forum.comments.size %></td>
             <td><%= link_to 'View', admins_forum_path(admins_forum), class: "btn btn-xs btn-primary" %></td>
