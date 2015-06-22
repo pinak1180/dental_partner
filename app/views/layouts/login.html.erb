@@ -19,12 +19,15 @@
     <%= javascript_include_tag "modernizr.js" %>
   </head>
   <body>
-    <div class="cover" style='background-image: url(<%= asset_path("cover1.jpg") %>)'></div>
+    <div class="cover" style='background-color: whitesmoke;'></div>
     <div class="overlay"></div>
     <div class="center-wrapper">
       <div class="center-content">
         <div class="row">
           <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+            <section class="panel bg-white text-center">
+              <h4><strong>Dental Partner</strong></h4>
+            </section>
             <section class="panel bg-white no-b">
               <ul class="switcher-dash-action">
                 <li class="<%= check_active('admins/sessions', 'active') %>"><%= link_to "Sign in", new_session_path(resource_name) %></li>
