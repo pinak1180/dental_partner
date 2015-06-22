@@ -16,14 +16,15 @@
           <th>Access levels</th>
           <th>Views </th>
           <th>Comments </th>
-          <th></th>
-          <th></th>
+          <th>View</th>
+          <th>Edit</th>
+          <th>Delete</th>
         </tr>
       </thead>
       <tbody>
         <% @forums.each do |admins_forum| %>
           <tr>
-            <td><%= link_to admins_forum.title, admins_forum_path(admins_forum) %></td>
+            <td><%= admins_forum.title %></td>
             <td><%= admins_forum.expiry_date %></td>
             <td><%= admins_forum.release_date %></td>
             <td><%= admins_forum.positions %></td>
@@ -33,6 +34,7 @@
             <td><%= admins_forum.access_levels %></td>
             <td><%= "3" %></td>
             <td><%= admins_forum.comments.size %></td>
+            <td><%= link_to 'View', admins_forum_path(admins_forum), class: "btn btn-xs btn-primary" %></td>
             <td><%= link_to 'Edit', edit_admins_forum_path(admins_forum), class: "btn btn-xs btn-warning" %></td>
             <td><%= link_to 'Delete', admins_forum_path(admins_forum), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %></td>
           </tr>

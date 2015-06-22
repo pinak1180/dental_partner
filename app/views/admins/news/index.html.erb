@@ -14,18 +14,20 @@
           <th>Comments </th>
           <th></th>
           <th></th>
+          <th></th>
         </tr>
       </thead>
 
       <tbody>
         <% @admins_news.each do |admins_news| %>
           <tr>
-            <td><%= link_to admins_news.title, admins_news_path(admins_news) %></td>
+            <td><%= admins_news.title.titlecase %></td>
             <td><%= admins_news.print_release_date %></td>
             <td><%= admins_news.print_expiry_date %></td>
             <td><%= "3" %></td>
             <td><%= admins_news.votes_for.size %></td>
             <td><%= admins_news.comments.size %></td>
+            <td><%= link_to 'View', admins_news_path(admins_news), class: "btn btn-xs btn-primary" %></td>
             <td><%= link_to 'Edit', edit_admins_news_path(admins_news), class: "btn btn-xs btn-warning" %></td>
             <td><%= link_to 'Delete', admins_news_path(admins_news), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %></td>
           </tr>

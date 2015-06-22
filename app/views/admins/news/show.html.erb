@@ -3,7 +3,7 @@
   <header class="panel-heading"><%= @admins_news.title.titlecase %></header>
   <div class="panel-body">
     <p>
-      <%= image_tag @admins_news.poster_avatar.url, style: "height: 300px; width: 100%;" %>
+      <%= image_tag @admins_news.poster_avatar.url(:header) %>
     </p>
     <hr/>
     <p>

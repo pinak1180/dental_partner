@@ -9,7 +9,9 @@ class Forum < ActiveRecord::Base
   ## Validations ##
   validates :title, :subject, presence: true
   validate :atleast_single_reciptient, :correct_expiry_date
-  has_attached_file :poster_avatar, styles: { medium: '300x300>', thumb: '100x100>' }, default_url: 'cover_default.jpg'
+  has_attached_file :poster_avatar,
+                    styles: { medium: '300x300>', thumb: '100x100>', header: '1100x300#' },
+                    default_url: 'cover_default.jpg'
   validates_attachment_content_type :poster_avatar, content_type: /\Aimage\/.*\Z/
 
   ## Instance Methods ##
