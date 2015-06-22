@@ -44,9 +44,9 @@
   <div class="panel-body">
     <div class="col-md-12 mt15">
     <%= form_tag import_admins_users_path, method: :post,  multipart: true do %>
-      <%= label_tag "Upload Users from a CSV File", nil, class: "form-label mr5" %>
+      <%= label_tag "Import users via CSV", nil, class: "form-label mr5" %>
       <div class="alert alert-info">
-        Click here to see the CSV Format <%= link_to "Download CSV", "/user_import.csv", class: "btn btn-success btn-xs" %>
+        Download sample CSV <%= link_to "Download CSV", "/user_import.csv", class: "btn btn-success btn-xs" %>
       </div>
       <%= file_field_tag "csv_file", { accept: %w(.csv).join(',') } %><br/>
       <%= submit_tag "Import", class: "btn mr5" %>
