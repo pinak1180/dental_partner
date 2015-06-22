@@ -20,7 +20,7 @@ class Importer
         direct_report = User.where(email: result[:direct_report].split(',')).ids rescue []
         access_levels = AccessLevel.where(level: result[:access_levels].split(',')).ids rescue []
         departments   = Department.where(name: result[:departments].split(',')).ids rescue []
-        practise_codes= PractiseCode.where(code: result[:practise_code].split(',')).ids rescue []
+        practise_codes= PractiseCode.where(code: result[:practise_codes].split(',')).ids rescue []
         user                   = User.find_or_create_by(email: result[:email])
         user.first_name        = result[:first_name]
         user.last_name         = result[:last_name]

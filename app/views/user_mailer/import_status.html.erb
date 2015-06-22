@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Welcome, <%= @admin.full_name %></h1>
+    <p>
+      Here is the status of your Import
+    </p>
+    <p>
+      Following are the Invalid Records<br/>
+      <table>
+        <thead>
+          <th>User Email</th>
+          <th>Error</th>
+        </thead>
+        <tbody>
+          <% @invalid_records.each do |record| %>
+          <tr>
+            <td><%= record.first %></td>
+            <td><%= record.last %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </p>
+    <p>Thank you, have a Good Day ahead.!</p>
+  </body>
+</html>
