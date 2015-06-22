@@ -3,51 +3,73 @@
   <header class="panel-heading">Listing News</header>
   <div class="panel-body">
     <p>
-      <strong>Title:</strong>
+      <%= image_tag @forum.poster_avatar.url, style: "height: 300px; width: 100%;" %>
+    </p><hr/>
+
+    <p>
+      <strong>Title:</strong><br/>
       <%= @forum.title %>
-    </p>
+    </p><hr/>
 
     <p>
-      <strong>Subject:</strong>
+      <strong>Subject:</strong><br/>
       <%= @forum.subject.html_safe %>
-    </p>
+    </p><br/>
 
     <p>
-      <strong>Expiry date:</strong>
+      <strong>Expiry date:</strong><br/>
       <%= @forum.expiry_date %>
-    </p>
+    </p><hr/>
 
     <p>
-      <strong>Release date:</strong>
+      <strong>Release date:</strong><br/>
       <%= @forum.release_date %>
-    </p>
+    </p><hr/>
 
     <p>
-      <strong>Position ids:</strong>
+      <strong>Position ids:</strong><br/>
       <%= @forum.positions %>
-    </p>
+    </p><hr/>
 
     <p>
-      <strong>Department ids:</strong>
+      <strong>Department ids:</strong><br/>
       <%= @forum.departments %>
-    </p>
+    </p><hr/>
 
     <p>
-      <strong>Practice code ids:</strong>
+      <strong>Practice code ids:</strong><br/>
       <%= @forum.practise_codes %>
-    </p>
+    </p><hr/>
 
     <p>
-      <strong>Direct Report:</strong>
+      <strong>Direct Report:</strong><br/>
       <%= @forum.direct_report_users %>
-    </p>
+    </p><hr/>
 
     <p>
-      <strong>Access level ids:</strong>
+      <strong>Access level ids:</strong><br/>
       <%= @forum.access_levels %>
-    </p>
-
-    <%= link_to 'Edit', edit_admins_forum_path(@forum) %> |
-    <%= link_to 'Back', admins_forums_path %>
+    </p><hr/>
+    <section class="panel panel-default  post-comments">
+      <div class="panel-heading">
+        Comments
+      </div>
+        <div class="media p5">
+        <% @forum_comments.each do |comment| %>
+          <a class="pull-left" href="<%= admins_user_path(comment.user.id) %>">
+            <%= image_tag 'faceless.jpg', class: "media-object avatar avatar-sm", alt: "" %>
+          </a>
+          <div class="comment">
+            <div class="comment-author h6 no-m">
+              <a href="<%= admins_user_path(comment.user.id) %>"><b><%= comment.user.full_name %></b></a>
+            </div>
+            <div class="comment-meta small"><%= comment.created_at.strftime("%b %Y, %H:%M %P") %></div>
+            <p><%= comment.comment %></p>
+            <hr>
+          </div>
+        <% end %>
+        <div class="text-center"><%= paginate @forum_comments, :window => 2 %></div>
+        </div>
+    </section>
   </div>
 </section>

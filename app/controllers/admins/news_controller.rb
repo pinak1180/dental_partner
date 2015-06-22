@@ -9,6 +9,7 @@ class Admins::NewsController < AdminBaseController
 
   def show
     @admins_news.notifications.update_all(read: true)
+    @news_comments = @admins_news.comments.includes(:user).page(params[:page]).per(5)
   end
 
   def new

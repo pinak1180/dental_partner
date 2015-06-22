@@ -2,57 +2,57 @@
 <section class="panel">
   <header class="panel-heading">View User</header>
   <div class="panel-body">
-  <p>
-    <strong>First name:</strong>
-    <%= @admins_user.first_name %>
-  </p>
-
-  <p>
-    <strong>Last name:</strong>
-    <%= @admins_user.last_name %>
-  </p>
-
-  <p>
-    <strong>Position ids:</strong>
-    <%= @admins_user.positions %>
-  </p>
-
-  <p>
-    <strong>Phone:</strong>
-    <%= @admins_user.phone %>
-  </p>
-
-  <p>
-    <strong>Email:</strong>
-    <%= @admins_user.email %>
-  </p>
-
-  <p>
-    <strong>Postalcode:</strong>
-    <%= @admins_user.postal_code %>
-  </p>
-
-  <p>
-    <strong>Access levels</strong>
-    <%= @admins_user.access_levels %>
-  </p>
-
-  <p>
-    <strong>Departments:</strong>
-    <%= @admins_user.departments %>
-  </p>
-
-  <p>
-    <strong>Practice code</strong>
-    <%= @admins_user.practise_codes %>
-  </p>
-
-  <p>
-    <strong>Direct Report</strong>
-    <%= @admins_user.direct_report_users %>
-  </p>
-
-  <%= link_to 'Edit', edit_admins_user_path(@admins_user) %> |
-  <%= link_to 'Back', admins_users_path %>
-<div>
+    <div class="col-md-4">
+      <div class="panel overflow-hidden no-b profile p15">
+        <div class="row mb25">
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-xs-12 col-sm-8">
+                <h4 class="mb0"><%= @admins_user.first_name %> <b><%= @admins_user.last_name %></b></h4>
+                <small><%= @admins_user.email %></small>
+                <h6 class="mt15 mb15"><%= @admins_user.positions.titlecase %></h6>
+                <ul class="user-meta">
+                  <li>
+                    <i class="ti-email mr5"></i>
+                    <span><%= @admins_user.email %></span>
+                  </li>
+                  <li>
+                    <strong><i class="fa fa-angle-right mr5"></i>Department<br/></strong>
+                    <%= @admins_user.departments %>
+                  </li>
+                  <li>
+                    <strong><i class="fa fa-angle-right mr5"></i>Access Levels<br/></strong>
+                    <%= @admins_user.access_levels %>
+                  </li>
+                  <li>
+                    <strong><i class="fa fa-angle-right mr5"></i>Direct Report<br/></strong>
+                    <%= @admins_user.direct_report_users %>
+                  </li>
+                  <li>
+                    <strong><i class="fa fa-angle-right mr5"></i>Practice Codes<br/></strong>
+                    <%= @admins_user.practise_codes %>
+                  </li>
+                  <li>
+                    <i class="fa fa-wrench mr5"></i>
+                    <%= link_to "Edit User", edit_admins_user_path(@admins_user.id) %>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-xs-12 col-sm-4 text-center">
+                <figure>
+                  <%= image_tag @admins_user.avatar.url, class: "avatar avatar-lg img-circle avatar-bordered" %>
+                  <div class="small mt10">Account Usage</div>
+                  <div class="progress progress-xs mt5 mb5">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                    </div>
+                  </div>
+                  <small>234 / 879</small>
+                </figure>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
