@@ -1,5 +1,30 @@
 <% provide :title, "Dashboard" %>
-
+<div class="row mb15">
+  <div class="col-lg-3 bg-primary p10 text-center brbl">
+    <%= link_to admins_news_index_path do %>
+      <span class="fa fa-newspaper-o fa-5x show mb5"></span>
+      Articles<br/><%= @articles_count %>
+    <% end %>
+  </div>
+  <div class="col-lg-3 bg-info p10 text-center">
+    <%= link_to admins_forums_path do %>
+      <span class="fa fa-question fa-5x show mb5"></span>
+      Forums<br/><%= @forums_count %>
+    <% end %>
+  </div>
+  <div class="col-lg-3 bg-primary p10 text-center brbr">
+    <%= link_to admins_users_path do %>
+      <span class="fa fa-user fa-5x show mb5"></span>
+      Users<br/><%= @users_count %>
+    <% end %>
+  </div>
+  <div class="col-lg-3 bg-info p10 text-center brbr">
+    <%= link_to admins_surveys_path do %>
+      <span class="fa fa-line-chart fa-5x show mb5"></span>
+      Surveys<br/><%= @surveys_count %>
+    <% end %>
+  </div>
+</div>
 <section class="panel">
   <header class="panel-heading">Dashboard</header>
   <div class="panel-body">
