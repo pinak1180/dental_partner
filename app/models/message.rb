@@ -37,6 +37,11 @@ class Message < ActiveRecord::Base
     created_at.strftime("%d %b %Y, %l:%M %P")
   end
 
+  def display_receiver
+    admin = User.admin
+    receiver == admin ? sender : receiver
+  end
+
   def atleast_one_reciptient?
     return false unless (position_ids || department_ids || practise_code_ids || direct_report_ids).present?
     true

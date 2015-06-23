@@ -65,11 +65,11 @@
               <p class="pull-right">
               <% if comment.allowed %>
                 <%= link_to mark_not_allowed_admins_forums_path(@forum.id, comment.id), class: "mr10", style: "color: red;", method: :post do %>
-                  <i class="fa fa-ban mr5"></i>Hide
+                  <i class="fa fa-ban mr5"></i>Hidden
                 <% end %>
               <% else %>
                 <%= link_to mark_not_allowed_admins_forums_path(@forum.id, comment.id), class: "mr10", style: "color: green;", method: :post do %>
-                  <i class="fa fa-check-circle mr5"></i>Allow
+                  <i class="fa fa-check-circle mr5"></i>Allowed
                 <% end %>
               <% end %>
               </p>

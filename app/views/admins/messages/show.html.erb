@@ -1,6 +1,6 @@
 <% provide :title, "Message" %>
 <section class="panel">
-  <div class="panel-heading"><header><%= @message.receiver.full_name %></header></div>
+  <div class="panel-heading"><header><%= @message.display_receiver.full_name %></header></div>
   <div class="panel-body">
     <div class="cf nestable-lists">
       <div class="dd" id="nestable">

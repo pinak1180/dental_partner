@@ -7,7 +7,7 @@
           <%= link_to admins_message_path(message.id) do %>
             <span class="show">
               <small class="pull-right"><%= message.sent_at %></small>
-              <strong class="text-uppercase"><%= message.receiver.full_name %></strong>
+              <strong class="text-uppercase"><%= message.display_receiver.full_name %></strong>
             </span>
             <p><%= message.short_message %></p>
           <% end %>
