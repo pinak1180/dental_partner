@@ -16,7 +16,7 @@ class Survey < ActiveRecord::Base
   ## instance methods
 
   def recipient_percent
-    (recipient_number.to_f/receivers.size.to_f)*100 rescue 0
+    ((recipient_number.to_f/receivers.size.to_f)*100).round(2) rescue 0
   end
 
   def recipient_number
