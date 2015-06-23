@@ -40,7 +40,7 @@
     <div class="cf nestable-lists">
       <div class="dd" id="nestable">
         <ol class="dd-list">
-          <% @survey.questions.each_with_index do |question, index| %>
+          <% @questions.each_with_index do |question, index| %>
           <%= "Question - #{index + 1}" %>
           <li class="dd-item">
               <div class="dd-handle dd3-handle">Drag</div>

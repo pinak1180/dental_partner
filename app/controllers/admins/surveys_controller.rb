@@ -9,6 +9,7 @@ class Admins::SurveysController < AdminBaseController
 
   def show
     add_breadcrumb @survey.title.titlecase, admins_survey_path(@survey.id)
+    @questions = @survey.questions.includes(:response_details, :answers)
   end
 
   def new
