@@ -14,8 +14,16 @@ DentalPartner::Application.routes.draw do
         post :import
       end
     end
-    resources :news
-    resources :forums
+    resources :news do
+      collection do
+        post '/:id/comments/:c_id' => 'news#mark_not_allowed', as: :mark_not_allowed
+      end
+    end
+    resources :forums do
+      collection do
+        post '/:id/comments/:c_id' => 'forums#mark_not_allowed', as: :mark_not_allowed
+      end
+    end
     resources :surveys
     resources :messages do
       collection do

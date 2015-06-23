@@ -18,6 +18,9 @@ class Comment < ActiveRecord::Base
   ## Callbacks ##
   after_create :generate_notification
 
+  ## Scope ##
+  scope :allowed, -> { where(allowed: true) }
+
   ## Instance methods
   def display_errors
     errors.full_messages.join(',')

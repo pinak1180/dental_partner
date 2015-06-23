@@ -55,6 +55,17 @@
             <div class="comment-author h6 no-m">
               <a href="<%= admins_user_path(comment.user.id) %>"><b><%= comment.user.full_name %></b></a>
             </div>
+            <p class="pull-right">
+              <% if comment.allowed %>
+                <%= link_to mark_not_allowed_admins_news_index_path(@admins_news.id, comment.id), class: "mr10", style: "color: red;", method: :post do %>
+                  <i class="fa fa-ban mr5"></i>Hide
+                <% end %>
+              <% else %>
+                <%= link_to mark_not_allowed_admins_news_index_path(@admins_news.id, comment.id), class: "mr10", style: "color: green;", method: :post do %>
+                  <i class="fa fa-check-circle mr5"></i>Allow
+                <% end %>
+              <% end %>
+            </p>
             <div class="comment-meta small"><%= comment.created_at.strftime("%b %Y, %H:%M %P") %></div>
             <p><%= comment.comment %></p>
             <hr>
