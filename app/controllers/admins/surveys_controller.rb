@@ -8,6 +8,7 @@ class Admins::SurveysController < AdminBaseController
   end
 
   def show
+    add_breadcrumb @survey.title.titlecase, admins_survey_path(@survey.id)
   end
 
   def new

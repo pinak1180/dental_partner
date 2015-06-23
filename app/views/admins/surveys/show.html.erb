@@ -3,62 +3,64 @@
   <header class="panel-heading"><%= @survey.title %></header>
   <div class="panel-body">
     <p>
-      <strong>Title:</strong><br/>
-      <%= @survey.title %>
-    </p>
-
-    <p>
       <strong>Description:</strong><br/>
       <%= @survey.description.html_safe %><br/>
-    </p>
+    </p><hr/>
 
-    <p class="col-md-6 pull-left">
-      <strong>Release date:</strong><br/>
-      <%= @survey.print_release_date %>
-    </p>
+    <p>
+      <strong>Open till:</strong><br/>
+      <%= @survey.print_release_date %> - <%= @survey.print_expiry_date %>
+    </p><hr/>
 
-    <p class="col-md-6 pull-right">
-      <strong>Expiry date:</strong><br/>
-      <%= @survey.print_expiry_date %>
-    </p
-    <div class="col-md-12">
-      <p class="col-md-2">
-        <strong>Positions</strong><br/>
-        <%= @survey.positions %>
-      </p>
-      <p class="col-md-2">
-        <strong>Access levels</strong><br/>
-        <%= @survey.access_levels %>
-      </p>
+    <p>
+      <strong>Positions</strong><br/>
+      <%= @survey.positions %>
+    </p><hr/>
+    <p>
+      <strong>Access levels</strong><br/>
+      <%= @survey.access_levels %>
+    </p><hr/>
 
-      <p class="col-md-3">
-        <strong>Practice code</strong><br/>
-        <%= @survey.practise_codes %>
-      </p>
+    <p>
+      <strong>Practice code</strong><br/>
+      <%= @survey.practise_codes %>
+    </p><hr/>
 
-      <p class="col-md-2">
-        <strong>Direct Reports</strong><br/>
-        <%= @survey.direct_report_users %>
-      </p>
+    <p>
+      <strong>Direct Reports</strong><br/>
+      <%= @survey.direct_report_users %>
+    </p><hr/>
 
-      <p class="col-md-3">
-        <strong>Departments:</strong><br/>
-        <%= @survey.departments %>
-      </p>
-    </div>
+    <p>
+      <strong>Departments:</strong><br/>
+      <%= @survey.departments %>
+    </p><hr/>
 
-    <div class="col-md-12 panel panel-info">
-      <p><strong>Question</strong></p>
-      <% @survey.questions.each do |question| %>
-        <ol>
-          <li><span><%= question.question %> <% if question.compulsory %><label class="label label-danger">compulsory</label><% end %></span></li>
-          <ul>
-            <% question.answers.each do |answer| %>
-              <li><%= answer.option %></li>
-            <% end %>
-          </ul>
+    <div class="cf nestable-lists">
+      <div class="dd" id="nestable">
+        <ol class="dd-list">
+          <% @survey.questions.each_with_index do |question, index| %>
+          <%= "Question - #{index + 1}" %>
+          <li class="dd-item">
+              <div class="dd-handle dd3-handle">Drag</div>
+              <div class="dd-handle" style="padding-left: 45px;">
+                <span style="color: red;"><%= '*' if question.compulsory %></span>
+                <%= question.question.titlecase %>
+              </div>
+              <% question.answers.each do |answer| %>
+                <ol class="dd-list">
+                  <li class="dd-item">
+                    <div class="dd-handle">
+                      <%= answer.option %>
+                    </div>
+                  </li>
+                </ol>
+              <% end %>
+          </li>
+          <br/>&nbsp;
+          <% end %>
         </ol>
-      <% end %>
+      </div>
     </div>
 
     <p class="col-md-12">
