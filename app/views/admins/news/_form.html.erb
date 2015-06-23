@@ -14,7 +14,7 @@
         <%= ff.input :file, label: "Secondary Image", input_html: { :class => "form-control mb5", :placeholder => "News Image" } unless ff.object.file.present? %><br/><br/>
         <%= ff.link_to_remove "Remove Image", class: "pull-left btn btn-xs btn-danger" %><br/><br/>
       <% end %>
-      <%= f.link_to_add "Add an Image", :media_files, :class => "pull-right btn btn-xs btn-primary" %><br/><br/>
+      <%= f.link_to_add "Add additional Image", :media_files, :class => "pull-right btn btn-xs btn-primary" %><br/><br/>
     </p>
     <%= render '/admins/shared/other_fields', f: f %>
     <div class="form-actions">

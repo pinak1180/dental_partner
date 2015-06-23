@@ -7,8 +7,9 @@ class UserMailer < ActionMailer::Base
     mail to: @email, subject: "Dental Partner Account Details"
   end
 
-  def import_status(invalid_records)
+  def import_status(method, invalid_records)
     @invalid_records = invalid_records
+    @method          = method
     @admin           = User.admin
     mail to: @admin.email, subject: "Dental Partner | User CSV Import Status"
   end

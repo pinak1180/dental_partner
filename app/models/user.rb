@@ -81,6 +81,10 @@ class User < ActiveRecord::Base
     importer = ImporterJob.perform_later("import_user", filepath)
   end
 
+  def delete_users(filepath)
+    importer = ImporterJob.perform_later("delete_users", filepath)
+  end
+
   private
   def set_password
     self.password = Devise.friendly_token

@@ -1,6 +1,8 @@
 class Admins::MessagesController < AdminBaseController
   before_action :set_form_details, only: [:new, :edit, :create, :update]
+  before_action :set_count, only: [:new, :edit, :index, :show]
   add_breadcrumb 'Messages', :admins_messages_path
+
 
   def new
     @message = current_user.sent_messages.build
@@ -57,5 +59,10 @@ class Admins::MessagesController < AdminBaseController
 
   def message_params
     params.require(:message).permit(:message_body, :send_push, :sender_id, :receiver_id, :parent_id, position_ids: [], department_ids: [], practise_code_ids: [], direct_report_ids: [], access_level_ids: [])
+  end
+
+  def set_count
+    @messages_count = current_user.messages.untrashed.parent_messages.count
+    @trash_count    = current_user.messages.parent_messages.trash_messages.count
   end
 end

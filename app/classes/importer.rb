@@ -37,6 +37,20 @@ class Importer
         end
       end
     end
-    return @valid_records, @invalid_records
+    return 'user_import', @invalid_records
+  end
+
+  def delete_users
+    @valid_records = []
+    @invalid_records = []
+    if filepath.present?
+      results   = SmarterCSV.process(filepath)
+      emails    = results.collect{|x| x[:emails] }
+      found     = User.where(email: emails)
+      not_found = emails - found.pluck(:email)
+      found.destroy_all
+      @invalid_records = [emails.join(', '), "where not found in the system"]
+    end
+    return 'user_delete', @invalid_records
   end
 end

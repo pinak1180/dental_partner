@@ -1,18 +1,9 @@
-<li class="notifications dropdown">
-  <a href="javascript:;" data-toggle="dropdown">
-    <i class="ti-bell"></i>
-    <% if @notifications.present? %>
-      <div class="badge badge-top bg-danger animated flash">
-        <span><%= @notifications.count %></span>
-      </div>
-    <% end %>
-  </a>
-  <div class="dropdown-menu animated fadeInLeft">
-    <div class="panel panel-default no-m">
-      <div class="panel-heading small"><b>Notifications</b>
-    </div>
-      <ul class="list-group">
-        <% @notifications.first(5).each do |notification| %>
+<% provide :title, "Notifications" %>
+<section class="panel">
+  <header class="panel-heading">Notifications</header>
+  <div class="panel-body">
+    <ul class="list-group">
+      <% @admin_notifications.each do |notification| %>
         <% if notification.key.eql?("commented") %>
           <li class="list-group-item">
             <%= link_to "/admins/#{notification.trackable_type.pluralize.downcase}/#{notification.trackable_id}" do %>
@@ -44,11 +35,8 @@
             <% end %>
           </li>
         <% end %>
-        <% end %>
-      </ul>
-      <div class="panel-footer">
-        <a href="<%= notifications_admins_users_path %>">See all Notifications</a>
-      </div>
-    </div>
+      <% end %>
+    </ul>
+    <div class="text-center"><%= paginate @admin_notifications, :window => 2 %></div>    
   </div>
-</li>
+</section>

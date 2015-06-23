@@ -46,9 +46,13 @@
     <%= form_tag import_admins_users_path, method: :post,  multipart: true do %>
       <%= label_tag "Import users via CSV", nil, class: "form-label mr5" %>
       <div class="alert alert-info">
-        Download sample CSV <%= link_to "Download CSV", "/user_import.csv", class: "btn btn-success btn-xs" %>
+        Download sample For User Import CSV &nbsp; &nbsp; <%= link_to "Download CSV", "/user_import.csv", class: "btn btn-success btn-xs" %>
       </div>
       <%= file_field_tag "csv_file", { accept: %w(.csv).join(',') } %><br/>
+      <div class="alert alert-danger">
+        Download sample For User Delete CSV &nbsp; &nbsp;<%= link_to "Download CSV", "/user_delete.csv", class: "btn btn-success btn-xs" %>
+      </div>
+      <%= file_field_tag "csv_delete_file", { accept: %w(.csv).join(',') } %><br/>
       <%= submit_tag "Import", class: "btn mr5" %>
     <% end %>
     </div>

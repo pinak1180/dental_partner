@@ -1,6 +1,6 @@
-<% provide :title, "View User" %>
+<% provide :title, @admins_user.full_name %>
 <section class="panel">
-  <header class="panel-heading">View User</header>
+  <header class="panel-heading"><%= @admins_user.full_name %></header>
   <div class="panel-body">
     <div class="col-md-4">
       <div class="panel overflow-hidden no-b profile p15">

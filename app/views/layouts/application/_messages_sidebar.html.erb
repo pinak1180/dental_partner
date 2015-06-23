@@ -26,7 +26,7 @@
             </li>
             <li>
               <a href="<%= admins_messages_path %>">
-                <span class="badge pull-right bg-success">0</span>
+                <span class="badge pull-right bg-success"><%= @messages_count %></span>
                 <i class="ti-import mr5"></i>
                 Conversations
               </a>
@@ -39,7 +39,7 @@
             </li>
             <li>
               <a href="<%= admins_messages_path(q: 'trash_messages') %>">
-                <span class="badge pull-right bg-danger">0</span>
+                <span class="badge pull-right bg-danger"><%= @trash_count %></span>
                 <i class="ti-trash mr5"></i>
                 Trash
               </a>

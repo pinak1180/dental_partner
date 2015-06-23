@@ -52,17 +52,24 @@ class Admins::UsersController < AdminBaseController
     end
   end
 
+  def notifications
+    add_breadcrumb 'Notifications', new_admins_user_path
+    @admin_notifications = current_user.notifications.includes(:owner, :trackable).order('created_at DESC').page(params[:page]).per(10)
+  end
+
   def import
     if params[:csv_file].present?
       current_user.import_users(params[:csv_file].path)
       redirect_to admins_users_path, notice: 'Users are being Imported, you will receive status soon by email'
+    elsif params[:csv_delete_file].present?
+      current_user.delete_users(params[:csv_delete_file].path)
+      redirect_to admins_users_path, notice: 'Users are being Deleted, you will receive status soon by email'
     else
       redirect_to admins_users_url, alert: 'CSV missing'
     end
   end
 
   private
-
   def set_admins_user
     @admins_user = User.find(params[:id])
   end
