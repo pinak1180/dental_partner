@@ -12,7 +12,7 @@
       <div class="panel-heading small"><b>Notifications</b>
     </div>
       <ul class="list-group">
-        <% @notifications.first(5).each do |notification| %>
+        <% (@notifications || []).first(5).each do |notification| %>
         <% if notification.key.eql?("commented") %>
           <li class="list-group-item">
             <%= link_to "/admins/#{notification.trackable_type.pluralize.downcase}/#{notification.trackable_id}" do %>
