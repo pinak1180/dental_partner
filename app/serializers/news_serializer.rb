@@ -7,6 +7,7 @@ class NewsSerializer < ActiveModel::Serializer
 
   ## Association ##
   has_many :comments
+  has_many :media_files, as: :fileable
 
   ## Instance Methods ##
   def total_comments

@@ -57,7 +57,7 @@
         <div class="media p5">
         <% @forum_comments.each do |comment| %>
           <a class="pull-left" href="<%= admins_user_path(comment.user.id) %>">
-            <%= image_tag 'faceless.jpg', class: "media-object avatar avatar-sm", alt: "" %>
+            <%= image_tag comment.user.avatar.url(:thumb), class: "media-object avatar avatar-sm", alt: "" %>
           </a>
           <div class="comment">
             <div class="comment-author h6 no-m">
