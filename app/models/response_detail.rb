@@ -9,4 +9,6 @@ class ResponseDetail < ActiveRecord::Base
   validates :question_id, uniqueness: { scope: [:response_id], message: 'question can only answered once' }
   validates_presence_of :response
 
+  ## Scope ##
+  scope :answer_count, -> { joins(:answer).select("answers.option").group("answers.option").count }
 end

@@ -1,3 +1,4 @@
+<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
 <% provide :title, "Survey" %>
 <section class="panel">
   <header class="panel-heading"><%= @survey.title %></header>
@@ -57,6 +58,7 @@
                 </ol>
               <% end %>
           </li>
+          <%= pie_chart question.response_details.answer_count %>
           <br/>&nbsp;
           <% end %>
         </ol>

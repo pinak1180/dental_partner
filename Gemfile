@@ -34,6 +34,8 @@ gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
 gem 'ajax-datatables-rails'
 gem 'smarter_csv'
 gem 'mina-sidekiq'
+gem 'chartkick'
+gem 'squeel'
 
 group :development, :test do
   gem 'byebug'

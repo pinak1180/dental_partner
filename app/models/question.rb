@@ -3,6 +3,7 @@ class Question < ActiveRecord::Base
   ## Associations ##
   belongs_to :survey
   has_many   :answers, dependent: :destroy
+  has_many   :response_details, dependent: :destroy
 
   ## Validations ##
   validates :question, :answers, presence: true
