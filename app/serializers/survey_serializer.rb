@@ -1,7 +1,7 @@
 class SurveySerializer < ActiveModel::Serializer
   ## Attributes ##
   attributes  :id, :title, :description, :release_date, :expiry_date,
-              :is_completed_by_user, :questions
+              :is_completed_by_user, :questions, :departments
 
   ## Associations ##
   has_many :questions
@@ -22,5 +22,9 @@ class SurveySerializer < ActiveModel::Serializer
 
   def expiry_date
     object.print_expiry_date
+  end
+
+  def departments
+    object.departments
   end
 end
