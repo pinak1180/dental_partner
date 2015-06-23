@@ -1,5 +1,5 @@
 class Admins::NewsController < AdminBaseController
-  before_action :set_admins_news, only: [:show, :edit, :update, :destroy]
+  before_action :set_admins_news, only: [:show, :edit, :update, :destroy, :mark_not_allowed]
   before_action :set_form_details, only: [:new, :edit, :create, :update]
   add_breadcrumb 'News', :admins_news_index_path, title: 'News'
 
@@ -25,36 +25,30 @@ class Admins::NewsController < AdminBaseController
 
   def create
     @admins_news = News.new(admins_news_params)
-    respond_to do |format|
-      if @admins_news.save
-        format.html { redirect_to admins_news_path(@admins_news), notice: 'News was successfully created.' }
-        format.json { render :show, status: :created, location: @admins_news }
-      else
-        logger.warn("========#{@admins_news.errors.full_messages}")
-        format.html { render :new }
-        format.json { render json: @admins_news.errors, status: :unprocessable_entity }
-      end
+    if @admins_news.save
+      redirect_to admins_news_path(@admins_news), notice: 'News was successfully created.'
+    else
+      render :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @admins_news.update(admins_news_params)
-        format.html { redirect_to admins_news_path(@admins_news), notice: 'News was successfully updated.' }
-        format.json { render :show, status: :ok, location: @admins_news }
-      else
-        format.html { render :edit }
-        format.json { render json: @admins_news.errors, status: :unprocessable_entity }
-      end
+    if @admins_news.update(admins_news_params)
+      redirect_to admins_news_path(@admins_news), notice: 'News was successfully updated.'
+    else
+      render :edit
     end
   end
 
   def destroy
     @admins_news.destroy
-    respond_to do |format|
-      format.html { redirect_to admins_news_index_url, notice: 'News was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to admins_news_index_url, notice: 'News was successfully destroyed.'
+  end
+
+  def mark_not_allowed
+    @comment = @admins_news.comments.find(params[:c_id])
+    @comment.update(allowed: !@comment.allowed)
+    redirect_to admins_news_path(@admins_news.id), notice: "The Comment is Reported"
   end
 
   private

@@ -1,5 +1,5 @@
 class Admins::ForumsController < AdminBaseController
-  before_action :set_forum, only: [:show, :edit, :update, :destroy]
+  before_action :set_forum, only: [:show, :edit, :update, :destroy, :mark_not_allowed]
   before_action :set_form_details, only: [:new, :edit, :create, :update]
   add_breadcrumb 'Forums', :admins_forums_path
 
@@ -41,6 +41,12 @@ class Admins::ForumsController < AdminBaseController
   def destroy
     @forum.destroy
     redirect_to admins_forums_path, notice: 'Forum was successfully destroyed.'
+  end
+
+  def mark_not_allowed
+    @comment = @forum.comments.find(params[:c_id])
+    @comment.update(allowed: !@comment.allowed)
+    redirect_to admins_forum_path(@forum.id), notice: "The Comment is Reported"
   end
 
   private
