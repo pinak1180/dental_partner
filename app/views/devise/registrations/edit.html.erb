@@ -10,7 +10,7 @@
         <%= f.input :last_name, required: true,  placeholder: "Last Name", input_html: {class: "form-control"} %><br/>
         <%= f.input :address, required: true,  placeholder: "Address", input_html: {class: "form-control"} %><br/>
         <%= f.input :phone,  placeholder: "Phone Number", input_html: {class: "phone_number form-control", maxlength: "10"} %><br/>
-        <%= f.input :avatar, as: :file %><br/>
+        <%= avatar_input_for('user[avatar]', resource.avatar.url, 'Avatar') %><br/>
         <%= f.input :current_password, hint: "we need your current password to confirm your changes", required: true, input_html: { class: "form-control" } %><br/>
       </div>
       <div class="form-actions">

@@ -68,8 +68,8 @@ $(document).ready(function() {
     "serverSide": false,
     "ajax": $('#user-table').data('source'),
     "pagingType": "full_numbers",
-    // optional, if you want full pagination controls.
-    // Check dataTables documentation to learn more about
-    // available options.
   });
+
+	// custom file input
+	change_file_input();	
 });

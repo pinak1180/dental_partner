@@ -16,12 +16,12 @@ module ApplicationHelper
     params[:controller].present? && params[:controller] == controller ? value : ""
   end
 
-  def avatar_input_for(object, name, image)
-    html = "<p class='form-label'> #{object.class.to_s + ' Picture'}
+  def avatar_input_for(name, image, label)
+    html = "<p class='form-label'> #{label}
     <div class='settings_account_avatar'>
       #{image_tag image, id: 'uploadPreview', size: '150x150'}
       <div class='settings_account_avatar_button'><i class='fa fa-camera fa-5x'></i></div>
-      <input type='file' name='#{name}' id='uploadImage' title='Click to upload picture' alt='Click to upload picture' autocomplete='off' onchange='PreviewImage();' accept='#{UserDecorator.valid_avatar_file_formats}'>
+      <input type='file' name='#{name}' id='uploadImage' title='Click to upload picture' alt='Click to upload picture' autocomplete='off' onchange='PreviewImage();' accept='image/*'>
     </div>
     </p>"
     html.html_safe

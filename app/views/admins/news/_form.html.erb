@@ -4,13 +4,12 @@
     <%= f.input :title, as: :string, input_html: {class: "form-control", autofocus: true} %><br/>
     <%= f.input :content, as: :text, input_html: { class: "form-control", rows: 10, cols: 5 } %><br/>
     <%= f.input :author_name, as: :string, input_html: {class: "form-control"} %><br/>
-    <%= f.input :poster_avatar, as: :file, label: "Primary Image" %>
+    <%= avatar_input_for('news[poster_avatar]', @admins_news.poster_avatar.url, 'Primary Image') %>
     <p>News Images
       <%= f.fields_for :media_files do |ff| %><br/>
         <%= ff.hidden_field :id %>
         <%= ff.hidden_field :fileable_id, :value => @admins_news.id %>
         <%= ff.hidden_field :fileable_type, :value => @admins_news.class %>
-        <%= image_tag ff.object.file.url(:thumb) if ff.object.file.present? %>
         <%= ff.input :file, label: "Secondary Image", input_html: { :class => "form-control mb5", :placeholder => "News Image" } unless ff.object.file.present? %><br/><br/>
         <%= ff.link_to_remove "Remove Image", class: "pull-left btn btn-xs btn-danger" %><br/><br/>
       <% end %>
