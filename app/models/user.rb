@@ -13,8 +13,7 @@ class User < ActiveRecord::Base
   has_many :notifications, class: PublicActivity::Activity, foreign_key: :recipient_id
 
   ## Validations ##
-  validates :first_name, :last_name, :phone, :access_level_ids,
-            :department_ids, :practise_code_ids, :position_ids, presence: true, unless: proc { |user| user.admin }
+  validates :first_name, :last_name, :phone, presence: true, unless: proc { |user| user.admin }
 
   before_validation :set_password, if: proc { |user| !user.admin && user.new_record? }
   after_create :send_welcome_mail, if: proc { |user| !user.admin }
