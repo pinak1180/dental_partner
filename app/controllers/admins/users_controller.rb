@@ -8,6 +8,7 @@ class Admins::UsersController < AdminBaseController
   end
 
   def show
+    add_breadcrumb @admins_user.full_name, admins_user_path(@admins_user.id)
   end
 
   def new
