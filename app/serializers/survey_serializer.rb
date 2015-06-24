@@ -1,7 +1,7 @@
 class SurveySerializer < ActiveModel::Serializer
   ## Attributes ##
   attributes  :id, :title, :description, :release_date, :expiry_date,
-              :is_completed_by_user, :questions, :departments
+              :is_completed_by_user, :questions, :departments, :tags
 
   ## Associations ##
   has_many :questions
