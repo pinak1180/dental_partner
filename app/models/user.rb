@@ -87,7 +87,7 @@ class User < ActiveRecord::Base
 
   private
   def set_password
-    self.password = Devise.friendly_token
+    self.password = Devise.friendly_token[0,6]
   end
 
   def send_welcome_mail

@@ -4,6 +4,7 @@
     <%= f.input :subject, as: :text, input_html: { class: "form-control", rows: 10, cols: 5 } %><br/>
     <%= avatar_input_for('forum[poster_avatar]', @forum.poster_avatar.url, 'Forum Image') %><br/>
     <%= render '/admins/shared/other_fields', f: f %>
-    <%= f.submit "Add New Forum", class: "btn btn-primary" %>
+    <%= f.submit "Publish Forum", class: "btn btn-primary" %>
+    <%= link_to "Cancel", admins_forums_path, class: "btn btn-defaut" %>
   <% end %>
 </div>

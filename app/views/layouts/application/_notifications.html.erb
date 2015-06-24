@@ -1,12 +1,12 @@
 <li class="notifications dropdown">
-  <a href="javascript:;" data-toggle="dropdown">
+  <%= link_to notification_badge_admins_users_path, "data-toggle": "dropdown", id: "bell", remote: true, method: :post do %>
     <i class="ti-bell"></i>
     <% if @notifications.present? %>
-      <div class="badge badge-top bg-danger animated flash">
+      <div class="badge badge-top bg-danger animated flash" id="nb">
         <span><%= @notifications.count %></span>
       </div>
     <% end %>
-  </a>
+  <% end %>
   <div class="dropdown-menu animated fadeInLeft">
     <div class="panel panel-default no-m">
       <div class="panel-heading small"><b>Notifications</b>

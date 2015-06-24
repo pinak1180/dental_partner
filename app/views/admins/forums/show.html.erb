@@ -1,6 +1,11 @@
 <% provide :title, "Forum" %>
 <section class="panel">
-  <header class="panel-heading"><%= @forum.title.titlecase %></header>
+  <header class="panel-heading">
+    <%= @forum.title.titlecase %>
+    <span class="pull-right">
+      <%= link_to "Edit Forum", edit_admins_forum_path(@forum.id), class: "btn btn-warning btn-xs" %>
+    </span>
+  </header>
   <div class="panel-body">
     <p>
       <%= image_tag @forum.poster_avatar.url(:header), size:"1100x300" %>

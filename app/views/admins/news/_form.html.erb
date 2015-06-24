@@ -10,6 +10,7 @@
         <%= ff.hidden_field :id %>
         <%= ff.hidden_field :fileable_id, :value => @admins_news.id %>
         <%= ff.hidden_field :fileable_type, :value => @admins_news.class %>
+        <%= image_tag ff.object.file.url, size: "150x150" if ff.object.file.present? %>
         <%= ff.input :file, label: "Secondary Image", input_html: { :class => "form-control mb5", :placeholder => "News Image" } unless ff.object.file.present? %><br/><br/>
         <%= ff.link_to_remove "Remove Image", class: "pull-left btn btn-xs btn-danger" %><br/><br/>
       <% end %>
@@ -18,6 +19,7 @@
     <%= render '/admins/shared/other_fields', f: f %>
     <div class="form-actions">
       <%= f.submit "Publish", class: "btn btn-primary mt15" %>
+      <%= link_to "Cancel", admins_news_index_path, class: "btn btn-defaut" %>
     </div>
   <% end %>
 </div>

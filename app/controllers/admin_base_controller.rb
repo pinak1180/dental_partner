@@ -4,7 +4,13 @@ class AdminBaseController < ApplicationController
 
   private
   def authenticate_admin
-    redirect_to new_user_session_path unless current_user.present?
+    unless current_user.present? && current_user.admin
+      if current_user.present?
+        sign_out current_user
+        flash[:alert] = "Your are restricted for access"
+      end
+      redirect_to new_user_session_path
+    end
   end
 
   def set_notification

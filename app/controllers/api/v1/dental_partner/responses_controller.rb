@@ -7,7 +7,7 @@ class Api::V1::DentalPartner::ResponsesController < Api::V1::BaseController
     @response.user_id = @current_user.id
     puts @response.response_details.inspect
     if @response.save
-      render_json({ result: { messages: 'ok', rstatus: 1, errorcode: '' }, data: { messages: 'Your response created successfully' } }.to_json)
+      render_json({ result: { messages: 'ok', rstatus: 1, errorcode: '' }, data: { messages: 'Survey Submitted' } }.to_json)
     else
       render_json({ result: { messages: @response.display_errors, rstatus: 0, errorcode: 404 } }.to_json)
     end

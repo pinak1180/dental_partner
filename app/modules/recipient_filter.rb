@@ -2,6 +2,10 @@ module RecipientFilter
   def self.included(base)
     base.send(:extend, ClassMethods)
     base.send(:include, InstanceMethods)
+    base.class_eval do
+      scope :latest,-> { order('created_at DESC') }
+      default_scope { where{(release_date <= Date.today) & ((expiry_date >= Date.today) | (expiry_date == nil))}.latest }
+    end
   end
   module ClassMethods
     def valid_feeds(user)

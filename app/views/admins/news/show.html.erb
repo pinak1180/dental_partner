@@ -1,6 +1,11 @@
 <% provide :title, "News" %>
 <section class="panel">
-  <header class="panel-heading"><%= @admins_news.title.titlecase %></header>
+  <header class="panel-heading">
+    <%= @admins_news.title.titlecase %>
+    <span class="pull-right">
+      <%= link_to "Edit News", edit_admins_news_path(@admins_news.id), class: "btn btn-warning btn-xs" %>
+    </span>
+  </header>
   <div class="panel-body">
     <p>
       <%= image_tag @admins_news.poster_avatar.url(:header) %>
@@ -57,12 +62,12 @@
             </div>
             <p class="pull-right">
               <% if comment.allowed %>
-                <%= link_to mark_not_allowed_admins_news_index_path(@admins_news.id, comment.id), class: "mr10", style: "color: red;", method: :post do %>
-                  <i class="fa fa-ban mr5"></i>Hidden
+                <%= link_to mark_not_allowed_admins_news_index_path(@admins_news.id, comment.id), class: "mr10", style: "color: green;", method: :post do %>
+                <i class="fa fa-check-circle mr5"></i>Allowed
                 <% end %>
               <% else %>
-                <%= link_to mark_not_allowed_admins_news_index_path(@admins_news.id, comment.id), class: "mr10", style: "color: green;", method: :post do %>
-                  <i class="fa fa-check-circle mr5"></i>Allowed
+                <%= link_to mark_not_allowed_admins_news_index_path(@admins_news.id, comment.id), class: "mr10", style: "color: red;", method: :post do %>
+                  <i class="fa fa-ban mr5"></i>Hidden
                 <% end %>
               <% end %>
             </p>

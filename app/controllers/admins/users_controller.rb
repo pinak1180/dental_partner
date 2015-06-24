@@ -69,6 +69,10 @@ class Admins::UsersController < AdminBaseController
     end
   end
 
+  def notification_badge
+    @notifications.update_all(read: true) if @notifications.present?
+  end
+
   private
   def set_admins_user
     @admins_user = User.find(params[:id])

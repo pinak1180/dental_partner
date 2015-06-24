@@ -13,6 +13,7 @@ DentalPartner::Application.routes.draw do
         post :update_password
         post :import
         get  :notifications
+        post :notification_badge
       end
     end
     resources :news do

@@ -71,5 +71,5 @@ $(document).ready(function() {
   });
 
 	// custom file input
-	change_file_input();	
+	change_file_input();
 });
