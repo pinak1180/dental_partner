@@ -27,7 +27,7 @@
         link_name: 'Submit Survey',
         link_href: 'submit_survey',
         link_method: 'POST',
-        original_link: api_dental_partner_survey_responses_path(survey_id: Survey.last.id),
+        original_link: api_dental_partner_survey_responses_path(survey_id: (Survey.last.id rescue 1)),
         parameters: [
           {name: 'authentication_token', description: 'You will get authentication token from signup/login api', required: 1 },
           {name: 'survey_id', description: 'The survey ID', required: 1 },
