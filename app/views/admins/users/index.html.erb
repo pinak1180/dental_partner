@@ -16,18 +16,20 @@
         <th>Departments</th>
         <th></th>
         <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
       <% @admins_users.each do |admins_user| %>
         <tr>
-          <td><%= link_to admins_user.first_name, admins_user_path(admins_user) %></td>
+          <td><%= admins_user.first_name %></td>
           <td><%= admins_user.last_name %></td>
           <td><%= admins_user.positions %></td>
           <td><%= admins_user.phone %></td>
           <td><%= admins_user.email %></td>
           <td><%= admins_user.access_levels %></td>
           <td><%= admins_user.departments %></td>
+          <td><%= link_to 'View', admins_user_path(admins_user), class: "btn btn-xs btn-primary" %></td>
           <td><%= link_to 'Edit', edit_admins_user_path(admins_user), class: "btn btn-xs btn-warning" %></td>
           <td><%= link_to 'Delete', admins_user_path(admins_user), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %></td>
         </tr>

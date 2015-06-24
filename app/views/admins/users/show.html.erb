@@ -1,6 +1,11 @@
 <% provide :title, @admins_user.full_name %>
 <section class="panel">
-  <header class="panel-heading"><%= @admins_user.full_name %></header>
+  <header class="panel-heading">
+    <%= @admins_user.full_name %>
+    <span class="pull-right">
+      <%= link_to 'Edit', edit_admins_user_path(@admins_user.id), class: 'btn btn-xs btn-warning' %>
+    </span>
+  </header>
   <div class="panel-body">
     <div class="col-md-4">
       <div class="panel overflow-hidden no-b profile p15">
@@ -13,8 +18,8 @@
                 <h6 class="mt15 mb15"><%= @admins_user.positions.titlecase %></h6>
                 <ul class="user-meta">
                   <li>
-                    <i class="ti-email mr5"></i>
-                    <span><%= @admins_user.email %></span>
+                    <i class="fa fa-phone mr5"></i>
+                    <span><%= @admins_user.phone %></span>
                   </li>
                   <li>
                     <strong><i class="fa fa-angle-right mr5"></i>Department<br/></strong>
