@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
 
   ## Validations ##
   validates :first_name, :last_name, :phone, presence: true, unless: proc { |user| user.admin }
+  validate  :atleast_single_reciptient
 
   before_validation :set_password, if: proc { |user| !user.admin && user.new_record? }
   after_create :send_welcome_mail, if: proc { |user| !user.admin }
@@ -89,7 +90,7 @@ class User < ActiveRecord::Base
 
   private
   def set_password
-    self.password = Devise.friendly_token[0,6]
+    self.password = Devise.friendly_token[0,8]
   end
 
   def send_welcome_mail

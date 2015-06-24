@@ -4,6 +4,6 @@ class ImporterJob < ActiveJob::Base
   def perform(import_type,filepath)
   	importer = Importer.new(import_type,filepath)
     method, invalid_records = importer.import
-    UserMailer.import_status(method, invalid_records).deliver_later! 
+    UserMailer.import_status(method, invalid_records).deliver_now!
   end
 end
