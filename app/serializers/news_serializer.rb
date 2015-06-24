@@ -3,7 +3,7 @@ class NewsSerializer < ActiveModel::Serializer
   ## Attributes ##
   attributes :id, :title, :content, :tags, :expiry_date, :comments,
              :total_comments, :medium_poster, :thumb_poster, :release_date,
-             :liked_by_user, :author_name, :department
+             :liked_by_user, :author_name, :department, :tags
 
   ## Association ##
   has_many :comments

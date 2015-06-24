@@ -1,7 +1,8 @@
 class ForumSerializer < ActiveModel::Serializer
   ## Attributes ##
   attributes :id, :title, :subject, :expiry_date, :release_date,
-             :tags, :expiry_date, :comments, :total_comments, :total_forums, :full_name, :medium_poster, :thumb_poster
+             :tags, :expiry_date, :comments, :total_comments,
+             :total_forums, :full_name, :medium_poster, :thumb_poster
 
   ## Associations ##
   has_many :comments

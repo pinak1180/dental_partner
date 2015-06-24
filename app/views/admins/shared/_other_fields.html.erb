@@ -1,4 +1,4 @@
-<%= f.input :tags, input_html: {class: "form-control thetags"} %><br/>
+<%= f.input :tags, input_html: {class: "form-control thetags", value: f.object.display_tags} %><br/>
 <%= f.input :release_date, as: :string, input_html: {class: "form-control datepicker"} %><br/>
 <%= f.input :expiry_date, as: :string, input_html: {class: "form-control datepicker"} %><br/>
 <%= f.input :send_push, as: :boolean,label: "Send Push To Recipients" %>

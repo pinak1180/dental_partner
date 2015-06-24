@@ -54,6 +54,10 @@ module RecipientFilter
       User.where(id: direct_report_ids).uniq.pluck(:email).join(',')
     end
 
+    def display_tags
+      tags.eql?("--- []\n") ? '' : tags rescue ''
+    end
+
     private
     def atleast_single_reciptient
       errors.add(:position_ids, "atleast single criteria must be selected") unless (position_ids || department_ids || practise_code_ids || direct_report_ids).present?

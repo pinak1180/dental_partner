@@ -2,6 +2,7 @@ class Forum < ActiveRecord::Base
   include RecipientFilter
   include PublicActivity::Common
   acts_as_commentable
+
   default_scope { where{(release_date <= Date.today) & ((expiry_date >= Date.today) | (expiry_date == nil))}.latest }
 
   ## Associations ##

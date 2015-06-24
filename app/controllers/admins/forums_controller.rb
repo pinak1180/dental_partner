@@ -56,6 +56,6 @@ class Admins::ForumsController < AdminBaseController
   end
 
   def forum_params
-    params.require(:forum).permit(:title, :send_push, :subject, :expiry_date, :release_date, :tags, :poster_avatar, position_ids: [], department_ids: [], practise_code_ids: [], direct_report_ids: [], access_level_ids: [])
+    params.require(:forum).permit(:title, :send_push, :subject, :tags, :expiry_date, :release_date, :poster_avatar, position_ids: [], department_ids: [], practise_code_ids: [], direct_report_ids: [], access_level_ids: [])
   end
 end
