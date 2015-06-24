@@ -22,7 +22,7 @@ class Api::V1::DentalPartner::PasswordsController < Api::V1::BaseController
        @current_user.save
       end
       if @user
-        render_json({ result: { messages: 'ok', rstatus: 1, errorcode: '' }, data: { messages: 'Your Password has been reset' } }.to_json)
+        render_json({ result: { messages: 'ok', rstatus: 1, errorcode: '' }, data: { messages: 'Settings have been saved' } }.to_json)
       else
         render_json({ result: { messages: @current_user.display_errors, rstatus: 0, errorcode: 404 } }.to_json)
       end
