@@ -1,5 +1,6 @@
 class Survey < ActiveRecord::Base
   include RecipientFilter
+  default_scope { where{(release_date <= Date.today) & ((expiry_date >= Date.today) | (expiry_date == nil))}.latest }
 
   ## Associations ##
   has_many :questions, dependent: :destroy

@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  default_scope { all }
+
   ## Associations ##
   has_many :authentication_tokens, dependent: :destroy, inverse_of: :user
   has_many :sent_messages, dependent: :destroy, class: Message, foreign_key: :sender_id
