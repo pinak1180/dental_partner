@@ -72,4 +72,9 @@ $(document).ready(function() {
 
 	// custom file input
 	change_file_input();
+
+	// remove {} text
+	if($('.tag').size() == 1 && $('.tag').text() == "{}  x"){
+			$('.tag').remove();
+		}
 });
