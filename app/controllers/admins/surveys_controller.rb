@@ -4,7 +4,7 @@ class Admins::SurveysController < AdminBaseController
   add_breadcrumb 'Surveys', :admins_surveys_path
 
   def index
-    @surveys = Survey.all
+    @surveys = Survey.unscoped.all
   end
 
   def show
@@ -44,9 +44,8 @@ class Admins::SurveysController < AdminBaseController
   end
 
   private
-
   def set_survey
-    @survey = Survey.find(params[:id])
+    @survey = Survey.unscoped.find(params[:id])
   end
 
   def survey_params

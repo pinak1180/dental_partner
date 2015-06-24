@@ -4,7 +4,7 @@ class Admins::ForumsController < AdminBaseController
   add_breadcrumb 'Forums', :admins_forums_path
 
   def index
-    @forums = Forum.all
+    @forums = Forum.unscoped.all
   end
 
   def show
@@ -52,7 +52,7 @@ class Admins::ForumsController < AdminBaseController
   private
 
   def set_forum
-    @forum = Forum.find(params[:id])
+    @forum = Forum.unscoped.find(params[:id])
   end
 
   def forum_params

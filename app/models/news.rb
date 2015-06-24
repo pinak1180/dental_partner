@@ -4,6 +4,7 @@ class News < ActiveRecord::Base
   include PublicActivity::Common
   acts_as_commentable
   acts_as_votable
+  default_scope { where{(release_date >= Date.today) & ((expiry_date <= Date.today) | (expiry_date == nil))} }
 
   ## Associations ##
   has_many :notifications, -> { where(trackable_type: "News") }, class: PublicActivity::Activity, foreign_key: :trackable_id, dependent: :destroy

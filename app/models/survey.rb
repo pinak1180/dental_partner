@@ -1,5 +1,6 @@
 class Survey < ActiveRecord::Base
   include RecipientFilter
+  default_scope { where{(release_date >= Date.today) & ((expiry_date <= Date.today) | (expiry_date == nil))} }
 
   ## Associations ##
   has_many :questions, dependent: :destroy
@@ -13,8 +14,7 @@ class Survey < ActiveRecord::Base
   ## Nested Attributes ##
   accepts_nested_attributes_for :questions, allow_destroy: true
 
-  ## instance methods
-
+  ## Instance Methods
   def recipient_percent
     ((recipient_number.to_f/receivers.size.to_f)*100).round(2) rescue 0
   end
