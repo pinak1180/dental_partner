@@ -5,7 +5,7 @@ class MessageSerializer < ActiveModel::Serializer
              :message_body, :parent_id
 
   ## Instance Methods ##
-  
+
 
   def sender_dp
     ENV['HOST'] + object.sender.avatar.url
