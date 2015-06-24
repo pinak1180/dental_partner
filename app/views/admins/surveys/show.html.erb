@@ -58,7 +58,8 @@
                 </ol>
               <% end %>
           </li>
-          <%= pie_chart question.response_details.answer_count %>
+          <% data = question.response_details.answer_count %>
+          <%= pie_chart data if data.present? %>
           <br/>&nbsp;
           <% end %>
         </ol>

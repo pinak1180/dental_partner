@@ -28,7 +28,7 @@ module RecipientFilter
     end
 
     def print_expiry_date
-      expiry_date.strftime("%d-%m-%Y")
+      expiry_date.present? ? expiry_date.strftime("%d-%m-%Y") : 'N/A'
     end
 
     def departments
@@ -57,7 +57,9 @@ module RecipientFilter
     end
 
     def correct_expiry_date
-      errors.add(:expiry_date, "must be greater than Release Date") unless release_date.present? && release_date <= expiry_date
+      if expiry_date.present?
+        errors.add(:expiry_date, "must be greater than Release Date") unless release_date.present? && release_date <= expiry_date
+      end
     end
   end
 end
