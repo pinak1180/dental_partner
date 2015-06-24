@@ -1,7 +1,12 @@
 <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
 <% provide :title, "Survey" %>
 <section class="panel">
-  <header class="panel-heading"><%= @survey.title %></header>
+  <header class="panel-heading">
+    <%= @survey.title.titlecase %>
+    <span class="pull-right">
+      <%= link_to 'Edit', edit_admins_survey_path(@survey.id), class: 'btn btn-warning btn-xs' %>
+    </span>
+  </header>
   <div class="panel-body">
     <p>
       <strong>Description:</strong><br/>
@@ -65,10 +70,5 @@
         </ol>
       </div>
     </div>
-
-    <p class="col-md-12">
-      <%= link_to 'Edit', edit_admins_survey_path(@survey), class: "btn btn-warning" %>
-      <%= link_to 'Back', admins_surveys_path, class: "btn btn-default" %>
-    </p>
   </div>
 </section>

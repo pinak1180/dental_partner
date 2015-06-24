@@ -17,7 +17,7 @@ class UserSerializer < ActiveModel::Serializer
   end
 
   def designation
-    object.positions.first
+    object.positions
   end
 
   def authentication_token
