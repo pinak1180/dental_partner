@@ -57,7 +57,7 @@ class User < ActiveRecord::Base
     f                    = File.open("#{Rails.root}/public/tmp/#{filename}.png")
     self.avatar = f
     f.close
-    File.delete("#{Rails.root}/public/tmp/#{filename}.png")
+    #File.delete("#{Rails.root}/public/tmp/#{filename}.png")
  end
 
   ## Instance methods ##
