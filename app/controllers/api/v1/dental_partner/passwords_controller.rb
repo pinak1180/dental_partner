@@ -15,19 +15,17 @@ class Api::V1::DentalPartner::PasswordsController < Api::V1::BaseController
   end
 
   def change_password
-    if [:current_password].present? && [:password].present?
+    if [:current_password].present? && [:password].present? && [:password_confirmation].present? && params[:avatar].present? && params[:password].to_s.eql?(params[:password_confirmation].to_s)
       @user = @current_user.update_with_password(current_password: params[:current_password], password: params[:password], password_confirmation: params[:password_confirmation])
-      if params[:avatar].present?
        @current_user.avatar1 = @current_user.decode_profile_picture_to_image_data(params[:avatar])
        @current_user.save
-      end
       if @user
         render_json({ result: { messages: 'ok', rstatus: 1, errorcode: '' }, data: { messages: 'Settings have been saved' } }.to_json)
       else
         render_json({ result: { messages: @current_user.display_errors, rstatus: 0, errorcode: 404 } }.to_json)
       end
     else
-      render_json({ result: { messages: 'Current Password and Password required', rstatus: 0, errorcode: 404 } }.to_json)
+      render_json({ result: { messages: 'Parameter Missing or password does not match', rstatus: 0, errorcode: 404 } }.to_json)
     end
  end
 end
