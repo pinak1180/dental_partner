@@ -32,8 +32,11 @@ class Api::V1::DentalPartner::PasswordsController < Api::V1::BaseController
  if params[:avatar].present?
    if params[:avatar].present?
     @current_user.avatar1 = @current_user.decode_profile_picture_to_image_data(params[:avatar])
-    @current_user.save
-    render_json({ result: { messages: 'ok', rstatus: 1, errorcode: '' }, data: { messages: 'Settings have been saved' } }.to_json)
+    if   @current_user.save
+      render_json({ result: { messages: 'ok', rstatus: 1, errorcode: '' }, data: { messages: 'Settings have been saved' } }.to_json)
+    else
+      render_json({ result: { messages: @current_user.display_errors, rstatus: 0, errorcode: 404 } }.to_json)
+    end
   end
  end
 end
