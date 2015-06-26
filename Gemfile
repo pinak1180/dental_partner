@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.1'
+gem 'rails', '4.2.3'
 gem 'active_model_serializers'
 gem 'pg'
 gem 'devise'
