@@ -30,7 +30,8 @@ class Response < ActiveRecord::Base
       puts answered_questions.inspect
       puts "====#{answered_questions}======#{compulsory_questions}"
       puts compulsory_questions == answered_questions
-      if compulsory_questions.present? && ((compulsory_questions & answered_questions) == compulsory_questions)
+      puts ((compulsory_questions & answered_questions))
+      if  !((compulsory_questions & answered_questions) == compulsory_questions)
         errors.add(:base, 'All compulsory questions need to be answered')
       end
     end
