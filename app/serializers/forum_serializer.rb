@@ -8,6 +8,10 @@ class ForumSerializer < ActiveModel::Serializer
   has_many :comments
 
   ## Instance Methods ##
+  def comments
+    object.comments.allowed
+  end
+
   def total_comments
     object.comments.size
   end

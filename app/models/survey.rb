@@ -23,4 +23,13 @@ class Survey < ActiveRecord::Base
   def recipient_number
     responses.size
   end
+
+  def completed?
+    if release_date.present? && expiry_date.present?
+      return true if release_date <= Date.today && expiry_date > Date.today
+      false
+    else
+      receivers.count == response.count
+    end
+  end
 end

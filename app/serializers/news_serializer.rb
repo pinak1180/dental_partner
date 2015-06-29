@@ -10,6 +10,10 @@ class NewsSerializer < ActiveModel::Serializer
   has_many :media_files, as: :fileable
 
   ## Instance Methods ##
+  def comments
+    object.comments.allowed
+  end
+
   def total_comments
     object.comments.size
   end
