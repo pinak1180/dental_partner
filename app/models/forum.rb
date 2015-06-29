@@ -4,7 +4,7 @@ class Forum < ActiveRecord::Base
   include PublicActivity::Common
   acts_as_commentable
 
-  default_scope { where{(release_date <= Date.today) & ((expiry_date >= Date.today) | (expiry_date == nil))}.latest }
+  default_scope { where{((release_date <= Date.today) | (release_date == nil)) & ((expiry_date >= Date.today) | (expiry_date == nil))}.latest }
 
   ## Associations ##
   has_many :notifications, -> { where(trackable_type: "Forum") }, class: PublicActivity::Activity, foreign_key: :trackable_id, dependent: :destroy
