@@ -65,6 +65,10 @@ class User < ActiveRecord::Base
     errors.full_messages.join(',')
   end
 
+  def original_image
+    ENV['HOST'] + avatar.url
+  end
+
   def medium_image
     ENV['HOST'] + avatar.url(:medium)
   end

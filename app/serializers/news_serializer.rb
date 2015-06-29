@@ -3,7 +3,7 @@ class NewsSerializer < ActiveModel::Serializer
   ## Attributes ##
   attributes :id, :title, :content, :tags, :expiry_date, :comments,
              :total_comments, :medium_poster, :thumb_poster, :release_date,
-             :liked_by_user, :author_name, :department, :tags
+             :liked_by_user, :author_name, :department, :tags, :original_poster
 
   ## Association ##
   has_many :comments
@@ -12,6 +12,10 @@ class NewsSerializer < ActiveModel::Serializer
   ## Instance Methods ##
   def total_comments
     object.comments.size
+  end
+
+  def original_poster
+    object.original_image
   end
 
   def medium_poster

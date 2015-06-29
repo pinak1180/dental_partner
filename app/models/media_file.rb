@@ -11,6 +11,10 @@ class MediaFile < ActiveRecord::Base
   validates_attachment_content_type :file, content_type: /\Aimage\/.*\Z/
 
   ## Instance Methods ##
+  def original_image
+    ENV['HOST'] + file.url
+  end
+
   def medium_image
     ENV['HOST'] + file.url(:medium)
   end

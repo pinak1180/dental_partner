@@ -22,6 +22,10 @@ class News < ActiveRecord::Base
   accepts_nested_attributes_for :media_files, allow_destroy: true
 
   ## Instance Methods ##
+  def original_image
+    ENV['HOST'] + poster_avatar.url
+  end
+
   def medium_image
     ENV['HOST'] + poster_avatar.url(:medium)
   end
