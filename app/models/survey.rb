@@ -1,5 +1,6 @@
 class Survey < ActiveRecord::Base
   include RecipientFilter
+  include Notifications
   default_scope { where{(release_date <= Date.today) & ((expiry_date >= Date.today) | (expiry_date == nil))}.latest }
 
   ## Associations ##

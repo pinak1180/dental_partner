@@ -1,13 +1,14 @@
 class AdminBaseController < ApplicationController
   before_action :authenticate_admin, :set_notification
-  add_breadcrumb "Dashboard", :root_path, :options => { :title => "Dashboard" }
+  add_breadcrumb 'Dashboard', :root_path, options: { title: 'Dashboard' }
 
   private
+
   def authenticate_admin
     unless current_user.present? && current_user.admin
       if current_user.present?
         sign_out current_user
-        flash[:alert] = "Your are restricted for access"
+        flash[:alert] = 'Your are restricted for access'
       end
       redirect_to new_user_session_path
     end

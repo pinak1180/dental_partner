@@ -27,7 +27,7 @@ module RecipientFilter
     end
 
     def print_release_date
-      release_date.strftime("%d-%m-%Y")
+      release_date.present? ? release_date.strftime("%d-%m-%Y") : 'N/A'
     end
 
     def print_expiry_date

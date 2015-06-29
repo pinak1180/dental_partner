@@ -1,5 +1,6 @@
 class Forum < ActiveRecord::Base
   include RecipientFilter
+  include Notifications
   include PublicActivity::Common
   acts_as_commentable
 

@@ -1,5 +1,6 @@
 class Message < ActiveRecord::Base
   include RecipientFilter
+  include Notifications
   include PublicActivity::Common
 
   ## Validations ##
@@ -9,13 +10,13 @@ class Message < ActiveRecord::Base
   belongs_to :sender, class: User, foreign_key: 'sender_id'
   belongs_to :receiver, class: User, foreign_key: 'receiver_id'
   belongs_to :parent, class: Message, foreign_key: 'parent_id'
-  has_many   :child_messages, class: Message, foreign_key: 'parent_id'
-  has_many   :notifications, -> { where(trackable_type: "Message") }, class: PublicActivity::Activity, foreign_key: :trackable_id
+  has_many :child_messages, class: Message, foreign_key: 'parent_id'
+  has_many :notifications, -> { where(trackable_type: 'Message') }, class: PublicActivity::Activity, foreign_key: :trackable_id
 
   ## Scope ##
-  scope :parent_messages, -> { where( parent_id: nil ) }
-  scope :trash_messages, -> { where( is_deleted: true ) }
-  scope :untrashed, -> { where( is_deleted: false ) }
+  scope :parent_messages, -> { where(parent_id: nil) }
+  scope :trash_messages, -> { where(is_deleted: true) }
+  scope :untrashed, -> { where(is_deleted: false) }
   ## Instance Methods ##
   def display_errors
     errors.full_messages.join(',')
@@ -34,7 +35,7 @@ class Message < ActiveRecord::Base
   end
 
   def sent_at
-    created_at.strftime("%d %b %Y, %l:%M %P")
+    created_at.strftime('%d %b %Y, %l:%M %P')
   end
 
   def display_receiver
