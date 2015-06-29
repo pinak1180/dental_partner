@@ -15,7 +15,8 @@ class AdminBaseController < ApplicationController
   end
 
   def set_notification
-    @notifications = current_user.notifications.includes(:owner, :trackable).where(read: false).order('created_at DESC')
+    @notifications = current_user.notifications.includes(:owner, :trackable).order('created_at DESC')
+    @new_notifications = @notifications.where(read: false)
   end
 
   def set_form_details

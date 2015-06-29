@@ -6,6 +6,7 @@ class Admins::MessagesController < AdminBaseController
 
   def new
     @message = current_user.sent_messages.build
+    @users = User.non_admins.pluck(:email, :id)
     add_breadcrumb 'New Message', new_admins_message_path
   end
 
@@ -21,6 +22,7 @@ class Admins::MessagesController < AdminBaseController
       @message.create_records
       redirect_to admins_messages_path, notice: 'Message sent'
     else
+      @users = User.non_admins.pluck(:email, :id)
       render :new
     end
   end
@@ -58,7 +60,7 @@ class Admins::MessagesController < AdminBaseController
   private
 
   def message_params
-    params.require(:message).permit(:message_body, :send_push, :sender_id, :receiver_id, :parent_id, position_ids: [], department_ids: [], practise_code_ids: [], direct_report_ids: [], access_level_ids: [])
+    params.require(:message).permit(:message_body, :send_push, :sender_id, :receiver_id, :parent_id, position_ids: [], department_ids: [], practise_code_ids: [], direct_report_ids: [], access_level_ids: [], direct_user_ids: [])
   end
 
   def set_count

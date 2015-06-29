@@ -17,6 +17,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'unicorn'
 gem 'chosen-rails', git: 'git://github.com/qpowell/chosen-rails.git'
+gem 'puma'
+gem 'mina-puma', :require => false
 gem 'acts_as_commentable'
 gem 'acts_as_votable', '~> 0.10.0'
 gem 'letter_opener', group: :development

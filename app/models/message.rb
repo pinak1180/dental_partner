@@ -44,7 +44,7 @@ class Message < ActiveRecord::Base
   end
 
   def atleast_one_reciptient?
-    return false unless (position_ids || department_ids || practise_code_ids || direct_report_ids).present?
+    return false unless (position_ids | department_ids | practise_code_ids | direct_report_ids | direct_user_ids).present?
     true
   end
 end
