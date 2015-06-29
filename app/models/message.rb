@@ -23,9 +23,13 @@ class Message < ActiveRecord::Base
   end
 
   def create_records
+    users = User.where(id: direct_user_ids)
     receiving_users = receivers
     sending_user = sender
     receiving_users.each do |user|
+      sending_user.sent_messages.build(receiver_id: user.id, message_body: message_body).save!
+    end
+    users.each do |user|
       sending_user.sent_messages.build(receiver_id: user.id, message_body: message_body).save!
     end
   end
