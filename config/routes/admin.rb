@@ -26,6 +26,7 @@ DentalPartner::Application.routes.draw do
         post '/:id/comments/:c_id' => 'forums#mark_not_allowed', as: :mark_not_allowed
       end
     end
+    resources :comments, only: [:create]
     resources :surveys
     resources :messages do
       collection do

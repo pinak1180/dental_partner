@@ -1,0 +1,10 @@
+<div class="col-md-10">
+<%= simple_form_for @comment, url: admins_comments_path do |f| %>
+  <%= f.input :title, input_html: { class: "form-control" }  %><br/>
+  <%= f.input :comment, as: :text, input_html: { class: "form-control" }  %><br/>
+  <%= f.input :user_id, as: :hidden, input_html: { class: "form-control", value: current_user.id }  %>
+  <%= f.input :commentable_id, as: :hidden, input_html: { class: "form-control", value: @comment.commentable_id }  %>
+  <%= f.input :commentable_type, as: :hidden, input_html: { class: "form-control", value: @comment.commentable_type }  %>
+  <%= f.submit "Comment", class: "btn btn-primary" %>
+<% end %>
+</div>

@@ -27,6 +27,9 @@ class Comment < ActiveRecord::Base
   end
 
   def generate_notification
-    self.commentable.create_activity(key: 'commented', owner: user, recipient: User.admin)
+    admin = User.admin
+    if user != admin
+      self.commentable.create_activity(key: 'commented', owner: user, recipient: User.admin)
+    end
   end
 end

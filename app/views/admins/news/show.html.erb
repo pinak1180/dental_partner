@@ -76,6 +76,7 @@
             <hr>
           </div>
         <% end %>
+        <%= render 'admins/shared/comment_form' %>
         <div class="text-center"><%= paginate @news_comments, :window => 2 %></div>
         </div>
     </section>

@@ -10,6 +10,7 @@ class Admins::NewsController < AdminBaseController
   def show
     @admins_news.notifications.update_all(read: true)
     @news_comments = @admins_news.comments.includes(:user).page(params[:page]).per(5)
+    @comment = @admins_news.comments.build
     add_breadcrumb @admins_news.title.titlecase, admins_news_path(@admins_news.id)
   end
 
