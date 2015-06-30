@@ -5,6 +5,7 @@
 <div class="panel panel-info">
   <div class="panel-heading">Select Recipients</div>
   <div class="panel-body">
+    <%= f.input :send_to_all, as: :boolean,label: "Send To all Members" %><hr/>
     <%= f.input :position_ids, label: "Select Position" do %><br/>
       <%= f.select :position_ids, @positions, {include_blank: false}, {:class => "chosen-select", "data-placeholder": "Select Positions", style: "width: 300px;", multiple: true} %>
     <% end %><br/>

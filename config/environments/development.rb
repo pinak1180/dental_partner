@@ -40,6 +40,7 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+  config.action_mailer.asset_host = "http://localhost:3000"
   config.action_mailer.default_url_options = { host: 'localhost:3000' }
   ActionMailer::Base.smtp_settings = {
     :address => "smtp.gmail.com",
@@ -48,5 +49,5 @@ Rails.application.configure do
     :authentication => :plain,
     :user_name => "jettison.inventory@gmail.com",
     :password => "cspl@123"
-    }  
+    }
 end

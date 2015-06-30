@@ -24,7 +24,6 @@ class Admins::UsersController < AdminBaseController
     if @admins_user.save
       redirect_to admins_user_path(@admins_user), notice: 'User was successfully created.'
     else
-      flash[:alert] = @admins_user.display_errors
       render :new
     end
   end
