@@ -10,19 +10,19 @@
       <div class="panel-heading">Select Recipients</div>
       <div class="panel-body">
         <%= f.input :position_ids, label: "Select Position" do %><br/>
-          <%= f.select :position_ids, @positions, {include_blank: false,include_hidden: false}, {:class => "chosen-select", "data-placeholder": "Select Positions", style: "width: 300px;", multiple: true} %>
+          <%= f.select :position_ids, @positions, {include_blank: false}, {:class => "chosen-select", "data-placeholder": "Select Positions", style: "width: 300px;", multiple: true} %>
         <% end %><br/>
         <%= f.input :access_level_ids, label: "Select Access Levels" do %><br/>
-          <%= f.select :access_level_ids, @access_levels, {include_blank: false,include_hidden: false}, {:class => "chosen-select", "data-placeholder": "Select Access Levels", style: "width: 300px;", multiple: true} %>
+          <%= f.select :access_level_ids, @access_levels, {include_blank: false}, {:class => "chosen-select", "data-placeholder": "Select Access Levels", style: "width: 300px;", multiple: true} %>
         <% end %><br/>
         <%= f.input :department_ids, label: "Select Departments" do %><br/>
-          <%= f.select :department_ids, @departments, {include_blank: false,include_hidden: false}, {:class => "chosen-select", "data-placeholder": "Select Departments", style: "width: 300px;", multiple: true} %>
+          <%= f.select :department_ids, @departments, {include_blank: false}, {:class => "chosen-select", "data-placeholder": "Select Departments", style: "width: 300px;", multiple: true} %>
         <% end %><br/>
         <%= f.input :practise_code_ids, label: "Select Practice Code" do %><br/>
-          <%= f.select :practise_code_ids, @practise_codes, {include_blank: false,include_hidden: false}, {:class => "chosen-select", "data-placeholder": "Select Practice Codes", style: "width: 300px;", multiple: true} %>
+          <%= f.select :practise_code_ids, @practise_codes, {include_blank: false}, {:class => "chosen-select", "data-placeholder": "Select Practice Codes", style: "width: 300px;", multiple: true} %>
         <% end %><br/>
         <%= f.input :direct_report_ids, label: "Direct Report" do %><br/>
-          <%= f.select :direct_report_ids, @direct_reporters, {include_blank: false,include_hidden: false}, {:class => "chosen-select", "data-placeholder": "Select Direct Report", style: "width: 300px;", multiple: true} %>
+          <%= f.select :direct_report_ids, @direct_reporters, {include_blank: false}, {:class => "chosen-select", "data-placeholder": "Select Direct Report", style: "width: 300px;", multiple: true} %>
         <% end %><br/>
       </div>
     </div>
