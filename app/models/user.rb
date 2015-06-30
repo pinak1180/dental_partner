@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
 
   ## Validations ##
   validates :first_name, :last_name, :phone, presence: true, unless: proc { |user| user.admin }
-  validate  :atleast_single_reciptient
+  validate  :atleast_single_reciptient, unless: proc { |user| user.admin }
 
   before_validation :set_password, if: proc { |user| !user.admin && user.new_record? }
   after_create :send_welcome_mail, if: proc { |user| !user.admin }
