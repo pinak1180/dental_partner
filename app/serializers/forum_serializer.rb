@@ -2,7 +2,8 @@ class ForumSerializer < ActiveModel::Serializer
   ## Attributes ##
   attributes :id, :title, :subject, :expiry_date, :release_date,
              :tags, :expiry_date, :comments, :total_comments,
-             :total_forums, :full_name, :medium_poster, :thumb_poster, :original_poster
+             :total_forums, :full_name, :medium_poster, :thumb_poster,
+             :original_poster, :created_on
 
   ## Associations ##
   has_many :comments
@@ -26,6 +27,10 @@ class ForumSerializer < ActiveModel::Serializer
 
   def original_poster
     object.original_image
+  end
+
+  def created_on
+    object.print_created_at
   end
 
   def medium_poster

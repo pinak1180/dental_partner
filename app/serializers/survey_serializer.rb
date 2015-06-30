@@ -2,12 +2,15 @@ class SurveySerializer < ActiveModel::Serializer
   ## Attributes ##
   attributes  :id, :title, :description, :release_date, :expiry_date,
               :is_completed_by_user, :questions, :departments, :tags
+              :created_on
 
   ## Associations ##
   has_many :questions
 
   ## Instance Methods ##
-
+  def created_on
+    object.print_created_at
+  end
 
   def attributes
     super.except(:questions) if serialization_options[:show_details]

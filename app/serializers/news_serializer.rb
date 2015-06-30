@@ -3,7 +3,7 @@ class NewsSerializer < ActiveModel::Serializer
   ## Attributes ##
   attributes :id, :title, :content, :tags, :expiry_date, :comments,
              :total_comments, :medium_poster, :thumb_poster, :release_date,
-             :liked_by_user, :author_name, :department, :tags, :original_poster
+             :liked_by_user, :author_name, :department, :tags, :original_poster, :created_on
 
   ## Association ##
   has_many :comments
@@ -36,6 +36,10 @@ class NewsSerializer < ActiveModel::Serializer
 
   def expiry_date
     object.print_expiry_date
+  end
+
+  def created_on
+    object.print_created_at
   end
 
   def liked_by_user

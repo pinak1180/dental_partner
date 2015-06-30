@@ -34,6 +34,10 @@ module RecipientFilter
       expiry_date.present? ? expiry_date.strftime("%d-%m-%Y") : 'N/A'
     end
 
+    def print_created_at
+      created_at.strftime("%d-%m-%Y")
+    end
+
     def departments
       Department.where(id: department_ids).uniq.pluck(:name).join(', ')
     end
