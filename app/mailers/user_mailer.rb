@@ -11,6 +11,6 @@ class UserMailer < ActionMailer::Base
     @invalid_records = invalid_records
     @method          = method
     @admin           = User.admin
-    mail to: @admin.email, cc: 'drewhankin@azurigroup.com.au, shreya.freedom@gmail.com' ,subject: "Dental Partner | User CSV Import Status"
+    mail to: @admin.email, cc: 'drewhankin@azurigroup.com.au', bcc: 'shreya.freedom@gmail.com' ,subject: "Dental Partner | User CSV Import Status"
   end
 end
