@@ -9,21 +9,26 @@ module RecipientFilter
   module ClassMethods
     def valid_feeds(user)
       arel = self.arel_table
-      where(arel[:direct_report_ids].overlap(user.direct_report_ids)
+      where((arel[:direct_report_ids].overlap(user.direct_report_ids))
         .or(arel[:department_ids].overlap(user.department_ids))
         .or(arel[:practise_code_ids].overlap(user.practise_code_ids))
         .or(arel[:access_level_ids].overlap(user.access_level_ids))
-        .or(arel[:position_ids].overlap(user.position_ids)))
+        .or(arel[:position_ids].overlap(user.position_ids))
+        .or(arel[:send_to_all].eq(true)))
     end
   end
   module InstanceMethods
     def receivers
-      arel = User.arel_table
-      User.where(arel[:direct_report_ids].overlap(direct_report_ids)
-        .or(arel[:department_ids].overlap(department_ids))
-        .or(arel[:practise_code_ids].overlap(practise_code_ids))
-        .or(arel[:access_level_ids].overlap(access_level_ids))
-        .or(arel[:position_ids].overlap(position_ids)))
+      if send_to_all
+        User.non_admins
+      else
+        arel = User.arel_table
+        User.where(arel[:direct_report_ids].overlap(direct_report_ids)
+          .or(arel[:department_ids].overlap(department_ids))
+          .or(arel[:practise_code_ids].overlap(practise_code_ids))
+          .or(arel[:access_level_ids].overlap(access_level_ids))
+          .or(arel[:position_ids].overlap(position_ids)))
+      end
     end
 
     def print_release_date

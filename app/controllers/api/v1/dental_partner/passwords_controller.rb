@@ -24,7 +24,6 @@ class Api::V1::DentalPartner::PasswordsController < Api::V1::BaseController
       if @user
         return render_json({ result: { messages: 'ok', rstatus: 1, errorcode: '' }, data: { messages: 'Settings have been saved' } }.to_json)
       else
-        logger.warn([:current_password].present? && [:password].present? && [:password_confirmation].present? && params[:password].to_s.eql?(params[:password_confirmation].to_s))
         return render_json({ result: { messages: @current_user.display_errors, rstatus: 0, errorcode: 404 } }.to_json)
       end
     elsif (params[:avatar].present? && !(params[:current_password] && params[:password] && params[:password_confirmation]).present?)

@@ -7,6 +7,9 @@ class User < ActiveRecord::Base
 
   default_scope { all }
 
+  ## Virtual Attributes ##
+  attr_accessor :send_to_all
+
   ## Associations ##
   has_many :authentication_tokens, dependent: :destroy, inverse_of: :user
   has_many :sent_messages, dependent: :destroy, class: Message, foreign_key: :sender_id
