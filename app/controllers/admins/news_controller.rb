@@ -16,12 +16,10 @@ class Admins::NewsController < AdminBaseController
 
   def new
     @admins_news = News.new
-    @admins_news.media_files.build
     add_breadcrumb 'New Article', new_admins_news_path, title: 'News'
   end
 
   def edit
-    @admins_news.media_files.build unless @admins_news.media_files.present?
   end
 
   def create

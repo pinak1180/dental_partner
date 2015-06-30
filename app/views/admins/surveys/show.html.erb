@@ -5,6 +5,7 @@
     <%= @survey.title.titlecase %>
     <span class="pull-right">
       <%= link_to 'Edit', edit_admins_survey_path(@survey.id), class: 'btn btn-warning btn-xs' %>
+      <%= link_to 'Export CSV', admins_survey_path(id: @survey.id, format: :csv), class: 'btn btn-default btn-xs' %>
     </span>
   </header>
   <div class="panel-body">

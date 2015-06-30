@@ -14,7 +14,8 @@ class Api::V1::DentalPartner::MessagesController < Api::V1::BaseController
   def create
     @message = @current_user.sent_messages.build(message_body: params[:message_body], receiver_id: params[:receiver_id], parent_id: params[:parent_id])
     if @message.save
-      @message.create_activity(key: 'messaged', owner: @current_user, recipient: User.admin)
+      receiver = User.find(params[:receiver_id])
+      @message.create_activity(key: 'messaged', owner: @current_user, recipient: receiver)
       render_json({ result: { messages: 'ok', rstatus: 1, errorcode: '' }, data: { messages: 'Message Sent Successfully' } }.to_json)
     else
       render_json({ errors: @message.display_errors }.to_json)

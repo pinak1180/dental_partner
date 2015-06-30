@@ -10,6 +10,13 @@ class Admins::SurveysController < AdminBaseController
   def show
     add_breadcrumb @survey.title.titlecase, admins_survey_path(@survey.id)
     @questions = @survey.questions.includes(:response_details, :answers)
+    respond_to do |format|
+      format.html
+      format.csv do
+        headers['Content-Disposition'] = "attachment; filename=\"survey.csv\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
+    end
   end
 
   def new

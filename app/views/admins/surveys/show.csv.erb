@@ -1,0 +1,8 @@
+<%- headers = ['Survey Name', 'Question', 'Answer', 'Select Count'] -%>
+<%= CSV.generate_line headers %>
+<%- @questions.each do |question| -%>
+  <% data = question.response_details.answer_count %>
+  <%- question.answers.each do |answer| %>
+    <%= CSV.generate_line([@survey.title, question.question, answer.option, data[answer.option]]) %>
+  <%- end -%>
+<%- end -%>
