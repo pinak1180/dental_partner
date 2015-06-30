@@ -17,11 +17,11 @@
           <li class="list-group-item">
             <%= link_to "/admins/#{notification.trackable_type.pluralize.downcase}/#{notification.trackable_id}" do %>
               <span class="pull-left mt5 mr15">
-                <%= image_tag notification.owner.avatar.url, class: "avatar avatar-sm img-circle" %>
+                <%= image_tag(notification.owner.avatar.url, class: "avatar avatar-sm img-circle") rescue "<p>No image</p>" %>
               </span>
               <div class="m-body">
                 <div class="">
-                  <small><b><%= notification.owner.full_name %></b></small>
+                  <small><b><%= notification.owner.full_name rescue nil %></b></small>
                 </div>
                 <span> commented on <%= notification.trackable.title.titlecase %></span>
                 <span class="time small"><%= notification.created_at.strftime("%d %b, %Y at %I:%M %P") %></span>
