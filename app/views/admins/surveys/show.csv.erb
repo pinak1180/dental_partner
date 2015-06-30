@@ -3,6 +3,6 @@
 <%- @questions.each do |question| -%>
   <% data = question.response_details.answer_count %>
   <%- question.answers.each do |answer| %>
-    <%= CSV.generate_line([@survey.title, question.question, answer.option, data[answer.option]]) %>
+    <%= CSV.generate_line([@survey.title, question.question, answer.option, data[answer.option]]).encode('WINDOWS-1252', :undef => :replace, :replace => '') %>
   <%- end -%>
 <%- end -%>
