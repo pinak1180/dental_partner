@@ -5156,28 +5156,28 @@ html[dir="rtl"] .select2-container .select2-choice .select2-arrow {
 *   Data tables
 *
 */
-.sorting:after,
-.sorting_asc:after,
-.sorting_desc:after,
-.sorting_asc_disabled:after,
-.sorting_desc_disabled:after {
-  font-family: FontAwesome;
-  float: right;
-  color: #ddd;
-}
-.sorting:after {
-  content: "\f0dc";
-}
-.sorting_asc:after,
-.sorting_asc_disabled:after {
-  content: "\f0de";
-  color: #59595a;
-}
-.sorting_desc:after,
-.sorting_desc_disabled:after {
-  content: "\f0dd";
-  color: #59595a;
-}
+// .sorting:after,
+// .sorting_asc:after,
+// .sorting_desc:after,
+// .sorting_asc_disabled:after,
+// .sorting_desc_disabled:after {
+//   font-family: FontAwesome;
+//   float: right;
+//   color: #ddd;
+// }
+// .sorting:after {
+//   content: "\f0dc";
+// }
+// .sorting_asc:after,
+// .sorting_asc_disabled:after {
+//   content: "\f0de";
+//   color: #59595a;
+// }
+// .sorting_desc:after,
+// .sorting_desc_disabled:after {
+//   content: "\f0dd";
+//   color: #59595a;
+// }
 table.dataTable.no-footer {
   border-bottom-color: #e3e6f3;
 }
@@ -6803,6 +6803,6 @@ td.no-b {
 }
 
 .vertical-bar{
-  height: 200px; 
+  height: 200px;
   overflow-y: scroll;
 }
