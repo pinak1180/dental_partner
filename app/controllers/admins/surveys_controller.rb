@@ -56,6 +56,6 @@ class Admins::SurveysController < AdminBaseController
   end
 
   def survey_params
-    params.require(:survey).permit(:title, :description, :send_push, :release_date, :expiry_date, :tags, position_ids: [], department_ids: [], practise_code_ids: [], direct_report_ids: [], access_level_ids: [], questions_attributes: [:survey_id, :id, :question, :compulsory, :_destroy, answers_attributes: [:id, :option, :_destroy]])
+    params.require(:survey).permit(:title, :description, :send_push, :send_to_all, :release_date, :expiry_date, :tags, position_ids: [], department_ids: [], practise_code_ids: [], direct_report_ids: [], access_level_ids: [], questions_attributes: [:survey_id, :id, :question, :compulsory, :_destroy, answers_attributes: [:id, :option, :_destroy]])
   end
 end

@@ -69,7 +69,7 @@ module RecipientFilter
 
     private
     def atleast_single_reciptient
-      errors.add(:position_ids, "atleast single criteria must be selected") if (position_ids | department_ids| practise_code_ids | direct_report_ids | access_level_ids).blank?
+      errors.add(:position_ids, "atleast single criteria must be selected") if (position_ids | department_ids| practise_code_ids | direct_report_ids | access_level_ids).reject{ |c| c.nil? }.blank? && send_to_all == false
     end
 
     def correct_expiry_date

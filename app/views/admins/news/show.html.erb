@@ -47,6 +47,11 @@
       <%= @admins_news.access_levels %>
     </p>
     <hr/>
+    <p>
+      <strong>For All Members:</strong><br/>
+      <%= @admins_news.send_to_all ? 'Yes' : 'No' %>
+    </p>
+    <hr/>
     <section class="panel panel-default  post-comments">
       <div class="panel-heading">
         <i class="fa fa-comments-o"></i>&nbsp;Comments

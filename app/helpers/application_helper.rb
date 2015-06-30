@@ -9,7 +9,7 @@ module ApplicationHelper
   end
 
   def page_title(title)
-    title.present? ? "#{title} | Dental Partners" : "Dental Partners"
+    title.present? ? "#{title} | Maven Dental" : "Maven Dental"
   end
 
   def check_active(controller, value)

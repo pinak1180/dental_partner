@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
 
   ## Validations ##
   validates :first_name, :last_name, :phone, presence: true, unless: proc { |user| user.admin }
-  validate  :atleast_single_reciptient
+  validate  :atleast_single_reciptient, unless: proc { |user| user.admin }
 
   before_validation :set_password, if: proc { |user| !user.admin && user.new_record? }
   after_create :send_welcome_mail, if: proc { |user| !user.admin }
@@ -89,11 +89,17 @@ class User < ActiveRecord::Base
   end
 
   def import_users(filepath)
-    importer = ImporterJob.perform_later("import_user", filepath)
+    #importer = ImporterJob.perform_late("import_user", filepath)
+    importer = Importer.new("import_user",filepath)
+    method, invalid_records = importer.import
+    UserMailer.import_status(method, invalid_records).deliver_now!
   end
 
   def delete_users(filepath)
-    importer = ImporterJob.perform_later("delete_users", filepath)
+    #importer = ImporterJob.perform_later("delete_users", filepath)
+    importer = Importer.new('delete_users',filepath)
+    method, invalid_records = importer.import
+    UserMailer.import_status(method, invalid_records).deliver_now!
   end
 
   private
