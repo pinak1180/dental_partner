@@ -30,8 +30,8 @@ class Api::V1::DentalPartner::MessagesController < Api::V1::BaseController
 
   def mark_read
     return missing_param if !params[:message_ids].present?
-    read = true || params[:read_flag]
-    msg = read == true ? 'marked' : 'unmarked'
+    read = params[:read_flag] == 'false' ? false : true
+    msg = read ? 'marked' : 'unmarked'
     @messages = @current_user.messages.where(id: params[:message_ids].split(','))
     @messages.update_all(is_read: read)
     render_json({ result: { messages: 'ok', rstatus: 1, errorcode: '' }, data: { messages: "Messages #{msg} Successfully" } }.to_json)
