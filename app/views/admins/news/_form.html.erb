@@ -4,6 +4,9 @@
     <%= f.input :title, as: :string, input_html: {class: "form-control", autofocus: true} %><br/>
     <%= f.input :content, as: :text, input_html: { class: "form-control", rows: 10, cols: 5 } %><br/>
     <%= f.input :author_name, as: :string, input_html: {class: "form-control"} %><br/>
+    <%= f.input :link, as: :string, input_html: {class: "form-control"} %><br/>
+    <%= f.input :pdf, as: :file, input_html: {class: "form-control", accept: 'application/pdf'} %><br/>
+    <%= link_to "View PDF", @admins_news.pdf.url, class: "btn btn-default btn-xs", target: '_blank' if @admins_news.pdf.present? %><br/><br/>
     <%= avatar_input_for('news[poster_avatar]', @admins_news.poster_avatar.url, 'Primary Image') %>
     <p>News Images
       <%= f.fields_for :media_files do |ff| %><br/>

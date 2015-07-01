@@ -11,12 +11,16 @@ class News < ActiveRecord::Base
   has_many  :media_files, as: :fileable, dependent: :destroy
 
   ## Validations ##
-  validates :title, :content, :poster_avatar, presence: true
+  validates :title, :content, :poster_avatar, :link, presence: true
+  validates :link, url: true
   validate :atleast_single_reciptient, :correct_expiry_date
   has_attached_file :poster_avatar,
                     styles: { medium: '300x300>', thumb: '100x100>', header: '1100x300#' },
                     default_url: 'cover_default.jpg'
   validates_attachment_content_type :poster_avatar, content_type: /\Aimage\/.*\Z/
+
+  has_attached_file :pdf
+  validates_attachment_content_type :pdf, content_type: ['application/pdf']
 
   ## Nested Attributes ##
   accepts_nested_attributes_for :media_files, allow_destroy: true

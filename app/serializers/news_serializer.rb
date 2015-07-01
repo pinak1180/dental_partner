@@ -1,9 +1,10 @@
 class NewsSerializer < ActiveModel::Serializer
 
   ## Attributes ##
-  attributes :id, :title, :content, :tags, :expiry_date, :comments,
+  attributes :id, :title, :content, :tags, :expiry_date, :comments, :link,
              :total_comments, :medium_poster, :thumb_poster, :release_date,
-             :liked_by_user, :author_name, :department, :tags, :original_poster, :created_on
+             :liked_by_user, :author_name, :department, :tags, :original_poster,
+             :created_on, :pdf_url
 
   ## Association ##
   has_many :comments
@@ -12,6 +13,10 @@ class NewsSerializer < ActiveModel::Serializer
   ## Instance Methods ##
   def comments
     object.comments.allowed
+  end
+
+  def pdf_url
+    object.pdf.present? ? ENV['HOST']+object.pdf.url : ''
   end
 
   def total_comments

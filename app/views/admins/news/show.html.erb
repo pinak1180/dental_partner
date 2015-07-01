@@ -28,6 +28,18 @@
     </p>
     <hr/>
     <p>
+      <strong>Link:</strong><br/>
+      <%= link_to "<i class='fa fa-link'></i> Visit Link".html_safe, @admins_news.link, target: '_blank', class: "btn btn-default" %>
+    </p>
+    <hr/>
+    <% if @admins_news.pdf.present? %>
+    <p>
+      <strong>Pdf:</strong><br/>
+      <%= link_to "<i class='fa fa-file-pdf-o'></i> Download Pdf".html_safe, @admins_news.pdf.url, target: '_blank', class: "btn btn-default" %>
+    </p>
+    <hr/>
+    <% end %>
+    <p>
       <strong>Positions:</strong><br/>
       <%= @admins_news.positions %>
     </p>

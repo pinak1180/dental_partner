@@ -57,6 +57,6 @@ class Admins::NewsController < AdminBaseController
   end
 
   def admins_news_params
-    params.require(:news).permit(:content, :tags, :send_push, :poster_avatar, :expiry_date, :release_date, :title, :author_name, :send_to_all, position_ids: [], access_level_ids: [], department_ids: [], practise_code_ids: [], direct_report_ids: [], media_files_attributes: [ :id, :fileable_id, :fileable_type, :file, :_destroy ])
+    params.require(:news).permit(:content, :tags, :send_push, :poster_avatar, :expiry_date, :release_date, :link, :pdf, :title, :author_name, :send_to_all, position_ids: [], access_level_ids: [], department_ids: [], practise_code_ids: [], direct_report_ids: [], media_files_attributes: [ :id, :fileable_id, :fileable_type, :file, :_destroy ])
   end
 end
