@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable #, :validatable
 
   default_scope { all }
 
@@ -22,8 +22,11 @@ class User < ActiveRecord::Base
   has_many :survey_views, -> { where(viewable_type: "Survey") }, class: View, foreign_key: :user_id, dependent: :destroy
 
   ## Validations ##
-  validates :first_name, :last_name, :phone, presence: true, unless: proc { |user| user.admin }
+  validates :email, :presence => false
+  validates :first_name, :last_name, :phone, :password, presence: true, unless: proc { |user| user.admin }
   validate  :atleast_single_reciptient, unless: proc { |user| user.admin }
+  validates :username, uniqueness: true
+  validate  :email_or_username
 
   before_validation :set_password, if: proc { |user| !user.admin && user.new_record? }
   after_create :send_welcome_mail, if: proc { |user| !user.admin }
@@ -49,7 +52,7 @@ class User < ActiveRecord::Base
 
   def self.authenticate_user_with_auth(email, password)
     return nil unless email.present? || password.present?
-    u = User.find_by_email(email)
+    u = User.find_by_email(email) || User.find_by(username: email)
     (u.present? && u.valid_password?(password)) ? u : nil
   end
 
@@ -146,4 +149,9 @@ class User < ActiveRecord::Base
   def send_welcome_mail
     UserMailer.send_credentials_email(self).deliver_now
   end
+
+  def email_or_username
+    errors.add(:email, "email or username must be present") if !email.present? && !username.present?
+  end
+
 end

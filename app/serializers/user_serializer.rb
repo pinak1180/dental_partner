@@ -2,12 +2,12 @@ class UserSerializer < ActiveModel::Serializer
   ## Attributes ##
   attributes :id, :first_name, :last_name, :phone, :email, :authentication_token,
              :address,:fax_no, :avatar_image, :designation, :admin_id,
-             :survey_unread_count, :news_unread_count, :forum_unread_count
+             :survey_unread_count, :news_unread_count, :forum_unread_count, :username
 
   ## Instance Methods ##
   def attributes
     unless serialization_options[:token]
-      super.except(:authentication_token, :admin_id, :survey_unread_count, :news_unread_count, :forum_unread_count)
+      super.except(:authentication_token, :admin_id, :survey_unread_count, :news_unread_count, :forum_unread_count, :username)
     else
       super
     end
