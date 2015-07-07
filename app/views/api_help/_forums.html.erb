@@ -37,3 +37,30 @@
 
              ],
          options: {}} %>
+<!-- Create follow Api -->
+<%= render partial: 'api', locals: {
+               link_name: 'follow forum',
+               link_href: 'follow_forum',
+               link_method: 'Post',
+               original_link: api_dental_partner_forums_follows_path,
+               parameters: [
+                {name: 'authentication_token', description: 'You will get authentication token from signup/login api', required: 1 },
+                {name: 'id', description: 'forum id', required: 1 }
+
+
+                      ],
+                  options: {}} %>
+
+<!-- Create unfollow Api -->
+<%= render partial: 'api', locals: {
+               link_name: 'Unfollow Forum',
+               link_href: 'unfollow_forum',
+               link_method: 'DELETE',
+               original_link: "/api/dental_partner/forums/follows/1",
+               parameters: [
+                {name: 'authentication_token', description: 'You will get authentication token from signup/login api', required: 1 },
+                {name: 'id', description: 'News id', required: 1 }
+
+
+                      ],
+                  options: {}} %>

@@ -4,11 +4,11 @@ class Api::V1::DentalPartner::ForumsController < Api::V1::BaseController
   def index
     @forum  = ::Forum.valid_feeds(@current_user).latest.page(@page).per(@limit)
     current_user.mark_forums_viewed(@forum)
-    render json: @forum, each_serializer: ForumSerializer, meta: { unread_count: 0 }
+    render json: @forum, each_serializer: ForumSerializer, user: @current_user, meta: { unread_count: 0 }
   end
 
   def show
     @forum = ::Forum.valid_feeds(@current_user).find(params[:id])
-    render json: @forum
+    render json: @forum, user: @current_user
   end
 end

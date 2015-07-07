@@ -3,7 +3,7 @@ class ForumSerializer < ActiveModel::Serializer
   attributes :id, :title, :subject, :expiry_date, :release_date,
              :tags, :expiry_date, :comments, :total_comments,
              :total_forums, :full_name, :medium_poster, :thumb_poster,
-             :original_poster, :created_on
+             :original_poster, :created_on, :followed_by_user
 
   ## Associations ##
   has_many :comments
@@ -40,11 +40,16 @@ class ForumSerializer < ActiveModel::Serializer
   def thumb_poster
     object.thumb_image
   end
+
   def release_date
     object.print_release_date
   end
 
   def expiry_date
     object.print_expiry_date
+  end
+
+  def followed_by_user
+    ActsAsVotable::Vote.where(voter_id: serialization_options[:user].id, votable_id: object.id,  vote_flag: true).present?
   end
 end
