@@ -2,7 +2,8 @@
 <div class="panel-body">
   <%= simple_nested_form_for(@admins_news, url: @admins_news.new_record? ? admins_news_index_path  : admins_news_path(@admins_news), html: {class: "col-md-12", multipart: true}) do |f| %>
     <%= f.input :title, as: :string, input_html: {class: "form-control", autofocus: true} %><br/>
-    <%= f.input :content, as: :text, input_html: { class: "form-control", rows: 10, cols: 5 } %><br/>
+    <%= f.input :content, as: :ckeditor, input_html: { ckeditor: {toolbar: 'Full'}, class: "form-control" } %><br/>
+    <%#= f.input :content, as: :text, input_html: { class: "form-control", rows: 10, cols: 5 } %><br/>
     <%= f.input :author_name, as: :string, input_html: {class: "form-control"} %><br/>
     <%= f.input :link, as: :string, input_html: {class: "form-control"} %><br/>
     <%= f.input :pdf, as: :file, input_html: {class: "form-control", accept: 'application/pdf'} %><br/>
