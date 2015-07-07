@@ -8,7 +8,8 @@ class Forum < ActiveRecord::Base
 
   ## Associations ##
   has_many :notifications, -> { where(trackable_type: "Forum") }, class: PublicActivity::Activity, foreign_key: :trackable_id, dependent: :destroy
-
+  has_many :views, as: :viewable, dependent: :destroy
+  
   ## Validations ##
   validates :title, :subject, presence: true
   validate :atleast_single_reciptient, :correct_expiry_date

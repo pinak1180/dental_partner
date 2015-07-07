@@ -8,7 +8,8 @@ class News < ActiveRecord::Base
 
   ## Associations ##
   has_many :notifications, -> { where(trackable_type: "News") }, class: PublicActivity::Activity, foreign_key: :trackable_id, dependent: :destroy
-  has_many  :media_files, as: :fileable, dependent: :destroy
+  has_many :media_files, as: :fileable, dependent: :destroy
+  has_many :views, as: :viewable, dependent: :destroy
 
   ## Validations ##
   validates :title, :content, :poster_avatar, :link, presence: true

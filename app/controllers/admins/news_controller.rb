@@ -4,7 +4,7 @@ class Admins::NewsController < AdminBaseController
   add_breadcrumb 'News', :admins_news_index_path, title: 'News'
 
   def index
-    @admins_news = News.unscoped.all
+    @admins_news = News.unscoped.includes(:views)
   end
 
   def show
