@@ -3,7 +3,8 @@ class Api::V1::DentalPartner::SurveysController < Api::V1::BaseController
 
   def index
     @survey  = Survey.valid_feeds(@current_user).page(@page).per(@limit)
-    render json: @survey, show_details: true, each_serializer: SurveySerializer, user_id: @current_user.id
+    current_user.mark_surveys_viewed(@survey)
+    render json: @survey, show_details: true, each_serializer: SurveySerializer, user_id: @current_user.id, meta: { unread_count: 0 }
   end
 
   def show

@@ -17,6 +17,9 @@ class User < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :notifications, class: PublicActivity::Activity, foreign_key: :recipient_id, dependent: :destroy
   has_many :owner_notifications, class: PublicActivity::Activity, foreign_key: :owner_id, dependent: :destroy
+  has_many :news_views, -> { where(viewable_type: "News") }, class: View, foreign_key: :user_id, dependent: :destroy
+  has_many :forum_views, -> { where(viewable_type: "Forum") }, class: View, foreign_key: :user_id, dependent: :destroy
+  has_many :survey_views, -> { where(viewable_type: "Survey") }, class: View, foreign_key: :user_id, dependent: :destroy
 
   ## Validations ##
   validates :first_name, :last_name, :phone, presence: true, unless: proc { |user| user.admin }
@@ -100,6 +103,39 @@ class User < ActiveRecord::Base
     importer = Importer.new('delete_users',filepath)
     method, invalid_records = importer.import
     UserMailer.import_status(method, invalid_records).deliver_now!
+  end
+
+  def mark_news_viewed(news)
+    news.each do |n|
+      news_views.find_by(viewable_id: n.id) ||
+      news_views.build(viewable_id: n.id).save
+    end
+  end
+
+  def mark_forums_viewed(forums)
+    forums.each do |forum|
+      forum_views.find_by(viewable_id: forum.id) ||
+      forum_views.build(viewable_id: forum.id).save
+    end
+  end
+
+  def mark_surveys_viewed(surveys)
+    surveys.each do |survey|
+      survey_views.find_by(viewable_id: survey.id) ||
+      survey_views.build(viewable_id: survey.id).save
+    end
+  end
+
+  def unread_news(news_ids)
+    news_ids.count - news_views.where(viewable_id: news_ids).count
+  end
+
+  def unread_surveys(survey_ids)
+    survey_ids.count - survey_views.where(viewable_id: survey_ids).count
+  end
+
+  def unread_forums(forum_ids)
+    forum_ids.count - forum_views.where(viewable_id: forum_ids).count
   end
 
   private
