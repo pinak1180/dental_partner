@@ -1,0 +1,26 @@
+<% provide :title, "Listing Documents" %>
+<section class="panel">
+  <header class="panel-heading">Listing Documents</header>
+  <div class="panel-body">
+    <%= link_to 'Add New Documents', new_admins_document_path,  class: "btn btn-default mb15" %>
+    <table class="table table-stripped" id="datatable-table" >
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Link</th>
+          <th>File Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @documents.each do |document| %>
+          <tr>
+            <td><%= document.title %></td>
+            <td><%= document.display_url %></td>
+            <td><%= document.file.content_type %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%#= paginate @forums, :window => 2 %>
+  </div>
+</section>

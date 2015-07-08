@@ -33,6 +33,7 @@
 //= require ckeditor/config
 //= require core/jquery.simple-dtpicker
 //= require jquery_nested_form
+//= require core/documents
 //= require_self
 
 $(document).ready(function() {

@@ -1,0 +1,14 @@
+<div class="panel-body">
+  <%= form_tag(admins_documents_path, { class: "col-md-12", multipart: true, method: :post }) do %>
+    <div id="form_fields">
+      <%= label_tag :title %>
+      <%= text_field_tag 'document[][title]', '', class: "form-control", autofocus: true %><br/>
+      <%= label_tag :file %>
+      <%= file_field_tag 'document[][file]', class: "form-control", accept: "application/pdf,text/csv" %><br/>
+    </div>
+    <div class='add_extra'></div>
+    <a class="btn btn-success btn-xs" onclick="add_fields();">Add File</a><br/><br/>
+    <%= submit_tag "Upload Documents", class: "btn btn-primary" %>
+    <%= link_to "Cancel", admins_documents_path, class: "btn btn-defaut" %>
+  <% end %>
+</div>

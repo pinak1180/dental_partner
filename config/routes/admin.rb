@@ -33,5 +33,6 @@ DentalPartner::Application.routes.draw do
         post :reply
       end
     end
+    resources :documents, only: [:new, :index, :create]
   end
 end
