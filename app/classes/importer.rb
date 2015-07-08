@@ -21,11 +21,17 @@ class Importer
         access_levels = AccessLevel.where(level: result[:access_levels].split(',')).ids rescue []
         departments   = Department.where(name: result[:departments].split(',')).ids rescue []
         practise_codes= PractiseCode.where(code: result[:practise_codes].split(',')).ids rescue []
-        user                   = User.find_or_create_by(email: result[:email])
+        user = User.find_by_login(result[:email] || result[:username])
+        if !user.present?
+          user = result[:email].present? ? User.new(email: result[:email]) : User.new(username: result[:username])
+        end
+        user.email             = result[:email]
+        user.username          = result[:username]
         user.first_name        = result[:first_name]
         user.last_name         = result[:last_name]
         user.phone             = result[:phone]
         user.postal_code       = result[:postal_code]
+        user.password          = result[:password]
         user.position_ids      = position_ids
         user.department_ids    = departments
         user.access_level_ids  = access_levels
@@ -33,7 +39,7 @@ class Importer
         if user.save
           @valid_records << user
         else
-          @invalid_records << [user.email, user.display_errors]
+          @invalid_records << [(user.email || user.username || user.full_name), user.display_errors]
         end
       end
     end
@@ -44,11 +50,13 @@ class Importer
     @valid_records = []
     @invalid_records = []
     if filepath.present?
-      results   = SmarterCSV.process(filepath)
-      emails    = results.collect{|x| x[:emails] }
-      found     = User.where(email: emails)
-      not_found = emails - found.pluck(:email)
-      found.destroy_all
+      results      = SmarterCSV.process(filepath)
+      emails       = results.collect{|x| x[:emails_or_username] }
+      found_emails = User.where(email: emails)
+      found_usernames = User.where(username: emails)
+      not_found = emails - found_emails.pluck(:email) - found_usernames.pluck(:username)
+      found_emails.destroy_all
+      found_usernames.destroy_all
       @invalid_records = [emails.join(', '), "where not found in the system"]
     end
     return 'user_delete', @invalid_records

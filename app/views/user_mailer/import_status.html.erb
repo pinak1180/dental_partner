@@ -22,7 +22,7 @@
           <p>
             Here is the status of your Import
           </p>
-          <% if @invalid_records.present? %>
+          <% if @invalid_records.present? && @method.eql?('user_import') %>
           <p>
             Following are the Invalid Records<br/>
             <table>
@@ -40,7 +40,23 @@
               </tbody>
             </table>
           </p>
-          <% else %>
+          <% elsif @invalid_records.present? && @method.eql?('user_delete') %>
+						<p>
+							Following are the Invalid Records<br/>
+	            <table>
+	              <thead>
+	                <th>User Email</th>
+	                <th>Error</th>
+	              </thead>
+	              <tbody>
+	                <tr>
+	                  <td><strong><%= @invalid_records.first %></strong></td>
+	                  <td><%= @invalid_records.last %></td>
+	                </tr>
+	              </tbody>
+	            </table>
+						</p>
+					<% else %>
             <p>
               Your, Task for <%= @method.humanize.titlecase %> is completed!
             </p>

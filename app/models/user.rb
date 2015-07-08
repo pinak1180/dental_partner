@@ -28,8 +28,8 @@ class User < ActiveRecord::Base
   validates :username, uniqueness: true
   validate  :email_or_username
 
-  before_validation :set_password, if: proc { |user| !user.admin && user.new_record? }
-  after_create :send_welcome_mail, if: proc { |user| !user.admin }
+  #before_validation :set_password, if: proc { |user| !user.admin && user.new_record? }
+  #after_create :send_welcome_mail, if: proc { |user| !user.admin }
   has_attached_file :avatar,
                     default_url: 'faceless.jpg',
                     styles: { medium: '300x300>', thumb: '100x100>' }
@@ -48,6 +48,10 @@ class User < ActiveRecord::Base
   ## Class Methods ##
   def self.invalid_credentials
     'Email or Password is not valid'
+  end
+
+  def self.find_by_login(login)
+    User.find_by(email: login) || User.find_by(username: login)
   end
 
   def self.authenticate_user_with_auth(email, password)
