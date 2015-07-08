@@ -16,7 +16,7 @@
           <tr>
             <td><%= document.title %></td>
             <td><%= document.display_url %></td>
-            <td><%= document.file.content_type %></td>
+            <td><%= content_type(document)%></td>
           </tr>
         <% end %>
       </tbody>
