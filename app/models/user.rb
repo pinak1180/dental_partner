@@ -23,8 +23,9 @@ class User < ActiveRecord::Base
 
   ## Validations ##
   validates :email, :presence => false
-  validates :first_name, :last_name, :phone, :password, presence: true, unless: proc { |user| user.admin }
-  validate  :atleast_single_reciptient, unless: proc { |user| user.admin }
+  validates :first_name, :last_name, :phone, presence: true, unless: proc { |user| user.admin }
+  validates :password, presence: true, if: proc { |user| user.new_record? }
+  validate  :atleast_single_category, unless: proc { |user| user.admin }
   validates :username, uniqueness: true
   validate  :email_or_username
 
@@ -158,4 +159,7 @@ class User < ActiveRecord::Base
     errors.add(:email, "email or username must be present") if !email.present? && !username.present?
   end
 
+  def atleast_single_category
+    errors.add(:position_ids, "atleast single criteria must be selected") if (position_ids | department_ids| practise_code_ids | direct_report_ids | access_level_ids).reject{ |c| c.nil? }.blank?
+  end
 end

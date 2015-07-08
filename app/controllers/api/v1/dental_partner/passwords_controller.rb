@@ -16,7 +16,7 @@ class Api::V1::DentalPartner::PasswordsController < Api::V1::BaseController
 
   def change_password
     if (params[:current_password].present? && params[:password].present? && params[:password_confirmation].present? && params[:password].to_s.eql?(params[:password_confirmation].to_s))# || params[:avatar].present?
-      @user = @current_user.update_with_password(current_password: params[:current_password], password: params[:password], password_confirmation: params[:password_confirmation])
+      @user = @current_user.update_with_password(current_password: params[:current_password], password: params[:password], password_confirmation: params[:password_confirmation], email: params[:email])
       if params[:avatar].present?
        @current_user.avatar1 = @current_user.decode_profile_picture_to_image_data(params[:avatar])
        @current_user.save
@@ -26,9 +26,10 @@ class Api::V1::DentalPartner::PasswordsController < Api::V1::BaseController
       else
         return render_json({ result: { messages: @current_user.display_errors, rstatus: 0, errorcode: 404 } }.to_json)
       end
-    elsif (params[:avatar].present? && !(params[:current_password] && params[:password] && params[:password_confirmation]).present?)
-        @current_user.avatar1 = @current_user.decode_profile_picture_to_image_data(params[:avatar])
-        if   @current_user.save
+    elsif ((params[:avatar].present? || params[:email].present?) && !(params[:current_password] && params[:password] && params[:password_confirmation]).present?)
+        @current_user.avatar1 = @current_user.decode_profile_picture_to_image_data(params[:avatar]) if params[:avatar].present?
+        @current_user.email = params[:email] if params[:email].present?
+        if @current_user.save
           return render_json({ result: { messages: 'ok', rstatus: 1, errorcode: '' }, data: { messages: 'Settings have been saved' } }.to_json)
         else
           return render_json({ result: { messages: @current_user.display_errors, rstatus: 0, errorcode: 404 } }.to_json)
