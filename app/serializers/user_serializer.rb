@@ -2,7 +2,8 @@ class UserSerializer < ActiveModel::Serializer
   ## Attributes ##
   attributes :id, :first_name, :last_name, :phone, :email, :authentication_token,
              :address,:fax_no, :avatar_image, :designation, :admin_id,
-             :survey_unread_count, :news_unread_count, :forum_unread_count, :username
+             :survey_unread_count, :news_unread_count, :forum_unread_count,
+             :username, :unread_messages_count
 
   ## Instance Methods ##
   def attributes
@@ -41,5 +42,9 @@ class UserSerializer < ActiveModel::Serializer
 
   def news_unread_count
     object.unread_news(News.valid_feeds(object).ids)
+  end
+
+  def unread_messages_count
+    object.messages.where(is_read: false).count
   end
 end

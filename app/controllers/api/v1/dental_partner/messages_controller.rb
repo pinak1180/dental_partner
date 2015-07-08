@@ -3,7 +3,8 @@ class Api::V1::DentalPartner::MessagesController < Api::V1::BaseController
 
   def index
     @messages = @current_user.messages.page(@page).per(@limit)
-    render json: @messages, each_serializer: MessageSerializer, token: false
+    unread_count = @messages.where(is_read: false).count
+    render json: @messages, each_serializer: MessageSerializer, token: false, meta: { unread_count: unread_count }
   end
 
   def show
