@@ -1,7 +1,7 @@
-first_name,last_name,email,username,password,phone,postal_code,positions,direct_reporters,access_levels,departments,practise_codes
-test,test,test.test@yopmail.com,test,testing123,9876543210,1001,manager,,"1,2,3","legal,marketing","GHDB,WUEI,WPEK"
-test1,test,test1.test@yopmail.com,test1,testing123,9876543211,1001,manager,test.test@yopmail.com,"1,2,3",marketing,"GHDB,WUEI"
-test2,test,,test2,testing123,9876543212,1001,manager,test.test@yopmail.com,"1,2,3",marketing,"GHDB,WUEI"
-test3,test,test3.test@yopmail.com,test3,testing123,9876543210,1001,manager,,"1,2,3","legal,marketing","GHDB,WUEI,WPEK"
-test4,test,,,testing123,9876543211,1001,manager,test.test@yopmail.com,"1,2,3",marketing,"GHDB,WUEI"
-test5,test,test5.test@yopmail.com,test5,,9876543212,1001,manager,test.test@yopmail.com,"1,2,3",marketing,"GHDB,WUEI"
+first_name,last_name,username,password,phone,postal_code,positions,direct_reporters,access_levels,departments,practise_codes
+test,test,test,testing123,9876543210,1001,manager,,"1,2,3","legal,marketing","GHDB,WUEI,WPEK"
+test1,test,test1,testing123,9876543211,1001,manager,test.test@yopmail.com,"1,2,3",marketing,"GHDB,WUEI"
+test2,test,test2,testing123,9876543212,1001,manager,test.test@yopmail.com,"1,2,3",marketing,"GHDB,WUEI"
+test3,test,test3,testing123,9876543210,1001,manager,,"1,2,3","legal,marketing","GHDB,WUEI,WPEK"
+test4,test,,testing123,9876543211,1001,manager,test.test@yopmail.com,"1,2,3",marketing,"GHDB,WUEI"
+test5,test,test5,,9876543212,1001,manager,test.test@yopmail.com,"1,2,3",marketing,"GHDB,WUEI"
