@@ -19,8 +19,8 @@ class Admins::MessagesController < AdminBaseController
   def create
     @message = current_user.sent_messages.build(message_params)
     if @message.valid? && @message.atleast_one_reciptient?
-      @message.create_records
-      redirect_to admins_messages_path, notice: 'Message sent'
+      msg = @message.create_records ? "Message Sent" : "Your message has not been sent because no users are in your selected target criteria"
+      redirect_to admins_messages_path, notice: msg
     else
       @users = User.non_admins.pluck(:email, :id)
       render :new
@@ -60,7 +60,7 @@ class Admins::MessagesController < AdminBaseController
   private
 
   def message_params
-    params.require(:message).permit(:message_body, :send_push, :sender_id, :receiver_id, :parent_id, position_ids: [], department_ids: [], practise_code_ids: [], direct_report_ids: [], access_level_ids: [], direct_user_ids: [])
+    params.require(:message).permit(:message_body, :send_push, :sender_id, :receiver_id, :parent_id, :msg_attachment, position_ids: [], department_ids: [], practise_code_ids: [], direct_report_ids: [], access_level_ids: [], direct_user_ids: [])
   end
 
   def set_count

@@ -11,6 +11,7 @@
                 <div class="dd-handle">
                   <%= @message.message_body %>
                   <label class="pull-right"><%= @message.sent_at %></label>
+                  <%= link_to "<i class='fa fa-paperclip fa-2x'></i> #{@message.msg_attachment_file_name}".html_safe, @message.msg_attachment.url, class: 'btn btn-xs pull-right', style: 'padding-right: 15px;', target: '_blank' if @message.msg_attachment.present? %>
                 </div>
               </li>
             </ol>
@@ -26,6 +27,7 @@
                     <div class="dd-handle">
                       <%= message.message_body %>
                       <label class="pull-right"><%= @message.sent_at %></label>
+                      <%= link_to "<i class='fa fa-paperclip fa-2x'></i> #{message.msg_attachment_file_name}".html_safe, message.msg_attachment.url, class: 'btn btn-xs pull-right', style: 'padding-right: 15px;', target: '_blank' if message.msg_attachment.present? %>
                     </div>
                   </li>
                 </ol>
@@ -38,6 +40,7 @@
     <% unless @message.is_deleted  %>
       <%= simple_form_for(@reply, url: reply_admins_messages_path, html: {class: "col-md-12", multipart: true}) do |f| %>
         <%= f.input :message_body, as: :text, label: false, input_html: { class: "form-control mt15", rows: 5, cols: 2, placeholder: "Message Text" } %><br/>
+        <%= f.input :msg_attachment, as: :file, input_html: { class: "form-control", accept: "application/pdf,image/*" } %><br/>
         <%= f.input :sender_id, as: :hidden, input_html: {class: "form-control", value: current_user.id} %>
         <%= f.input :receiver_id, as: :hidden, input_html: {class: "form-control", value: @message.receiver_id} %>
         <%= f.input :parent_id, as: :hidden, input_html: {class: "form-control", value: @message.id} %>

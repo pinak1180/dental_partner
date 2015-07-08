@@ -2,7 +2,7 @@ class MessageSerializer < ActiveModel::Serializer
   ## Attributes ##
   attributes :id, :sender_dp, :sender_name, :sender_id,
              :is_new, :sent_date, :is_deleted, :is_read,
-             :message_body, :parent_id
+             :message_body, :parent_id, :msg_attachment_url
 
   ## Instance Methods ##
 
