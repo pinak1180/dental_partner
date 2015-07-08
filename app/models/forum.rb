@@ -31,4 +31,9 @@ class Forum < ActiveRecord::Base
   def thumb_image
     ENV['HOST'] + poster_avatar.url(:thumb)
   end
+
+  def mark_user_follow(user)
+    vote = votes_for.find_by(voter_id: user.id)
+    liked_by user if !vote.present?
+  end
 end

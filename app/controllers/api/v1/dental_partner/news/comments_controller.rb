@@ -5,6 +5,7 @@ class Api::V1::DentalPartner::News::CommentsController < Api::V1::BaseController
     @comment = @news.comments.allowed.build(comment: params[:comment], title: params[:title])
     @comment.user_id = @current_user.id
     if @comment.save
+      @news.mark_user_follow(@current_user)
       render_json({ result: { messages: 'ok', rstatus: 1, errorcode: '' }, data: { messages: 'Comments Sucessfully created' } }.to_json)
     else
       render_json({ result: { messages: @comment.display_errors, rstatus: 0, errorcode: 404 } }.to_json)
