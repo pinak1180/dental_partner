@@ -3,12 +3,12 @@ class UserSerializer < ActiveModel::Serializer
   attributes :id, :first_name, :last_name, :phone, :email, :authentication_token,
              :address,:fax_no, :avatar_image, :designation, :admin_id,
              :survey_unread_count, :news_unread_count, :forum_unread_count,
-             :username, :unread_messages_count
+             :username, :unread_messages_count, :incomplete_survey_count
 
   ## Instance Methods ##
   def attributes
     unless serialization_options[:token]
-      super.except(:authentication_token, :admin_id, :survey_unread_count, :news_unread_count, :forum_unread_count, :username)
+      super.except(:authentication_token, :admin_id, :survey_unread_count, :news_unread_count, :forum_unread_count, :username, :incomplete_survey_count)
     else
       super
     end
@@ -46,5 +46,9 @@ class UserSerializer < ActiveModel::Serializer
 
   def unread_messages_count
     object.messages.where(is_read: false).count
+  end
+
+  def incomplete_survey_count
+    object.incomplete_survey.count
   end
 end
