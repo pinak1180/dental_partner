@@ -7,7 +7,6 @@
   <table class="table table-stripped" id="datatable-table">
     <thead>
       <tr>
-        <th>Profile Pic</th>
         <th>First name</th>
         <th>Last name</th>
         <th>Positions</th>
@@ -24,7 +23,6 @@
     <tbody>
       <% @admins_users.each do |admins_user| %>
         <tr>
-          <td><%= image_tag admins_user.avatar.url(:thumb), size: "50x50" %></td>
           <td><%= admins_user.first_name %></td>
           <td><%= admins_user.last_name %></td>
           <td><%= admins_user.positions %></td>
