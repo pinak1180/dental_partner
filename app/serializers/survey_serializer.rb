@@ -1,14 +1,14 @@
 class SurveySerializer < ActiveModel::Serializer
   ## Attributes ##
   attributes  :id, :title, :description, :release_date, :expiry_date,
-              :is_completed_by_user, :questions, :departments, :tags
-              :created_on
+              :is_completed_by_user, :questions, :departments, :tags,
+              :created_at, :admin_dp
 
   ## Associations ##
   has_many :questions
 
   ## Instance Methods ##
-  def created_on
+  def created_at
     object.print_created_at
   end
 
@@ -29,5 +29,9 @@ class SurveySerializer < ActiveModel::Serializer
 
   def departments
     object.departments
+  end
+
+  def admin_dp
+    ENV['HOST'] + User.admin.avatar.url
   end
 end
