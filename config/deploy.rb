@@ -69,17 +69,15 @@ task deploy: :environment do
       invoke :'sidekiq:restart'
       queue "mkdir -p #{deploy_to}/#{current_path}/tmp/"
       queue "touch #{deploy_to}/#{current_path}/tmp/restart.txt"
-      invote :'unicorn:restart'
+      invote :'unicorn_restart'
     end
   end
 end
 
-task unicorn: :environment do
+task :unicorn_restart do
   puts 'restarting-----'
-  restart do
-    queue %(echo `ps -ef | grep "unicorn" | grep -v "color" | awk '{print $2}'`)
-    queue %(sudo kill -9 echo `ps -ef | grep "unicorn" | grep -v "color" | awk '{print $2}'`)
-    queue "RAILS_ENV=production bundle exec unicorn -p 5000 -l 139.162.24.20:6000 -D"
-  end
+  queue %(echo `ps -ef | grep "unicorn" | grep -v "color" | awk '{print $2}'`)
+  queue %(sudo kill -9 echo `ps -ef | grep "unicorn" | grep -v "color" | awk '{print $2}'`)
+  queue "RAILS_ENV=production bundle exec unicorn -p 5000 -l 139.162.24.20:6000 -D"
   puts 'restarted-----'
 end
