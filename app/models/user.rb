@@ -147,7 +147,8 @@ class User < ActiveRecord::Base
   end
 
   def incomplete_survey
-     Survey.valid_feeds(self).eager_load(:responses).where(Response.where((Response.arel_table[:user_id].eq(self.id)).or(Response.arel_table[:id].eq(nil))))
+     #Survey.valid_feeds(self).eager_load(:responses).where(Response.where((Response.arel_table[:user_id].eq(self.id)).or(Response.arel_table[:id].eq(nil))))
+     0
   end
 
   private
