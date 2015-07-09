@@ -2,7 +2,7 @@ class SurveySerializer < ActiveModel::Serializer
   ## Attributes ##
   attributes  :id, :title, :description, :release_date, :expiry_date,
               :is_completed_by_user, :questions, :departments, :tags,
-              :created_at, :admin_dp
+              :created_at, :admin_dp, :admin_name
 
   ## Associations ##
   has_many :questions
@@ -33,5 +33,10 @@ class SurveySerializer < ActiveModel::Serializer
 
   def admin_dp
     ENV['HOST'] + User.admin.avatar.url
+  end
+
+  def admin_name
+    admin = User.admin
+    admin.full_name.present? ? admin.full_name : "Alana"
   end
 end
