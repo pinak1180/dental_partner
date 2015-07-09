@@ -49,7 +49,6 @@ class UserSerializer < ActiveModel::Serializer
   end
 
   def incomplete_survey_count
-    #object.incomplete_survey.count
-    0
+    object.incomplete_surveys.count
   end
 end

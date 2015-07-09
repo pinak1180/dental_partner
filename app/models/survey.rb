@@ -13,6 +13,9 @@ class Survey < ActiveRecord::Base
   validates :questions, :length => { :minimum => 1 }
   validate :atleast_single_reciptient, :correct_expiry_date
 
+  ## Scopes ##
+  scope :incomplete_surveys_for_user, -> (user){ valid_feeds(user).eager_load(:responses).where("responses.user_id = ? OR responses.id = ?", user.id, nil) }
+
   ## Nested Attributes ##
   accepts_nested_attributes_for :questions, allow_destroy: true
 

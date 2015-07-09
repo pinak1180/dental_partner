@@ -146,9 +146,9 @@ class User < ActiveRecord::Base
     forum_ids.count - forum_views.where(viewable_id: forum_ids).count
   end
 
-  def incomplete_survey
-     #Survey.valid_feeds(self).eager_load(:responses).where(Response.where((Response.arel_table[:user_id].eq(self.id)).or(Response.arel_table[:id].eq(nil))))
-     0
+  def incomplete_surveys
+     surveys = Survey.valid_feeds(self)
+     surveys - surveys.includes(:responses).where("responses.user_id = ? OR responses.id = ?", id, nil).references(:responses)
   end
 
   private
