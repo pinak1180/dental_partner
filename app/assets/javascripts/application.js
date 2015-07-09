@@ -25,7 +25,6 @@
 //= require pages/jquery-ui.custom.min.js
 //= require core/main.js
 //= require core/offscreen.js
-//  require core/formance.js
 //= require core/jquery.tagsinput
 //= require core/file_upload_changer
 //= require chosen-jquery

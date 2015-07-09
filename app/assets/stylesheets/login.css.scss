@@ -1,0 +1,19 @@
+/*
+*= require_self
+*/
+
+@import "core/bootstrap.min";
+@import "font-awesome";
+@import "core/themify-icons.css.scss";
+@import "core/animate.min.css.scss";
+@import "templates/palette.css.scss";
+@import "templates/font.css.scss";
+@import "templates/main.css.scss";
+@charset "utf-8";
+
+.text-center{
+	display: block;
+	text-align: center;
+	padding: 12px;
+	font-style: oblique;
+}
