@@ -4,7 +4,7 @@ class NewsSerializer < ActiveModel::Serializer
   attributes :id, :title, :content, :tags, :expiry_date, :comments, :link,
              :total_comments, :medium_poster, :thumb_poster, :release_date,
              :liked_by_user, :author_name, :department, :tags, :original_poster,
-             :created_on, :pdf_url
+             :created_on, :pdf_url, :admin_dp, :admin_name
 
   ## Association ##
   has_many :comments
@@ -53,5 +53,13 @@ class NewsSerializer < ActiveModel::Serializer
 
   def department
     object.departments
+  end
+  def admin_dp
+    ENV['HOST'] + User.admin.avatar.url
+  end
+
+  def admin_name
+    admin = User.admin
+    admin.full_name.present? ? admin.full_name : "Alana"
   end
 end

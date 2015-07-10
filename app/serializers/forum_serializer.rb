@@ -3,7 +3,7 @@ class ForumSerializer < ActiveModel::Serializer
   attributes :id, :title, :subject, :expiry_date, :release_date,
              :tags, :expiry_date, :comments, :total_comments,
              :total_forums, :full_name, :medium_poster, :thumb_poster,
-             :original_poster, :created_on, :followed_by_user
+             :original_poster, :created_on, :followed_by_user, :admin_dp, :admin_name
 
   ## Associations ##
   has_many :comments
@@ -51,5 +51,14 @@ class ForumSerializer < ActiveModel::Serializer
 
   def followed_by_user
     ActsAsVotable::Vote.where(voter_id: serialization_options[:user].id, votable_id: object.id,  vote_flag: true).present?
+  end
+
+  def admin_dp
+    ENV['HOST'] + User.admin.avatar.url
+  end
+
+  def admin_name
+    admin = User.admin
+    admin.full_name.present? ? admin.full_name : "Alana"
   end
 end
