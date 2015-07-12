@@ -61,4 +61,27 @@ class Importer
     end
     return 'user_delete', @invalid_records
   end
+
+  def import_contact
+    @valid_records = []
+    @invalid_records = []
+    if filepath.present?
+      results      = SmarterCSV.process(filepath)
+      results.each do |result|
+        position_ids  = Position.where(name: result[:position].split(',')).ids rescue []
+        department_ids   = Department.where(name: result[:departments].split(',')).ids rescue []
+        results = SmarterCSV.process(filepath)
+        contact = Contact.find_or_initialize_by(email: result[:email])
+        contact.first_name = result[:first_name]
+        contact.last_name = result[:last_name]
+        contact.phone = result[:phone]
+        contact.position_ids = position_ids
+        contact.department_ids = department_ids
+        if !contact.save
+          @invalid_records << [(contact.email || contact.first_name || contact.last_name), contact.display_errors]
+        end
+      end
+    end
+    return 'contact_import', @invalid_records
+  end
 end

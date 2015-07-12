@@ -1,0 +1,40 @@
+<% provide :title, @contact.first_name %>
+<section class="panel">
+  <header class="panel-heading">
+    <%= @contact.first_name %>
+    <span class="pull-right">
+      <%= link_to 'Edit', edit_admins_contact_path(@contact.id), class: 'btn btn-xs btn-warning' %>
+    </span>
+  </header>
+  <div class="panel-body">
+    <div class="col-md-4">
+      <div class="panel overflow-hidden no-b profile p15">
+        <div class="row mb25">
+          <div class="col-sm-12">
+            <div class="row">
+              <div>
+                <h4 class="mb0"><%= @contact.first_name %> <%= @contact.last_name %></h4>
+                <small><%= @contact.email %></small>
+                <h6 class="mt15 mb15"><%= @contact.positions.titlecase %></h6>
+                <ul class="user-meta">
+                  <li>
+                    <i class="fa fa-phone mr5"></i>
+                    <span><%= @contact.phone %></span>
+                  </li>
+                  <li>
+                    <strong><i class="fa fa-angle-right mr5"></i>Department<br/></strong>
+                    <%= @contact.departments %>
+                  </li>
+                  <li>
+                    <i class="fa fa-wrench mr5"></i>
+                    <%= link_to "Edit Contact", edit_admins_contact_path(@contact.id) %>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

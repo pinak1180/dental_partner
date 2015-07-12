@@ -34,5 +34,10 @@ DentalPartner::Application.routes.draw do
       end
     end
     resources :documents, only: [:new, :index, :create]
+    resources :contacts do
+      collection do
+        post :import
+      end
+    end
   end
 end

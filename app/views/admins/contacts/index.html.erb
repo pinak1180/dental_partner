@@ -1,0 +1,51 @@
+<% provide :title, "Listing Contacts" %>
+<section class="panel">
+  <header class="panel-heading">Listing Contacts</header>
+  <div class="panel-body">
+    <%= link_to 'Add New Contacts', new_admins_contact_path,  class: "btn btn-default mb15" %>
+    <table class="table table-stripped" id="datatable-table" >
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @contacts.each do |contact| %>
+          <tr>
+            <td><%= contact.first_name %></td>
+            <td><%= contact.last_name %></td>
+            <td><%= contact.email %></td>
+            <td><%= contact.phone %></td>
+            <td><%= link_to 'View', admins_contact_path(contact), class: 'btn btn-primary btn-xs' %></td>
+            <td><%= link_to 'Edit', edit_admins_contact_path(contact), class: 'btn btn-warning btn-xs' %></td>
+            <td><%= link_to 'Delete', admins_contact_path(contact), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <br>
+  </div>
+</section>
+
+<section class="panel">
+  <header class="panel-heading">Import Users</header>
+  <div class="panel-body">
+    <div class="col-md-12 mt15">
+    <%= form_tag import_admins_contacts_path, method: :post,  multipart: true do %>
+      <%= label_tag "Import Contacts via CSV", nil, class: "form-label mr5" %>
+      <div class="alert alert-info">
+        Download sample For User Import CSV &nbsp; &nbsp; <%= link_to "Download CSV", "/contact_import.csv", class: "btn btn-success btn-xs" %>
+      </div>
+      <%= file_field_tag "csv_file", { accept: %w(.csv).join(',') } %><br/>
+      <%= submit_tag "Import", class: "btn mr5" %>
+    <% end %>
+    </div>
+  </div>
+</section>

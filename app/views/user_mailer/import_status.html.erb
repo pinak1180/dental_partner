@@ -22,7 +22,7 @@
           <p>
             Here is the status of your Import
           </p>
-          <% if @invalid_records.present? && @method.eql?('user_import') %>
+          <% if @invalid_records.present? && (@method.eql?('user_import') || @method.eql?('contact_import')) %>
           <p>
             Following are the Invalid Records<br/>
             <table>
