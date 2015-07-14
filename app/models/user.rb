@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
 
   ## Class Methods ##
   def self.invalid_credentials
-    'Email or Password is not valid'
+    'Username or Password is not valid'
   end
 
   def self.find_by_login(login)
