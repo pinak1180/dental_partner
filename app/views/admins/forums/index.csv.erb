@@ -1,0 +1,5 @@
+<%- headers = ['Title', 'Release Date', 'Expiry Date',"Views",'Likes', 'Comments'] -%>
+<%= CSV.generate_line headers %>
+<%- @forums.find_each do |forum| -%>
+    <%= CSV.generate_line([forum.title.titlecase, forum.print_release_date, forum.print_expiry_date, forum.views.size, forum.votes_for.size, forum.comments.size]).html_safe %>
+<%- end -%>

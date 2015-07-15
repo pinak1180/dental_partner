@@ -4,7 +4,7 @@ class Api::V1::DentalPartner::Forums::FollowsController < Api::V1::BaseControlle
   def create
     @like = @forum.liked_by @current_user
     if @like
-      render_json({ result: { messages: 'ok', rstatus: 1, errorcode: '' }, data: { messages: 'Sucessfully Followed' } }.to_json)
+      render_json({ result: { messages: 'ok', rstatus: 1, errorcode: '' }, data: { messages: 'You will now receive notifications when users comment on this article. Click the “Following” button again to unfollow' } }.to_json)
     else
       render_json({ result: { messages: "something went wrong", rstatus: 0, errorcode: 404 } }.to_json)
     end

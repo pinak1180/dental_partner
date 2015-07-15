@@ -3,6 +3,7 @@
   <header class="panel-heading">Listing Forums</header>
   <div class="panel-body">
     <%= link_to 'Add New Forum', new_admins_forum_path,  class: "btn btn-default mb15" %>
+    <%= link_to 'Export CSV', admins_forums_path(format: :csv), class: 'btn btn-default mb15' %>
     <table class="table table-stripped" id="datatable-table" >
       <thead>
         <tr>

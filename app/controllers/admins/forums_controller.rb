@@ -5,6 +5,13 @@ class Admins::ForumsController < AdminBaseController
 
   def index
     @forums = Forum.unscoped.includes(:views)
+    respond_to do |format|
+      format.html
+      format.csv do
+        headers['Content-Disposition'] = "attachment; filename=\"forums.csv\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
+    end
   end
 
   def show

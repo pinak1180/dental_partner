@@ -5,6 +5,13 @@ class Admins::NewsController < AdminBaseController
 
   def index
     @admins_news = News.unscoped.includes(:views)
+    respond_to do |format|
+      format.html
+      format.csv do
+        headers['Content-Disposition'] = "attachment; filename=\"articles.csv\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
+    end
   end
 
   def show

@@ -5,6 +5,13 @@ class Admins::UsersController < AdminBaseController
 
   def index
     @admins_users = User.non_admins
+    respond_to do |format|
+      format.html
+      format.csv do
+        headers['Content-Disposition'] = "attachment; filename=\"users.csv\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
+    end
   end
 
   def show
