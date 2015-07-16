@@ -4,6 +4,7 @@
     <%= f.input :last_name, input_html: {class: 'input form-control'} %><br/>
     <%= f.input :email, input_html: {class: 'input form-control', type: 'email'} %><br/>
     <%= f.input :phone, input_html: {class: 'input form-control'} %><br/>
+    <%= f.input :description, as: :ckeditor, input_html: { ckeditor: {toolbar: 'Full'}, class: "form-control" } %><br/>
     <div class="panel panel-info">
       <div class="panel-heading">Select Recipients</div>
       <div class="panel-body">

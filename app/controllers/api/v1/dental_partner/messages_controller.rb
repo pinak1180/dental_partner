@@ -2,7 +2,7 @@ class Api::V1::DentalPartner::MessagesController < Api::V1::BaseController
   before_filter :authentication_user_with_authentication_token
 
   def index
-    @messages = @current_user.messages.page(@page).per(@limit)
+    @messages = @current_user.received_messages.page(@page).per(@limit)
     unread_count = @messages.where(is_read: false).count
     render json: @messages, each_serializer: MessageSerializer, token: false, meta: { unread_count: unread_count }
   end

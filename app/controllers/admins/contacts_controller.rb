@@ -57,6 +57,6 @@ class Admins::ContactsController < AdminBaseController
     end
 
     def contact_params
-      params.require(:contact).permit(:first_name, :last_name, :email, :phone, position_ids: [], access_level_ids: [], department_ids: [], practise_code_ids: [], direct_report_ids: [])
+      params.require(:contact).permit(:first_name, :last_name, :email, :phone, :description, position_ids: [], access_level_ids: [], department_ids: [], practise_code_ids: [], direct_report_ids: [])
     end
 end
