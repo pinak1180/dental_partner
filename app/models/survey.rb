@@ -19,6 +19,9 @@ class Survey < ActiveRecord::Base
   ## Nested Attributes ##
   accepts_nested_attributes_for :questions, allow_destroy: true
 
+  ## Virtual Attributes ##
+  attr_accessor :is_completed
+
   ## Instance Methods
   def recipient_percent
     ((recipient_number.to_f/receivers.size.to_f)*100).round(2) rescue 0
@@ -33,7 +36,11 @@ class Survey < ActiveRecord::Base
       return true if release_date <= Date.today && expiry_date > Date.today
       false
     else
-      receivers.count == response.count
+      receivers.count == responses.count
     end
+  end
+
+  def is_completed
+    completed?
   end
 end

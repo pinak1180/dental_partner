@@ -3,6 +3,7 @@
   <header class="panel-heading">Listing Surveys</header>
   <div class="panel-body">
     <%= link_to 'Add New Survey', new_admins_survey_path, class: "btn btn-default mb15" %>
+    <%= link_to 'Export CSV', admins_surveys_path(format: :csv), class: 'btn btn-default mb15' %>
     <table class="table table-stripped" id="datatable-table">
       <thead>
         <tr>
@@ -11,6 +12,7 @@
           <th>Expiry date</th>
           <th>Participated %</th>
           <th>Participated #</th>
+          <th>Completed</th>
           <th></th>
           <th></th>
           <th></th>
@@ -24,6 +26,7 @@
             <td><%= survey.print_expiry_date %></td>
             <td><%= survey.recipient_percent %></td>
             <td><%= survey.recipient_number %></td>
+            <td><%= survey.completed? %></td>
             <td><%= link_to 'View', admins_survey_path(survey), class: "btn btn-xs btn-primary" %></td>
             <td><%= link_to 'Edit', edit_admins_survey_path(survey), class: "btn btn-xs btn-warning" %></td>
             <td><%= link_to 'Delete', admins_survey_path(survey), class: "btn btn-xs btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
