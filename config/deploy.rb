@@ -69,15 +69,16 @@ task deploy: :environment do
       invoke :'sidekiq:restart'
       queue "mkdir -p #{deploy_to}/#{current_path}/tmp/"
       queue "touch #{deploy_to}/#{current_path}/tmp/restart.txt"
-      #invoke :'unicorn_restart'
+      queue %(echo `ps -ef | grep "puma" | grep -v "color" | awk '{print $2}'`)
+      queue %(sudo pkill -f puma)
+      queue "RAILS_ENV=production puma  -d -b  tcp://139.162.24.20:5000"
+      queue %(echo `ps -ef | grep "puma" | grep -v "color" | awk '{print $2}'`)
     end
   end
 end
 
 task :unicorn_restart do
   queue %(echo `ps -ef | grep "unicorn" | grep -v "color" | awk '{print $2}'`)
-  queue %(sudo kill -9 `echo `ps -ef | grep "unicorn" | grep -v "color" | awk '{print $2}'``)
-  queue "RAILS_ENV=production bundle exec unicorn -p 5000 -l 139.162.24.20:6000 -D"
 end
 
 desc "Shows logs."
