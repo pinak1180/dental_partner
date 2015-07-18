@@ -20,7 +20,7 @@ class NewsSerializer < ActiveModel::Serializer
   end
 
   def total_comments
-    object.comments.size
+    object.comments.allowed.size
   end
 
   def original_poster

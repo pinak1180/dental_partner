@@ -9,12 +9,14 @@
 </style>
 </head>
 <body style="font-family: 'Source Sans Pro',sans-serif;line-height:26px;margin:0;">
-  <div style="width:650px;margin:0 auto;">
-  	<div style="background-color:#053e5c;no-repeat;text-align:center;">
-      <div style="display:inline-block;background-image:url(<%= image_url('shadow_bg.png') %>);background-position:top center;background-repeat:no-repeat;padding:20px 0;">
-        `	<a href="<%= root_url %>"><%= image_tag 'logo.png', alt: "logo" %></a>
-        </div>
-      </div>
+	<div style="width:650px;margin:0 auto;">
+		<div style="background-color:#01babd;no-repeat;text-align:center;">
+		    <div style="width:650px;margin:0 auto;">
+		        <div style="display:inline-block;padding:20px 0 15px;">
+	        		`	<a href="<%= root_url %>"><%= image_tag 'logo.png', alt: "logo" %></a>
+		        </div>
+		    </div>
+		</div>
       <div style="background-color:#fff;color:#000;padding:10px 15px;">
       	<h2 style="font-size:20px;font-weight:400;text-align:center;padding-bottom:15px;border-bottom:1px solid #e0e0e0;margin-bottom:40px;">Your Import Task Status</h2>
         <div style="background-color:#fff;color:#000;padding:10px 15px;">
@@ -61,14 +63,9 @@
               Your, Task for <%= @method.humanize.titlecase %> is completed!
             </p>
           <% end %>
-          <br/><p>Thank you, have a Good Day ahead.!</p>
+          <br/><p>Thank you</p>
         </div>
-      <div style="margin-bottom:10px; text-align:center;line-height:0;">
-        <a href="#" style="display:inline-block;margin-right:5px;"><%= image_tag "facebook_icon.png", alt: "facebook" %></a>
-        <a href="#" style="display:inline-block;margin-right:5px;"><%= image_tag "twitter_icon.png", alt: "twitter" %></a>
-        <a href="#"><%= image_tag "instagram.png", alt: "instagram", style: "display:inline-block;" %></a>
-      </div>
-      <p style="font-size:14px;text-align:center; color:#999999; margin:0 0 10px;">© 2014 Dental Partners.</p>
+      <p style="font-size:14px;text-align:center; color:#999999; margin:0 0 10px;">© 2015 Maven Dental.</p>
     </div>
   </div>
 </body>
