@@ -27,5 +27,6 @@ module DentalPartner
       config.autoload_paths << Rails.root.join('app', dir)
     end
     config.active_record.raise_in_transactional_callbacks = true
+    config.middleware.use Rack::GoogleAnalytics, tracker: 'UA-65407263-1'
   end
 end

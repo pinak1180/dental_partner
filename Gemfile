@@ -37,6 +37,7 @@ gem 'mina-sidekiq'
 gem 'chartkick'
 gem 'squeel'
 gem 'roo', '~> 2.0.0'
+gem 'rack-google-analytics'
 
 group :development, :test do
   gem 'byebug'

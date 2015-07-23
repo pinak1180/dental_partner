@@ -1,5 +1,5 @@
 <%- headers = ['Title', 'Release Date', 'Expiry Date',"Views",'Likes', 'Comments'] -%>
-<%= CSV.generate_line headers %>
+<%= CSV.generate_line headers,row_sep: ?\t, quote_char: ?\  %>
 <%- @admins_news.find_each do |news| -%>
-    <%= CSV.generate_line([news.title.titlecase, news.print_release_date, news.print_expiry_date, news.views.size, news.votes_for.size, news.comments.size]).html_safe %>
+    <%= CSV.generate_line([news.title.titlecase, news.print_release_date, news.print_expiry_date, news.views.size, news.votes_for.size, news.comments.size],row_sep: ?\t, quote_char: ?\ ).html_safe %>
 <%- end -%>
