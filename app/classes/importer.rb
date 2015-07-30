@@ -71,7 +71,7 @@ class Importer
         position_ids  = Position.where(name: result[:position].split(',')).ids rescue []
         department_ids   = Department.where(name: result[:departments].split(',')).ids rescue []
         results = SmarterCSV.process(filepath)
-        contact = Contact.find_or_initialize_by(email: result[:email])
+        contact = Contact.find_or_initialize_by(website: result[:website])
         contact.first_name = result[:first_name]
         contact.last_name = result[:last_name]
         contact.phone = result[:phone]
