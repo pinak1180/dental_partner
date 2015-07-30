@@ -74,6 +74,7 @@ class Importer
         contact = Contact.find_or_initialize_by(website: result[:website])
         contact.first_name = result[:first_name]
         contact.last_name = result[:last_name]
+        contact.description = result[:description]
         contact.phone = result[:phone]
         contact.position_ids = position_ids
         contact.department_ids = department_ids
