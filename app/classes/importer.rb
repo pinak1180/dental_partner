@@ -14,13 +14,15 @@ class Importer
     @valid_records = []
     @invalid_records = []
     if filepath.present?
-      results = SmarterCSV.process(filepath)
+      f = File.open(filepath, "r:ISO-8859-1")
+      results = SmarterCSV.process(f)
+      f.close
       results.each do |result|
-        position_ids  = Position.where(name: result[:positions].split(',')).ids rescue []
+        position_ids  = [Position.find_or_create_by(name: result[:positions].downcase).id] rescue []
         direct_report = User.where(email: result[:direct_report].split(',')).ids rescue []
-        access_levels = AccessLevel.where(level: result[:access_levels].split(',')).ids rescue []
-        departments   = Department.where(name: result[:departments].split(',')).ids rescue []
-        practise_codes= PractiseCode.where(code: result[:practise_codes].split(',')).ids rescue []
+        access_levels = AccessLevel.where(level: result[:access_levels]).ids rescue []
+        departments   = [Department.find_or_create_by(name: result[:departments].downcase).id] rescue []
+        practise_codes= [PractiseCode.find_or_create_by(code: result[:practise_codes]).id] rescue []
         user = User.find_by_login(result[:email] || result[:username])
         if !user.present?
           user = result[:email].present? ? User.new(email: result[:email]) : User.new(username: result[:username])
