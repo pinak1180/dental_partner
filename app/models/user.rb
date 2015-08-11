@@ -166,6 +166,6 @@ class User < ActiveRecord::Base
   end
 
   def atleast_single_category
-    #errors.add(:position_ids, "atleast single criteria must be selected") if (position_ids | department_ids| practise_code_ids | direct_report_ids | access_level_ids).reject{ |c| c.nil? }.blank?
+    errors.add(:position_ids, "atleast single criteria must be selected") if (position_ids | department_ids| practise_code_ids | direct_report_ids | access_level_ids).reject{ |c| c.nil? }.blank?
   end
 end
