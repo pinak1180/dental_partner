@@ -2,7 +2,7 @@ class Contact < ActiveRecord::Base
   include RecipientFilter
 
   ## Validations ##
-  validates :first_name, :last_name#, :website, presence: true
+  validates :first_name, :last_name, presence: true
   #validates :website, uniqueness: true
   validate :atleast_single_reciptient
 
