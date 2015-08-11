@@ -2,8 +2,8 @@ class Contact < ActiveRecord::Base
   include RecipientFilter
 
   ## Validations ##
-  validates :first_name, :last_name, presence: true
-  #validates :website, uniqueness: true
+  validates :first_name, :last_name, :phone, presence: true
+  #validates :phone, uniqueness: true
   validate :atleast_single_reciptient
 
   ## Virtual Attribute ##
@@ -13,7 +13,7 @@ class Contact < ActiveRecord::Base
     #importer = ImporterJob.perform_late("import_user", filepath)
     importer = Importer.new("import_contact",filepath)
     method, invalid_records = importer.import
-    UserMailer.import_status(method, invalid_records).deliver_now!
+    #UserMailer.import_status(method, invalid_records).deliver_now!
   end
 
   def display_errors
