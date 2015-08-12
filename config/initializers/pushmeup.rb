@@ -1,7 +1,7 @@
 APNS.port = Rails.application.secrets.APNS_PORT
 APNS.pem  = Rails.application.secrets.APNS_PEM
 APNS.host = Rails.application.secrets.APNS_HOST
-
+APNS.pass = '123456'
 
 
 GCM.host = Rails.application.secrets.GCM_HOST
