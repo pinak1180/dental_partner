@@ -1,6 +1,6 @@
-APNS.port = Rails.application.secrets.APNS_PORT
-APNS.pem  = Rails.application.secrets.APNS_PEM
-APNS.host = Rails.application.secrets.APNS_HOST
+APNS.port = ENV['APNS_PORT']
+APNS.pem  = ENV['APNS_PEM']
+APNS.host = ENV['APNS_HOST']
 APNS.pass = '123456'
 
 
