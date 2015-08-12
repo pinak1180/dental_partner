@@ -22,7 +22,10 @@ class Survey < ActiveRecord::Base
   ## Virtual Attributes ##
   attr_accessor :is_completed
 
-  ## Instance Methods
+  ## Callbacks ##
+  after_create :send_new_post_push
+
+  ## Instance Methods ##
   def recipient_percent
     ((recipient_number.to_f/receivers.size.to_f)*100).round(2) rescue 0
   end

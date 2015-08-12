@@ -76,6 +76,10 @@ module RecipientFilter
       if expiry_date.present? && release_date.present?
         errors.add(:expiry_date, "must be greater than Release Date") unless release_date <= expiry_date
       end
-    end    
+    end
+
+    def send_new_post_push
+      msg = "New #{self.class.name} was added!"
+    end
   end
 end

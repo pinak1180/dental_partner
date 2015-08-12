@@ -21,6 +21,10 @@ class Message < ActiveRecord::Base
   scope :parent_messages, -> { where(parent_id: nil) }
   scope :trash_messages, -> { where(is_deleted: true) }
   scope :untrashed, -> { where(is_deleted: false) }
+
+  ## Callbacks ##
+  after_create :send_new_post_push
+
   ## Instance Methods ##
   def display_errors
     errors.full_messages.join(',')
