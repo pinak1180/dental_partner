@@ -10,7 +10,7 @@
               <strong class="text-uppercase"><%= message.display_receiver.full_name %></strong>
             </span>
             <p>
-              <%= message.short_message %>
+              <%= message.short_message.html_safe %>
               <% if message.msg_attachment.present? %>
                 <i class="fa fa-paperclip"></i>
               <% end %>
