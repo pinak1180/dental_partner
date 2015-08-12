@@ -35,7 +35,7 @@ class Api::V1::DentalPartner::PasswordsController < Api::V1::BaseController
           return render_json({ result: { messages: @current_user.display_errors, rstatus: 0, errorcode: 404 } }.to_json)
         end
       else
-        return render_json({ result: { messages: 'Current Password and Password required or password does not match', rstatus: 0, errorcode: 404 } }.to_json)
+        return render_json({ result: { messages: 'Password does not match', rstatus: 0, errorcode: 404 } }.to_json)
       end
    end
 end
