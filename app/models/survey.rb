@@ -23,7 +23,7 @@ class Survey < ActiveRecord::Base
   attr_accessor :is_completed
 
   ## Callbacks ##
-  after_create :send_new_post_push
+  after_create :send_new_post_push, if: :send_push?
 
   ## Instance Methods ##
   def recipient_percent

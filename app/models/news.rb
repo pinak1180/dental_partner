@@ -28,8 +28,8 @@ class News < ActiveRecord::Base
 
   ## Callbacks ##
   before_save :init_release_date
-  after_create :send_new_post_push
-  
+  after_create :send_new_post_push, if: :send_push?
+
   ## Instance Methods ##
   def original_image
     ENV['HOST'] + poster_avatar.url

@@ -80,6 +80,7 @@ module RecipientFilter
 
     def send_new_post_push
       msg = "New #{self.class.name} was added!"
+      send_push_notification(msg)
     end
   end
 end
