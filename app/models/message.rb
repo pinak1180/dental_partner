@@ -23,7 +23,7 @@ class Message < ActiveRecord::Base
   scope :untrashed, -> { where(is_deleted: false) }
 
   ## Callbacks ##
-  after_create :send_new_post_push, if: :send_push?
+  after_create :send_new_post_push
 
   ## Instance Methods ##
   def display_errors
