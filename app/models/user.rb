@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable #, :validatable
+         :recoverable, :rememberable, :trackable # , :validatable
 
   default_scope { all }
 
@@ -17,24 +17,23 @@ class User < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :notifications, class: PublicActivity::Activity, foreign_key: :recipient_id, dependent: :destroy
   has_many :owner_notifications, class: PublicActivity::Activity, foreign_key: :owner_id, dependent: :destroy
-  has_many :news_views, -> { where(viewable_type: "News") }, class: View, foreign_key: :user_id, dependent: :destroy
-  has_many :forum_views, -> { where(viewable_type: "Forum") }, class: View, foreign_key: :user_id, dependent: :destroy
-  has_many :survey_views, -> { where(viewable_type: "Survey") }, class: View, foreign_key: :user_id, dependent: :destroy
+  has_many :news_views, -> { where(viewable_type: 'News') }, class: View, foreign_key: :user_id, dependent: :destroy
+  has_many :forum_views, -> { where(viewable_type: 'Forum') }, class: View, foreign_key: :user_id, dependent: :destroy
+  has_many :survey_views, -> { where(viewable_type: 'Survey') }, class: View, foreign_key: :user_id, dependent: :destroy
 
   ## Validations ##
-  validates :email, :presence => false
+  validates :email, presence: false
   validates :first_name, :last_name, :phone, presence: true, unless: proc { |user| user.admin }
   validates :password, presence: true, if: proc { |user| user.new_record? }
-  validate  :atleast_single_category, unless: proc { |user| user.admin }
+  validate :atleast_single_category, unless: proc { |user| user.admin }
   validates :username, uniqueness: true
-  validate  :email_or_username
+  validate :email_or_username
 
-  #before_validation :set_password, if: proc { |user| !user.admin && user.new_record? }
-  #after_create :send_welcome_mail, if: proc { |user| !user.admin }
+  # before_validation :set_password, if: proc { |user| !user.admin && user.new_record? }
+  # after_create :send_welcome_mail, if: proc { |user| !user.admin }
   has_attached_file :avatar,
                     default_url: 'faceless.jpg',
                     styles: { medium: '300x300>', thumb: '100x100>' }
-
 
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
@@ -42,7 +41,9 @@ class User < ActiveRecord::Base
   scope :non_admins, -> { where(admin: false) }
   scope :admin, -> { find_by(admin: true) }
   scope :device_ids_not_null, -> { where("device_id <> ''") }
-  scope :push_eligible_user, ->(type) { where(device_type: type).pluck(:device_id)}
+  scope :push_eligible_user, ->(type) { where(device_type: type).pluck(:device_id) }
+  scope :get_user_device_ids, ->(device_id) { where('device_id = ?', device_id) }
+  scope :without_user, ->(user) { where (user ? ['id != ?', user.id] : {}) }
 
   ## Custom Attributes ##
   attr_accessor :avatar1
@@ -69,10 +70,10 @@ class User < ActiveRecord::Base
     temp2                = Base64.decode64(cid)
     file.write(temp2)
     file.close
-    f                    = File.open("#{Rails.root}/public/tmp/#{filename}.png")
+    f = File.open("#{Rails.root}/public/tmp/#{filename}.png")
     self.avatar = f
     f.close
-    #File.delete("#{Rails.root}/public/tmp/#{filename}.png")
+   # File.delete("#{Rails.root}/public/tmp/#{filename}.png")
  end
 
   ## Instance methods ##
@@ -101,15 +102,15 @@ class User < ActiveRecord::Base
   end
 
   def import_users(filepath)
-    #importer = ImporterJob.perform_late("import_user", filepath)
-    importer = Importer.new("import_user",filepath)
+    # importer = ImporterJob.perform_late("import_user", filepath)
+    importer = Importer.new('import_user', filepath)
     method, invalid_records = importer.import
     UserMailer.import_status(method, invalid_records).deliver_now!
   end
 
   def delete_users(filepath)
-    #importer = ImporterJob.perform_later("delete_users", filepath)
-    importer = Importer.new('delete_users',filepath)
+    # importer = ImporterJob.perform_later("delete_users", filepath)
+    importer = Importer.new('delete_users', filepath)
     method, invalid_records = importer.import
     UserMailer.import_status(method, invalid_records).deliver_now!
   end
@@ -117,21 +118,21 @@ class User < ActiveRecord::Base
   def mark_news_viewed(news)
     news.each do |n|
       news_views.find_by(viewable_id: n.id) ||
-      news_views.build(viewable_id: n.id).save
+        news_views.build(viewable_id: n.id).save
     end
   end
 
   def mark_forums_viewed(forums)
     forums.each do |forum|
       forum_views.find_by(viewable_id: forum.id) ||
-      forum_views.build(viewable_id: forum.id).save
+        forum_views.build(viewable_id: forum.id).save
     end
   end
 
   def mark_surveys_viewed(surveys)
     surveys.each do |survey|
       survey_views.find_by(viewable_id: survey.id) ||
-      survey_views.build(viewable_id: survey.id).save
+        survey_views.build(viewable_id: survey.id).save
     end
   end
 
@@ -148,13 +149,22 @@ class User < ActiveRecord::Base
   end
 
   def incomplete_surveys
-     surveys = Survey.valid_feeds(self)
-     surveys - surveys.includes(:responses).where("responses.user_id = ? OR responses.id = ?", id, nil).references(:responses)
+    surveys = Survey.valid_feeds(self)
+    surveys - surveys.includes(:responses).where('responses.user_id = ? OR responses.id = ?', id, nil).references(:responses)
+  end
+
+  def check_duplicate_device_ids(device_id, user, device_type)
+    @users = User.without_user(user).get_user_device_ids(device_id)
+    @users.update_all(device_token: nil) if @users.present?
+    user.device_id = device_id
+    user.device_type  = device_type
+    user.save
   end
 
   private
+
   def set_password
-    self.password = Devise.friendly_token[0,8]
+    self.password = Devise.friendly_token[0, 8]
   end
 
   def send_welcome_mail
@@ -162,10 +172,10 @@ class User < ActiveRecord::Base
   end
 
   def email_or_username
-    errors.add(:email, "email or username must be present") if !email.present? && !username.present?
+    errors.add(:email, 'email or username must be present') if !email.present? && !username.present?
   end
 
   def atleast_single_category
-    errors.add(:position_ids, "atleast single criteria must be selected") if (position_ids | department_ids| practise_code_ids | direct_report_ids | access_level_ids).reject{ |c| c.nil? }.blank?
+    errors.add(:position_ids, 'atleast single criteria must be selected') if (position_ids | department_ids | practise_code_ids | direct_report_ids | access_level_ids).reject(&:nil?).blank?
   end
 end
