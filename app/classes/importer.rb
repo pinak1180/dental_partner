@@ -73,15 +73,15 @@ class Importer
         position_ids  = Position.where(name: result[:position].split(',')).ids rescue []
         department_ids   = Department.where(name: result[:departments].split(',')).ids rescue []
         results = SmarterCSV.process(filepath)
-        contact = Contact.find_or_initialize_by(website: result[:website])
-        contact.first_name = result[:first_name]
-        contact.last_name = result[:last_name]
-        contact.description = result[:description]
+        contact = Contact.find_or_initialize_by(first_name: result[:first_name], last_name: result[:last_name])
         contact.phone = result[:phone]
+        contact.description = result[:description]
+        contact.email = result[:email]
         contact.position_ids = position_ids
         contact.department_ids = department_ids
         if !contact.save
           @invalid_records << [(contact.email || contact.first_name || contact.last_name), contact.display_errors]
+          puts contact.errors.full_messages
         end
       end
     end

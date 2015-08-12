@@ -12,7 +12,7 @@ class News < ActiveRecord::Base
   has_many :views, as: :viewable, dependent: :destroy
 
   ## Validations ##
-  validates :title, :content, :poster_avatar, :link, presence: true
+  validates :title, :content, :poster_avatar, presence: true
   validates :link, url: true
   validate :atleast_single_reciptient, :correct_expiry_date
   has_attached_file :poster_avatar,

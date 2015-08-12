@@ -45,7 +45,7 @@ class UserSerializer < ActiveModel::Serializer
   end
 
   def unread_messages_count
-    object.messages.where(is_read: false).count
+    object.received_messages.where(is_read: false).count
   end
 
   def incomplete_survey_count
