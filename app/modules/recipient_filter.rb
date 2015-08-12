@@ -32,7 +32,7 @@ module RecipientFilter
     end
 
     def print_release_date
-      release_date.present? ? release_date.strftime("%d-%m-%Y") : 'N/A'
+      release_date.present? ? release_date.strftime("%d-%m-%Y") : Date.today.strftime("%d-%m-%Y")
     end
 
     def print_expiry_date
@@ -76,6 +76,6 @@ module RecipientFilter
       if expiry_date.present? && release_date.present?
         errors.add(:expiry_date, "must be greater than Release Date") unless release_date <= expiry_date
       end
-    end
+    end    
   end
 end

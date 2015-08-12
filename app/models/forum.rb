@@ -19,6 +19,9 @@ class Forum < ActiveRecord::Base
                     default_url: 'cover_default.jpg'
   validates_attachment_content_type :poster_avatar, content_type: /\Aimage\/.*\Z/
 
+  ## Callbacks ##
+  before_save :init_release_date
+
   ## Instance Methods ##
   def original_image
     ENV['HOST'] + poster_avatar.url
@@ -35,5 +38,9 @@ class Forum < ActiveRecord::Base
   def mark_user_follow(user)
     vote = votes_for.find_by(voter_id: user.id)
     liked_by user if !vote.present?
+  end
+
+  def init_release_date
+    release_date ||= Date.today if new_record?
   end
 end

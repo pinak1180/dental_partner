@@ -8,8 +8,8 @@
       <thead>
         <tr>
           <th>Title</th>
-          <th>Expiry date</th>
           <th>Release date</th>
+          <th>Expiry date</th>
           <th>Views </th>
           <th>Comments </th>
           <th>View</th>
@@ -21,8 +21,8 @@
         <% @forums.each do |admins_forum| %>
           <tr>
             <td><%= admins_forum.title %></td>
-            <td><%= admins_forum.expiry_date %></td>
-            <td><%= admins_forum.release_date %></td>
+            <td><%= admins_forum.print_release_date %></td>
+            <td><%= admins_forum.print_expiry_date %></td>
             <td><%= admins_forum.views.count %></td>
             <td><%= admins_forum.comments.size %></td>
             <td><%= link_to 'View', admins_forum_path(admins_forum), class: "btn btn-xs btn-primary" %></td>
