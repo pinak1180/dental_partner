@@ -103,7 +103,7 @@
 
 .dataTables_paginate {
 	width: 44px;
-	* width: 50px;
+	/* width: 50px; */
 	float: right;
 	text-align: right;
     padding:10px 20px;
@@ -142,9 +142,9 @@ table.display {
 	margin: 0 auto;
 	clear: both;
 	width: 100%;
-	
+
 	/* Note Firefox 3.5 and before have a bug with border-collapse
-	 * ( https://bugzilla.mozilla.org/show%5Fbug.cgi?id=155955 ) 
+	 * ( https://bugzilla.mozilla.org/show%5Fbug.cgi?id=155955 )
 	 * border-spacing: 0; is one possible option. Conditional-css.com is
 	 * useful for this kind of thing
 	 *
@@ -152,7 +152,7 @@ table.display {
 	 * It subtracts one px relative to the other browsers from the first column, and
 	 * adds one to the end...
 	 *
-	 * If you want that effect I'd suggest setting a border-top/left on th/td's and 
+	 * If you want that effect I'd suggest setting a border-top/left on th/td's and
 	 * then filling in the gaps with other borders.
 	 */
 }
@@ -332,7 +332,7 @@ td.details {
 	border-bottom:1px solid #D7D7D7;
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
-	border-radius: 2px; 
+	border-radius: 2px;
 	padding: 2px 5px;
 	margin: 0 3px;
 	cursor: pointer;
@@ -350,7 +350,7 @@ td.details {
 
 .paging_full_numbers span.paginate_active {
 	background-color: #B90000;
-	color:#fff;	
+	color:#fff;
 	text-shadow: 0px 1px 0px #000;
 }
 
