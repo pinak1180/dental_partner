@@ -155,7 +155,7 @@ class User < ActiveRecord::Base
 
   def check_duplicate_device_ids(device_id, user, device_type)
     @users = User.without_user(user).get_user_device_ids(device_id)
-    @users.update_all(device_token: nil) if @users.present?
+    @users.update_all(device_id: nil) if @users.present?
     user.device_id = device_id
     user.device_type  = device_type
     user.save
