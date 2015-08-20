@@ -3,7 +3,7 @@ module RecipientFilter
     base.send(:extend, ClassMethods)
     base.send(:include, InstanceMethods)
     base.class_eval do
-      scope :latest,-> { order("#{self.arel_table.name}.created_at DESC") }
+      scope :latest,-> { order("#{self.arel_table.name}.release_date DESC") }
     end
   end
   module ClassMethods
