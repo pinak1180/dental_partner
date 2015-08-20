@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
 
   ## Validations ##
   validates :email, presence: false
-  validates :first_name, :last_name, :phone, presence: true, unless: proc { |user| user.admin }
+  validates :first_name, :last_name, presence: true, unless: proc { |user| user.admin }
   validates :password, presence: true, if: proc { |user| user.new_record? }
   validate :atleast_single_category, unless: proc { |user| user.admin }
   validates :username, uniqueness: true
