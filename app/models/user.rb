@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :timeoutable 
+         :recoverable, :rememberable, :trackable, :timeoutable
 
   default_scope { all }
 
@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   validates :first_name, :last_name, presence: true, unless: proc { |user| user.admin }
   validates :password, presence: true, if: proc { |user| user.new_record? }
   validate :atleast_single_category, unless: proc { |user| user.admin }
-  validates :username, uniqueness: true
+  validates :username, uniqueness: { case_sensitive: false }
   validate :email_or_username
 
   # before_validation :set_password, if: proc { |user| !user.admin && user.new_record? }
