@@ -33,7 +33,7 @@ class Importer
         user.last_name         = result[:last_name]
         user.phone             = result[:phone]
         user.postal_code       = result[:postal_code]
-        user.password          = result[:password]
+        user.password          = "%08d" % result[:password]
         user.position_ids      = position_ids
         user.department_ids    = departments
         user.access_level_ids  = access_levels
