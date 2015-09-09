@@ -28,7 +28,6 @@ module RecipientFilter
           .or(arel[:department_ids].overlap(department_ids))
           .or(arel[:practise_code_ids].overlap(practise_code_ids))
           .or(arel[:access_level_ids].overlap(access_level_ids))
-          .or(arel[:individual_ids].overlap(user.id))
           .or(arel[:position_ids].overlap(position_ids)))
       end
     end
