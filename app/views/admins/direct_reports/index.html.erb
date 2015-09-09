@@ -1,0 +1,27 @@
+<% provide :title, "Listing DirectReport" %>
+<section class="panel">
+  <header class="panel-heading">Listing DirectReport</header>
+  <div class="panel-body">
+    <%= link_to 'Add New DirectReport', new_admins_direct_report_path, class: "btn btn-default mb15" %>
+    <table class="table table-stripped" id="datatable-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @admins_direct_reports.each do |admins_direct_report| %>
+          <tr>
+            <td><%= admins_direct_report.name %></td>
+            <td><%= admins_direct_report.email %></td>
+            <td><%= link_to 'Edit', edit_admins_direct_report_path(admins_direct_report), class: "btn btn-xs btn-warning" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <br/>
+  </div>
+</section>

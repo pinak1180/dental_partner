@@ -60,7 +60,7 @@ class Admins::MessagesController < AdminBaseController
   private
 
   def message_params
-    params.require(:message).permit(:message_body, :send_push, :sender_id, :receiver_id, :parent_id, :msg_attachment, position_ids: [], department_ids: [], practise_code_ids: [], direct_report_ids: [], access_level_ids: [], direct_user_ids: [])
+    params.require(:message).permit(:message_body, :send_push, :sender_id, :receiver_id, :parent_id, :msg_attachment, position_ids: [], department_ids: [], practise_code_ids: [],individual_user_ids:[], direct_report_ids: [], access_level_ids: [], direct_user_ids: [])
   end
 
   def set_count

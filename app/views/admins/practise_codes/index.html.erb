@@ -1,0 +1,25 @@
+<% provide :title, "Listing PractiseCode" %>
+<section class="panel">
+  <header class="panel-heading">Listing PractiseCode</header>
+  <div class="panel-body">
+    <%= link_to 'Add New PractiseCode', new_admins_practise_code_path, class: "btn btn-default mb15" %>
+    <table class="table table-stripped" id="datatable-table">
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @admins_practise_codes.each do |admins_practise_code| %>
+          <tr>
+            <td><%= admins_practise_code.code %></td>
+            <td><%= link_to 'Edit', edit_admins_practise_code_path(admins_practise_code), class: "btn btn-xs btn-warning" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <br/>
+  </div>
+</section>

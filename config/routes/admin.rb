@@ -28,6 +28,8 @@ DentalPartner::Application.routes.draw do
     end
     resources :comments, only: [:create]
     resources :surveys
+    resources :practise_codes, except: [:destroy, :show]
+    resources :direct_reports, except: [:destroy, :show]
     resources :messages do
       collection do
         post :reply

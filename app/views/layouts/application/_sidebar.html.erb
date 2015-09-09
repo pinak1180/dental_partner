@@ -52,6 +52,28 @@
           <span>Contacts</span>
         <% end %>
       </li>
+
+      <li>
+        <a href="javascript:;">
+          <i class="toggle-accordion"></i>
+          <i class="fa fa-gears"></i>
+          <span>Settings</span>
+        </a>
+        <ul class="sub-menu">
+          <li>
+            <%= link_to admins_practise_codes_path do %>
+              <i class="ti-arrow-circle-right"></i>
+              <span>Practise Codes</span>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to admins_direct_reports_path do %>
+              <i class="ti-arrow-circle-right"></i>
+              <span>Direct Reports</span>
+            <% end %>
+          </li>
+        </ul>
+      </li>
     </ul>
   </nav>
 </aside>

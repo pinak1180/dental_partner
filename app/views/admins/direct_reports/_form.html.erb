@@ -1,0 +1,8 @@
+<div class="panel-body">
+  <%= simple_form_for(@admins_direct_report, url: @admins_direct_report.new_record? ? admins_direct_reports_path : admins_direct_report_path(@admins_direct_report), html: { class: "col-md-12" }) do |f| %>
+    <%= f.input :name, input_html: { class: "form-control", autofocus: true } %><br/>
+    <%= f.input :email, input_html: { class: "form-control", autofocus: true } %><br/>
+    <%= f.submit "Publish DirectReport", class: "btn btn-primary" %>
+    <%= link_to "Cancel", admins_practise_codes_path, class: "btn btn-defaut" %>
+  <% end %>
+</div>

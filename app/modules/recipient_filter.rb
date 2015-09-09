@@ -14,6 +14,7 @@ module RecipientFilter
         .or(arel[:practise_code_ids].overlap(user.practise_code_ids))
         .or(arel[:access_level_ids].overlap(user.access_level_ids))
         .or(arel[:position_ids].overlap(user.position_ids))
+        .or(arel[:individual_user_ids].any(user.id))
         .or(arel[:send_to_all].eq(true)))
     end
   end
@@ -27,6 +28,7 @@ module RecipientFilter
           .or(arel[:department_ids].overlap(department_ids))
           .or(arel[:practise_code_ids].overlap(practise_code_ids))
           .or(arel[:access_level_ids].overlap(access_level_ids))
+          .or(arel[:individual_ids].overlap(user.id))
           .or(arel[:position_ids].overlap(position_ids)))
       end
     end
@@ -69,7 +71,7 @@ module RecipientFilter
 
     private
     def atleast_single_reciptient
-      errors.add(:position_ids, "atleast single criteria must be selected") if (position_ids | department_ids| practise_code_ids | direct_report_ids | access_level_ids).reject{ |c| c.nil? }.blank? && send_to_all == false
+      errors.add(:position_ids, "atleast single criteria must be selected") if (position_ids | department_ids| practise_code_ids | direct_report_ids | access_level_ids | individual_user_ids).reject{ |c| c.nil? }.blank? && send_to_all == false
     end
 
     def correct_expiry_date

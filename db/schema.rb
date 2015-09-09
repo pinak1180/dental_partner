@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150723195352) do
+ActiveRecord::Schema.define(version: 20150909110802) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,6 +106,7 @@ ActiveRecord::Schema.define(version: 20150723195352) do
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.text     "description"
+    t.string   "website"
   end
 
   add_index "contacts", ["access_level_ids"], name: "index_contacts_on_access_level_ids", using: :gin
@@ -114,6 +115,13 @@ ActiveRecord::Schema.define(version: 20150723195352) do
   add_index "contacts", ["position_ids"], name: "index_contacts_on_position_ids", using: :gin
 
   create_table "departments", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "direct_reports", force: :cascade do |t|
+    t.string   "email"
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -150,7 +158,10 @@ ActiveRecord::Schema.define(version: 20150723195352) do
     t.datetime "poster_avatar_updated_at"
     t.boolean  "send_push",                  default: false
     t.boolean  "send_to_all",                default: false
+    t.integer  "individual_user_ids",        default: [],                      array: true
   end
+
+  add_index "forums", ["individual_user_ids"], name: "index_forums_on_individual_user_ids", using: :gin
 
   create_table "media_files", force: :cascade do |t|
     t.integer  "fileable_id"
@@ -187,7 +198,10 @@ ActiveRecord::Schema.define(version: 20150723195352) do
     t.string   "msg_attachment_content_type"
     t.integer  "msg_attachment_file_size"
     t.datetime "msg_attachment_updated_at"
+    t.integer  "individual_user_ids",         default: [],                 array: true
   end
+
+  add_index "messages", ["individual_user_ids"], name: "index_messages_on_individual_user_ids", using: :gin
 
   create_table "news", force: :cascade do |t|
     t.date     "release_date"
@@ -214,11 +228,13 @@ ActiveRecord::Schema.define(version: 20150723195352) do
     t.string   "pdf_content_type"
     t.integer  "pdf_file_size"
     t.datetime "pdf_updated_at"
+    t.integer  "individual_user_ids",        default: [],                      array: true
   end
 
   add_index "news", ["access_level_ids"], name: "index_news_on_access_level_ids", using: :gin
   add_index "news", ["department_ids"], name: "index_news_on_department_ids", using: :gin
   add_index "news", ["direct_report_ids"], name: "index_news_on_direct_report_ids", using: :gin
+  add_index "news", ["individual_user_ids"], name: "index_news_on_individual_user_ids", using: :gin
   add_index "news", ["position_ids"], name: "index_news_on_position_ids", using: :gin
 
   create_table "positions", force: :cascade do |t|
@@ -269,17 +285,20 @@ ActiveRecord::Schema.define(version: 20150723195352) do
     t.text     "description"
     t.date     "release_date"
     t.date     "expiry_date"
-    t.text     "tags",              default: "--- []\n"
-    t.integer  "position_ids",      default: [],                      array: true
-    t.integer  "department_ids",    default: [],                      array: true
-    t.integer  "practise_code_ids", default: [],                      array: true
-    t.integer  "direct_report_ids", default: [],                      array: true
-    t.integer  "access_level_ids",  default: [],                      array: true
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-    t.boolean  "send_push",         default: false
-    t.boolean  "send_to_all",       default: false
+    t.text     "tags",                default: "--- []\n"
+    t.integer  "position_ids",        default: [],                      array: true
+    t.integer  "department_ids",      default: [],                      array: true
+    t.integer  "practise_code_ids",   default: [],                      array: true
+    t.integer  "direct_report_ids",   default: [],                      array: true
+    t.integer  "access_level_ids",    default: [],                      array: true
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.boolean  "send_push",           default: false
+    t.boolean  "send_to_all",         default: false
+    t.integer  "individual_user_ids", default: [],                      array: true
   end
+
+  add_index "surveys", ["individual_user_ids"], name: "index_surveys_on_individual_user_ids", using: :gin
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: ""
@@ -319,7 +338,6 @@ ActiveRecord::Schema.define(version: 20150723195352) do
   add_index "users", ["access_level_ids"], name: "index_users_on_access_level_ids", using: :gin
   add_index "users", ["department_ids"], name: "index_users_on_department_ids", using: :gin
   add_index "users", ["direct_report_ids"], name: "index_users_on_direct_report_ids", using: :gin
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["position_ids"], name: "index_users_on_position_ids", using: :gin
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 

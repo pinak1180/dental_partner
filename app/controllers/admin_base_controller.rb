@@ -20,7 +20,8 @@ class AdminBaseController < ApplicationController
   end
 
   def set_form_details
-    @direct_reporters = User.non_admins.order(:email).pluck(:email, :id)
+    @direct_reporters = DirectReport.order(:name).pluck(:name, :id)
+    @all_users        = User.non_admins.order(:username).pluck(:username, :id)
     @positions        = Position.order(:name).pluck(:name, :id)
     @access_levels    = AccessLevel.order(:level).pluck(:level, :id)
     @departments      = Department.order(:name).pluck(:name, :id)

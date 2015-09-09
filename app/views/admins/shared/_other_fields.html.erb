@@ -21,8 +21,8 @@
     <%= f.input :direct_report_ids, label: "Direct Report" do %><br/>
       <%= f.select :direct_report_ids, @direct_reporters, {include_blank: false}, {:class => "chosen-select", "data-placeholder": "Select Direct Report", style: "width: 300px;", multiple: true} %>
     <% end %>
-    <%= f.input :direct_report_ids, label: "Select User(s)" do %><br/>
-      <%= f.select :direct_report_ids, @direct_reporters, {include_blank: false}, {:class => "chosen-select", "data-placeholder": "Select User(s)", style: "width: 300px;", multiple: true} %>
+    <%= f.input :individual_user_ids, label: "Select User(s)" do %><br/>
+      <%= f.select :individual_user_ids, @all_users, {include_blank: false}, {:class => "chosen-select", "data-placeholder": "Select User(s)", style: "width: 300px;", multiple: true} %>
     <% end %><br/>
   </div>
 </div>
