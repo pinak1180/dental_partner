@@ -162,6 +162,10 @@ class User < ActiveRecord::Base
     user.save
   end
 
+  def print_last_sign_in_at
+    last_sign_in_at.present? ? last_sign_in_at.strftime('%d/%b/%Y') : ''
+  end
+
   private
 
   def set_password
