@@ -2,6 +2,7 @@ class Response < ActiveRecord::Base
   ## Associations ##
   has_many :response_details, dependent: :destroy, inverse_of: :response
   belongs_to :survey, inverse_of: :responses
+  belongs_to :user, inverse_of: :responses
   has_many :questions, through: :survey
 
   ## Validations ##

@@ -2,4 +2,11 @@
 <%= CSV.generate_line headers %>
 <%- @surveys.find_each do |survey| -%>
     <%= CSV.generate_line([survey.title.titlecase, survey.print_release_date, survey.print_expiry_date, survey.recipient_percent, survey.recipient_number, survey.completed?]).html_safe %>
+    <%- sub_headers = ['User Name',	'Question',	'Option Chosen'] -%>
+    <%= CSV.generate_line sub_headers %>
+    <%- survey.responses.each do |response| -%>
+        <%- response.response_details.each do |detail| -%>
+            <%= CSV.generate_line([response.user.full_name, detail.question.question, detail.answer.option]) %>
+        <%- end -%>
+    <%- end -%>
 <%- end -%>

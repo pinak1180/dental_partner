@@ -4,7 +4,7 @@ class Admins::SurveysController < AdminBaseController
   add_breadcrumb 'Surveys', :admins_surveys_path
 
   def index
-    @surveys = Survey.unscoped.all
+    @surveys = Survey.unscoped.all.includes(responses: {user: [], response_details: [:question, :answer]})
   end
 
   def show

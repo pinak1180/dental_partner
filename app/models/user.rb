@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
   has_many :news_views, -> { where(viewable_type: 'News') }, class: View, foreign_key: :user_id, dependent: :destroy
   has_many :forum_views, -> { where(viewable_type: 'Forum') }, class: View, foreign_key: :user_id, dependent: :destroy
   has_many :survey_views, -> { where(viewable_type: 'Survey') }, class: View, foreign_key: :user_id, dependent: :destroy
+  has_many :responses
 
   ## Validations ##
   validates :email, presence: false
