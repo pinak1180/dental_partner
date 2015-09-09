@@ -6,7 +6,7 @@
     <%= CSV.generate_line sub_headers %>
     <%- survey.responses.each do |response| -%>
         <%- response.response_details.each do |detail| -%>
-            <%= CSV.generate_line([response.user.full_name, detail.question.question, detail.answer.option]) %>
+            <%= CSV.generate_line([response.user.full_name, detail.question.question, detail.answer.option],row_sep: ?\t, quote_char: ?\ ).html_safe %>
         <%- end -%>
     <%- end -%>
 <%- end -%>
