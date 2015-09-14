@@ -1,5 +1,5 @@
 <%- headers = ['First name', 'Last name', 'Positions',"Phone",'Email', 'Username', 'Access levels','Departments', 'Sign In Count', 'Last Signin At', 'Articles Liked', 'No of Comments on Articles'] -%>
 <%= CSV.generate_line headers,row_sep: ?\t, quote_char: ?\  %>
 <%- @admins_users.find_each do |admins_user| -%>
-    <%= CSV.generate_line([admins_user.first_name, admins_user.last_name, admins_user.positions.gsub(',', ' |'), admins_user.phone, admins_user.email, admins_user.username, admins_user.access_levels.gsub(',', ' |'), admins_user.departments.gsub(',', ' |'), admins_user.sign_in_count, admins_user.print_last_sign_in_at, admins_user.news_views.count, admins_user.comments.count],row_sep: ?\t, quote_char: ?\ ).html_safe %>
+    <%= CSV.generate_line([admins_user.first_name, admins_user.last_name, admins_user.positions.gsub(',', ' '), admins_user.phone, admins_user.email, admins_user.username, admins_user.access_levels.gsub(',', ' '), admins_user.departments.gsub(',', ' '), admins_user.sign_in_count, admins_user.print_last_sign_in_at, admins_user.news_views.count, admins_user.comments.count],row_sep: ?\t, quote_char: ?\ ).html_safe %>
 <%- end -%>
