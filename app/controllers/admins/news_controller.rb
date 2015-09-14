@@ -18,7 +18,15 @@ class Admins::NewsController < AdminBaseController
     @admins_news.notifications.update_all(read: true)
     @news_comments = @admins_news.comments.includes(:user).page(params[:page]).per(5)
     @comment = @admins_news.comments.build
+    @news_views = @admins_news.views.includes(:user)
     add_breadcrumb @admins_news.title.titlecase, admins_news_path(@admins_news.id)
+    respond_to do |format|
+      format.html
+      format.csv do
+        headers['Content-Disposition'] = "attachment; filename=\"articles.csv\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
+    end
   end
 
   def new

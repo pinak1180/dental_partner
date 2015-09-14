@@ -1,0 +1,11 @@
+<%- headers = ['Title', 'Release Date', 'Expiry Date',"Views",'Likes', 'Comments'] -%>
+<%= CSV.generate_line headers,row_sep: ?\t, quote_char: ?\  %>
+<%= CSV.generate_line([@admins_news.title.titlecase, @admins_news.print_release_date, @admins_news.print_expiry_date, @admins_news.views.size, @admins_news.votes_for.size, @news_comments.count],row_sep: ?\t, quote_char: ?\ ).html_safe %>
+<%= CSV.generate_line ['User Name Viewed', 'Viewed On'],row_sep: ?\t, quote_char: ?\  %>
+<%- @news_views.each do |view| -%>
+<%= CSV.generate_line([view.user.full_name, view.created_at.strftime("%d/%b/%Y")],row_sep: ?\t, quote_char: ?\ ).html_safe %>
+<%- end -%>
+<%= CSV.generate_line ['User Name', 'Comment', 'Commented On'],row_sep: ?\t, quote_char: ?\  %>
+<%- @admins_news.comments.includes(:user).each do |comment| -%>
+<%= CSV.generate_line([comment.user.full_name, comment.comment, comment.created_at.strftime("%d/%b/%Y")],row_sep: ?\t, quote_char: ?\ ).html_safe %>
+<%- end -%>

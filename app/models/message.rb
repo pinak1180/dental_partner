@@ -11,11 +11,11 @@ class Message < ActiveRecord::Base
                                     content_type: ['application/pdf', /^image\/(jpg|jpeg|pjpeg|png|x-png|gif)$/ ],
                                     message: "Invalid File, only Pdfs and Images are valid"
   ## Associations ##
-  belongs_to :sender, class: User, foreign_key: 'sender_id'
-  belongs_to :receiver, class: User, foreign_key: 'receiver_id'
-  belongs_to :parent, class: Message, foreign_key: 'parent_id'
-  has_many :child_messages, class: Message, foreign_key: 'parent_id'
-  has_many :notifications, -> { where(trackable_type: 'Message') }, class: PublicActivity::Activity, foreign_key: :trackable_id
+  belongs_to :sender, class_name: User, foreign_key: 'sender_id'
+  belongs_to :receiver, class_name: User, foreign_key: 'receiver_id'
+  belongs_to :parent, class_name: Message, foreign_key: 'parent_id'
+  has_many :child_messages, class_name: Message, foreign_key: 'parent_id'
+  has_many :notifications, -> { where(trackable_type: 'Message') }, class_name: PublicActivity::Activity, foreign_key: :trackable_id
 
   ## Scope ##
   scope :parent_messages, -> { where(parent_id: nil) }

@@ -8,7 +8,7 @@ class Forum < ActiveRecord::Base
   default_scope { where{((release_date <= Date.today) | (release_date == nil)) & ((expiry_date >= Date.today) | (expiry_date == nil))}.latest }
 
   ## Associations ##
-  has_many :notifications, -> { where(trackable_type: "Forum") }, class: PublicActivity::Activity, foreign_key: :trackable_id, dependent: :destroy
+  has_many :notifications, -> { where(trackable_type: "Forum") }, class_name: PublicActivity::Activity, foreign_key: :trackable_id, dependent: :destroy
   has_many :views, as: :viewable, dependent: :destroy
 
   ## Validations ##

@@ -4,6 +4,7 @@
     <%= @admins_news.title.titlecase %>
     <span class="pull-right">
       <%= link_to "Edit News", edit_admins_news_path(@admins_news.id), class: "btn btn-warning btn-xs" %>
+      <%= link_to 'Export CSV', admins_news_path(id: @admins_news.id, format: :csv), class: 'btn btn-default btn-xs' %>
     </span>
   </header>
   <div class="panel-body">

@@ -12,14 +12,14 @@ class User < ActiveRecord::Base
 
   ## Associations ##
   has_many :authentication_tokens, dependent: :destroy, inverse_of: :user
-  has_many :sent_messages, dependent: :destroy, class: Message, foreign_key: :sender_id
-  has_many :received_messages, dependent: :destroy, class: Message, foreign_key: :receiver_id
+  has_many :sent_messages, dependent: :destroy, class_name: Message, foreign_key: :sender_id
+  has_many :received_messages, dependent: :destroy, class_name: Message, foreign_key: :receiver_id
   has_many :comments, dependent: :destroy
-  has_many :notifications, class: PublicActivity::Activity, foreign_key: :recipient_id, dependent: :destroy
-  has_many :owner_notifications, class: PublicActivity::Activity, foreign_key: :owner_id, dependent: :destroy
-  has_many :news_views, -> { where(viewable_type: 'News') }, class: View, foreign_key: :user_id, dependent: :destroy
-  has_many :forum_views, -> { where(viewable_type: 'Forum') }, class: View, foreign_key: :user_id, dependent: :destroy
-  has_many :survey_views, -> { where(viewable_type: 'Survey') }, class: View, foreign_key: :user_id, dependent: :destroy
+  has_many :notifications, class_name: PublicActivity::Activity, foreign_key: :recipient_id, dependent: :destroy
+  has_many :owner_notifications, class_name: PublicActivity::Activity, foreign_key: :owner_id, dependent: :destroy
+  has_many :news_views, -> { where(viewable_type: 'News') }, class_name: View, foreign_key: :user_id, dependent: :destroy
+  has_many :forum_views, -> { where(viewable_type: 'Forum') }, class_name: View, foreign_key: :user_id, dependent: :destroy
+  has_many :survey_views, -> { where(viewable_type: 'Survey') }, class_name: View, foreign_key: :user_id, dependent: :destroy
   has_many :responses
 
   ## Validations ##
