@@ -41,5 +41,6 @@ DentalPartner::Application.routes.draw do
         post :import
       end
     end
+    resources :reports
   end
 end

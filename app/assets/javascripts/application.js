@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require core/jquery-1.11.1.min
 //= require core/bootstrap
+//= require bootstrap/bootstrap-tooltip
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require core/jquery.slimscroll.min
@@ -69,6 +70,8 @@ $(document).ready(function() {
     "ajax": $('#user-table').data('source'),
     "pagingType": "full_numbers",
   });
+
+	$("a[rel='tooltip']").tooltip();
 
 	// custom file input
 	change_file_input();
