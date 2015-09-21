@@ -2,4 +2,15 @@
 <%= CSV.generate_line headers,row_sep: ?\t, quote_char: ?\  %>
 <%- @forums.find_each do |forum| -%>
     <%= CSV.generate_line([forum.title.titlecase, forum.print_release_date, forum.print_expiry_date, forum.views.size, forum.votes_for.size, forum.comments.size],row_sep: ?\t, quote_char: ?\ ).html_safe %>
+    <%= CSV.generate_line ['Views Details'], row_sep: ?\t, quote_char: ?\  %>
+    <%= CSV.generate_line ['Name', 'Viewed on'], row_sep: ?\t, quote_char: ?\  %>
+    <%- forum.views.each do |view| -%>
+      <%= CSV.generate_line([view.user.full_name, view.created_at.strftime("%d/%b/%Y")],row_sep: ?\t, quote_char: ?\ ).html_safe %>
+    <%- end -%>
+    <%= CSV.generate_line ['Comments Details'], row_sep: ?\t, quote_char: ?\  %>
+    <%= CSV.generate_line ['Name', 'Comment', 'Commented On'], row_sep: ?\t, quote_char: ?\  %>
+    <%- forum.comments.each do |comment| -%>
+      <%= CSV.generate_line([comment.user.full_name, comment.comment, comment.created_at.strftime("%d/%b/%Y")],row_sep: ?\t, quote_char: ?\ ).html_safe %>
+    <%- end -%>
+    <%= CSV.generate_line [''], row_sep: ?\t, quote_char: ?\  %>
 <%- end -%>

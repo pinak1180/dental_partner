@@ -4,7 +4,7 @@ class Admins::ForumsController < AdminBaseController
   add_breadcrumb 'Forums', :admins_forums_path
 
   def index
-    @forums = Forum.unscoped.includes(:views)
+    @forums = Forum.unscoped.eager_load(comments: :user, views: :user)
     respond_to do |format|
       format.html
       format.csv do
