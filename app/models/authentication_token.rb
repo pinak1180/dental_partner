@@ -5,6 +5,9 @@ class AuthenticationToken < ActiveRecord::Base
   ## Validations ##
   validates :auth_token, :user_id, presence: true
 
+  ## callback
+  after_create :increse_signin_count
+
   ## Scope ##
   scope :current_authentication_token_for_user, ->(user_id, token) { joins(:user).where('users.id =? and auth_token = ?', user_id, token).readonly(false) }
 
@@ -22,5 +25,9 @@ class AuthenticationToken < ActiveRecord::Base
       u = where(auth_token: token)
       (u.present? && u.first.user.present?) ? u.first.user : nil
     end
+  end
+
+  def increse_signin_count
+    User.increment_counter(:sign_in_count, user_id)
   end
 end
