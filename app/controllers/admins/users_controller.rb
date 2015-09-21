@@ -4,7 +4,7 @@ class Admins::UsersController < AdminBaseController
   add_breadcrumb 'Users', :admins_users_path
 
   def index
-    @admins_users = User.non_admins
+    @admins_users = User.all
     respond_to do |format|
       format.html
       format.csv do
