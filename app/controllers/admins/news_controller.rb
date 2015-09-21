@@ -4,7 +4,7 @@ class Admins::NewsController < AdminBaseController
   add_breadcrumb 'News', :admins_news_index_path, title: 'News'
 
   def index
-    @admins_news = News.unscoped.includes(:views)
+    @admins_news = News.unscoped.eager_load(comments: :user, views: :user)
     respond_to do |format|
       format.html
       format.csv do
